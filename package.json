@@ -1,10 +1,13 @@
 {
   "name": "egel",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "A minimal framework around the WebGL API.",
+  "main": "dist/egel.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=development webpack -d --progress --watch --display-modules",
+    "lint": "eslint src/**/*.js",
+    "dist": "NODE_ENV=production webpack -p --progress --optimize-minimize --display-modules && NODE_ENV=development webpack -d --progress --display-modules",
+    "deploy": "npm run dist && npm version patch && npm publish && git push origin"
   },
   "repository": {
     "type": "git",
@@ -12,6 +15,19 @@
   },
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
+  "dependencies": {
+    "gl-matrix": "^2.4.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^3.8.1"
+  },
   "bugs": {
     "url": "https://github.com/TimvanScherpenzeel/egel/issues"
   },
