@@ -11,7 +11,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const config = {
 	context: srcPath,
 	devtool: isDevelopment ? 'eval-cheap-module-source-map' : '',
-	entry: './index.js',
+	entry: './index.ts',
 	output: {
 		path: distPath,
 		filename: !isDevelopment ? 'egel.min.js' : 'egel.js',
@@ -23,6 +23,11 @@ const config = {
 	module: {
 		rules: [
 			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader!ts-loader',
+			},
+			{
 				test: /\.js$/,
 				exclude: /node_modules\/(?!(gl-matrix)\/).*/,
 				loader: 'babel-loader?cacheDirectory=true',
@@ -30,7 +35,11 @@ const config = {
 					presets: [
 						['env', {
 							targets: {
-								browsers: ['last 2 versions'],
+								browsers: [
+									'last 2 versions',
+									'ios_saf >= 10.2',
+									'not IE <= 10',
+								],
 							},
 							modules: false,
 						}],
