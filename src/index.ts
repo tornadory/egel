@@ -1,4 +1,5 @@
+// example
 const example = {
-    "example": 1,
-    "example2": 2
-}
+    example: 1,
+    example2: 2,
+};

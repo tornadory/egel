@@ -5,7 +5,7 @@
   "main": "dist/egel.js",
   "scripts": {
     "start": "NODE_ENV=development webpack -d --progress --watch --display-modules",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/**/*.js && tslint --project './tsconfig.json'",
     "dist": "NODE_ENV=production webpack -p --progress --optimize-minimize --display-modules && NODE_ENV=development webpack -d --progress --display-modules",
     "deploy": "npm run dist && npm version patch && npm publish && git push origin"
   },
@@ -28,7 +28,6 @@
     "raw-loader": "^0.5.1",
     "ts-loader": "^3.2.0",
     "tslint": "^5.8.0",
-    "tslint-config-airbnb": "^5.4.2",
     "typescript": "^2.6.2",
     "webpack": "^3.8.1"
   },
