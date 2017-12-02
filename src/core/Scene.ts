@@ -1,6 +1,7 @@
 // Vendor
 import { mat4 } from 'gl-matrix';
 
+// Core
 import Mesh from './Mesh';
 
 export default class Scene {
