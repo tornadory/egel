@@ -1,4 +1,4 @@
-export const baseFragmentShader = `
+export default `
     <HOOK_PRECISION>
     <HOOK_DEFINES>
 
