@@ -2,7 +2,7 @@
 import { mat4 } from 'gl-matrix';
 
 // Core
-import { RENDERER_DEFAULT_RATIO } from '../core/Constants';
+import { RENDERER_DEFAULT_RATIO } from '../core/CoreConstants';
 import Object3D from '../core/Object3D';
 
 // Math

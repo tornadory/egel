@@ -1,6 +1,6 @@
 // Core
-import { PRECISION } from './Constants';
 import * as Context from './Context';
+import { PRECISION } from './CoreConstants';
 
 // Utilities
 import { warn } from '../utilities/Console';

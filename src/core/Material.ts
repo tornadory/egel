@@ -7,8 +7,8 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 
 // Core
 import { capabilities } from './Capabilities';
-import { CULL_NONE, DRAW_TRIANGLES } from './Constants';
 import * as Context from './Context';
+import { CULL_NONE, DRAW_TRIANGLES } from './CoreConstants';
 import Program from './Program';
 
 // Geometry

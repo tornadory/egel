@@ -12,11 +12,11 @@ export { PerspectiveCamera };
 import * as Capabilities from './core/Capabilities';
 export { Capabilities };
 
-import * as Constants from './core/Constants';
-export { Constants };
-
 import * as Context from './core/Context';
 export { Context };
+
+import * as CoreConstants from './core/CoreConstants';
+export { CoreConstants };
 
 import * as CreateBuffer from './core/CreateBuffer';
 export { CreateBuffer };

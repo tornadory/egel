@@ -1,5 +1,9 @@
 import { mat4, quat, vec3 } from 'gl-matrix';
 
+export function clamp(value: number, min: number, max: number) {
+    return Math.max(Math.min(value, max), min);
+  }
+
 export function lookAt(eye: vec3, target: vec3, up: vec3) {
     const quatOut = quat.create();
     const x = vec3.create();
