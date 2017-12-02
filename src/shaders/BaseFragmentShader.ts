@@ -1,6 +1,6 @@
 export const baseFragmentShader = `
-    <HOOK_PRECISION>
-    <HOOK_DEFINES>
+    #HOOK_PRECISION
+    #HOOK_DEFINES
 
     // Color
     varying vec3 vDiffuse;
@@ -18,7 +18,7 @@ export const baseFragmentShader = `
     varying vec3 vUv;
     #endif
 
-    <HOOK_FRAGMENT_PRE>
+    #HOOK_FRAGMENT_PRE
 
     void main() {
         vec3 color = vDiffuse;
@@ -27,10 +27,10 @@ export const baseFragmentShader = `
         vec3 normal = normalize(vNormal);
         #endif
 
-        <HOOK_FRAGMENT_MAIN>
+        #HOOK_FRAGMENT_MAIN
 
         gl_FragColor = vec4(color.rgb, 1.0);
 
-        <HOOK_FRAGMENT_END>
+        #HOOK_FRAGMENT_END
     }
 `;
