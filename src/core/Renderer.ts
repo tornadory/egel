@@ -160,7 +160,7 @@ export default class Renderer {
 
     public render(
         scene: Scene,
-        camera: Camera | PerspectiveCamera | OrthorgraphicCamera,
+        camera: Camera | PerspectiveCamera | OrthographicCamera,
     ) {
         gl = Context.get();
 
