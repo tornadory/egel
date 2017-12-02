@@ -1,9 +1,9 @@
 let gl: WebGLRenderingContext;
 
 export function set(
-    _gl: WebGLRenderingContext,
+    context: WebGLRenderingContext,
 ) {
-    gl = _gl;
+    gl = context;
 }
 
 export function get(): WebGLRenderingContext {

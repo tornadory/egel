@@ -27,4 +27,8 @@ export default class Scene {
             }
         }
     }
+
+    public update() {
+        // Override
+    }
 }
