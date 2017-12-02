@@ -30,8 +30,6 @@ export default class Program {
         this.compiledVertexShader = this.compile('vertex', vertexShader);
         this.compiledFragmentShader = this.compile('fragment', fragmentShader);
 
-        debugger;
-
         if (!this.compiledVertexShader || !this.compiledFragmentShader) {
             return;
         }

@@ -26,7 +26,7 @@ export default class PerspectiveCamera extends Camera {
         mat4.perspective(
             this.projectionMatrix,
             this.fieldOfView,
-            this.aspect,
+            this.aspectRatio,
             this.near,
             this.far,
         );

@@ -26,7 +26,7 @@ export default class Camera {
     public near: number;
     public far: number;
     public fieldOfView: number;
-    public aspect: number;
+    public aspectRatio: number;
     public position: Vector3;
     public target: Vector3;
     public up: Vector3;
@@ -40,7 +40,7 @@ export default class Camera {
         this.near = 0.1;
         this.far = 100;
         this.fieldOfView = 70;
-        this.aspect = RENDERER_DEFAULT_ASPECT_RATIO;
+        this.aspectRatio = RENDERER_DEFAULT_ASPECT_RATIO;
         this.position = new Vector3();
         this.target = new Vector3();
         this.up = new Vector3(0, 1, 0);

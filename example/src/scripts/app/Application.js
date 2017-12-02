@@ -16,6 +16,7 @@ export default class Application {
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
+
 		this.element.appendChild(this.renderer.canvas);
 
 		// Scene
