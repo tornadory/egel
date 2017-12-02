@@ -125,24 +125,24 @@ export default class Material {
 
         this.uniforms = {
             uDiffuse: {
-              location: null,
-              type: '3f',
-              value: new Color().v,
+                location: null,
+                type: '3f',
+                value: new Color().v,
             },
             uModelMatrix: {
-              location: null,
-              type: '4fv',
-              value: mat4.create(),
+                location: null,
+                type: '4fv',
+                value: mat4.create(),
             },
             uModelViewMatrix: {
-              location: null,
-              type: '4fv',
-              value: mat4.create(),
+                location: null,
+                type: '4fv',
+                value: mat4.create(),
             },
             uNormalMatrix: {
-              location: null,
-              type: '4fv',
-              value: mat4.create(),
+                location: null,
+                type: '4fv',
+                value: mat4.create(),
             },
             ...this.customUniforms,
             ...projectionViewUniforms,
@@ -226,20 +226,20 @@ export default class Material {
                 }
                 case '3f': {
                     gl.uniform3f(
-                      uniform.location,
-                      uniform.value[0],
-                      uniform.value[1],
-                      uniform.value[2],
+                        uniform.location,
+                        uniform.value[0],
+                        uniform.value[1],
+                        uniform.value[2],
                     );
                     break;
                 }
                 case '4f': {
                     gl.uniform4f(
-                      uniform.location,
-                      uniform.value[0],
-                      uniform.value[1],
-                      uniform.value[2],
-                      uniform.value[3],
+                        uniform.location,
+                        uniform.value[0],
+                        uniform.value[1],
+                        uniform.value[2],
+                        uniform.value[3],
                     );
                     break;
                 }
@@ -321,10 +321,10 @@ export default class Material {
         // Camera
         if (camera && this.uniforms.uCameraPosition) {
             gl.uniform3f(
-              this.uniforms.uCameraPosition.location,
-              camera.position.v[0],
-              camera.position.v[1],
-              camera.position.v[2],
+                this.uniforms.uCameraPosition.location,
+                camera.position.v[0],
+                camera.position.v[1],
+                camera.position.v[2],
             );
         }
     }
@@ -334,12 +334,13 @@ export default class Material {
         Object.keys(this.customUniforms).forEach((uniformName) => {
             const uniform = this.uniforms[uniformName];
             switch (uniform.type) {
-            case 't':
-            case 'tc': {
-                gl.deleteTexture(uniform.value);
-                break;
-            }
-            default:
+                case 't':
+                case 'tc': {
+                    gl.deleteTexture(uniform.value);
+                    break;
+                }
+                default:
+                    break;
             }
         });
 

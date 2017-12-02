@@ -22,16 +22,16 @@ export const baseVertexShader = `
     uniform vec3 uDiffuse;
     varying vec3 vDiffuse;
 
-	// Normal
-	#ifdef normals
-	attribute vec3 aVertexNormal;
-	varying vec3 vNormal;
+    // Normal
+    #ifdef normals
+    attribute vec3 aVertexNormal;
+    varying vec3 vNormal;
     #endif
 
-	// Uv
-	#ifdef uv
-	attribute vec2 aUv;
-	varying vec2 vUv;
+    // Uv
+    #ifdef uv
+    attribute vec2 aUv;
+    varying vec2 vUv;
     #endif
 
     #HOOK_VERTEX_PRE
@@ -40,27 +40,27 @@ export const baseVertexShader = `
         vDiffuse = uDiffuse;
 
         // Override for custom positioning
-		vec3 transformed = vec3(0.0);
+        vec3 transformed = vec3(0.0);
 
         #ifdef vertexColors
-		vDiffuse = aVertexColor;
-		#endif
+        vDiffuse = aVertexColor;
+        #endif
 
         #ifdef uv
-		vUv = aUv;
-		#endif
+        vUv = aUv;
+        #endif
 
         #HOOK_VERTEX_MAIN
 
-		#ifdef normals
+        #ifdef normals
         vNormal = uNormalMatrix * aVertexNormal;
-		#endif
+        #endif
 
         // Vertex position + offset
-		vPosition = aVertexPosition + transformed;
+        vPosition = aVertexPosition + transformed;
 
         // Calculate world position of vertex with transformed
-		vWorldPosition = uModelMatrix * vec4(aVertexPosition + transformed, 1.0);
+        vWorldPosition = uModelMatrix * vec4(aVertexPosition + transformed, 1.0);
 
         gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(vPosition, 1.0);
 
