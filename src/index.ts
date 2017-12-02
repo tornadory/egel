@@ -1,5 +1,5 @@
-// example
-const example = {
-    example: 1,
-    example2: 2,
-};
+import * as Core from './core/Core';
+export { Core };
+
+import * as CoreConstants from './core/CoreConstants';
+export { CoreConstants };
