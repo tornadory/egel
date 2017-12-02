@@ -15,68 +15,69 @@ import Mesh from '../core/Mesh';
 // Geometry
 import Geometry from '../geometry/Geometry';
 
-// Math
-import { lerp } from '../math/Utilities';
-
 let gl: WebGLRenderingContext;
 
 const customVertexShader = `
-    attribute vec3 aVertexPosition;
+	attribute vec3 aVertexPosition;
+	attribute vec3 aVertexColor;
 
     uniform mat4 uProjectionMatrix;
-    uniform mat4 uModelViewMatrix;
+	uniform mat4 uModelViewMatrix;
 
-    void main() {
-        gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
-    }
+    varying vec3 vColor;
+
+    void main(void){
+		vColor = aVertexColor;
+		gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+	}
 `;
 
 const customFragmentShader = () => `
     precision ${capabilities.precision} float;
 
-    void main() {
-        gl_FragColor = vec4(vec3(0.5), 1.0);
-    }
+    varying vec3 vColor;
+
+	void main(void){
+		gl_FragColor = vec4(vColor, 1.0);
+	}
 `;
 
-class GridGeometry extends Geometry {
-    constructor(size: number, divisions: number) {
+class AxisGeometry extends Geometry {
+    constructor(size: number) {
         let vertices = [];
-        const halfSize = size * 0.5;
 
-        for (let i = 0; i < divisions + 1; i += 1) {
-            const x1 = lerp(-halfSize, halfSize, i / divisions);
-            const y1 = 0;
-            const z1 = -halfSize;
-            const x2 = lerp(-halfSize, halfSize, i / divisions);
-            const y2 = 0;
-            const z2 = halfSize;
-            vertices = vertices.concat([x1, y1, z1, x2, y2, z2]);
-        }
+        // X-axis
+        vertices = vertices.concat([0, 0, 0, size, 0, 0]);
 
-        for (let i = 0; i < divisions + 1; i += 1) {
-            const x1 = -halfSize;
-            const y1 = 0;
-            const z1 = lerp(-halfSize, halfSize, i / divisions);
-            const x2 = halfSize;
-            const y2 = 0;
-            const z2 = lerp(-halfSize, halfSize, i / divisions);
-            vertices = vertices.concat([x1, y1, z1, x2, y2, z2]);
-        }
+        // Y-axis
+        vertices = vertices.concat([0, 0, 0, 0, size, 0]);
 
-        super(new Float32Array(vertices));
-    }
+        // Z-axis
+        vertices = vertices.concat([0, 0, 0, 0, 0, size]);
+
+        // Colors
+        const colors = new Float32Array([
+          1, 0, 0,
+          1, 0, 0,
+          0, 1, 0,
+          0, 1, 0,
+          0, 0, 1,
+          0, 0, 1,
+        ]);
+
+        super(new Float32Array(vertices), undefined, undefined, undefined, colors);
+      }
 }
 
-export default class GridHelper extends Mesh {
-    constructor(size = 1, divisions = 10) {
+export default class AxisHelper extends Mesh {
+    constructor(size = 1) {
         const vertexShader = customVertexShader;
         const fragmentShader = customFragmentShader();
 
         super(
-            new GridGeometry(size, divisions),
+            new AxisGeometry(size),
             new Material({
-                name: 'GridHelper',
+                name: 'AxisHelper',
                 vertexShader,
                 fragmentShader,
             }),

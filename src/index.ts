@@ -54,6 +54,9 @@ import Geometry from './geometry/Geometry';
 export { Geometry };
 
 // Helpers
+import AxisHelper from './helpers/AxisHelper';
+export { AxisHelper };
+
 import GridHelper from './helpers/GridHelper';
 export { GridHelper };
 

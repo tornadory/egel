@@ -36,8 +36,11 @@ export default class Application {
 
 		this.controls.update();
 
-		this.grid = new Egel.GridHelper(10);
-		this.scene.add(this.grid);
+		this.gridHelper = new Egel.GridHelper(10);
+		this.scene.add(this.gridHelper);
+
+		this.axisHelper = new Egel.AxisHelper();
+		this.scene.add(this.axisHelper);
 
 		this.onResize();
 
