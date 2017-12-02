@@ -1,4 +1,5 @@
 // Vendor
+const BabiliPlugin = require('babili-webpack-plugin');
 const path = require('path');
 
 // Paths
@@ -65,6 +66,8 @@ const config = {
 		colors: true,
 		children: false,
 	},
+
+	plugins: !isDevelopment ? [new BabiliPlugin()] : [],
 };
 
 module.exports = config;

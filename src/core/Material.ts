@@ -18,8 +18,8 @@ import Geometry from '../geometry/Geometry';
 import Color from '../math/Color';
 
 // Shaders
-import BaseFragmentShader from '../shaders/BaseFragmentShader';
-import BaseVertexShader from '../shaders/BaseVertexShader';
+import { baseFragmentShader } from '../shaders/BaseFragmentShader';
+import { baseVertexShader } from '../shaders/BaseVertexShader';
 
 let gl: WebGLRenderingContext;
 const normalMatrix: mat3 = mat3.create();
@@ -71,8 +71,8 @@ export default class Material {
         this.hookFragmentPre = '';
         this.hookFragmentMain = '';
         this.hookFragmentEnd = '';
-        this.vertexShader = BaseVertexShader;
-        this.fragmentShader = BaseFragmentShader;
+        this.vertexShader = baseVertexShader;
+        this.fragmentShader = baseFragmentShader;
         this.drawType = DRAW_TRIANGLES;
         this.culling = CULL_NONE;
         this.blending = false;

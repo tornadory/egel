@@ -1,4 +1,4 @@
-export default `
+export const baseVertexShader = `
     <HOOK_PRECISION>
     <HOOK_DEFINES>
 
