@@ -31,7 +31,7 @@ export default class Geometry {
         indices?: any, // Uint16Array | Uint32Array, (typings are wrong for createBuffer)
         normals?: Float32Array,
         uvs?: Float32Array,
-        colors?: Float32Array
+        colors?: Float32Array,
     ) {
         gl = Context.get();
 
@@ -49,7 +49,7 @@ export default class Geometry {
                 'aVertexPosition',
                 gl.ARRAY_BUFFER,
                 this.bufferVertices,
-                3
+                3,
             );
 
             this.generateVertices();
@@ -62,7 +62,7 @@ export default class Geometry {
                 gl.ELEMENT_ARRAY_BUFFER,
                 this.bufferIndices,
                 1,
-                false
+                false,
             );
 
             this.generateFaces();
@@ -74,7 +74,7 @@ export default class Geometry {
                 'aVertexNormal',
                 gl.ARRAY_BUFFER,
                 this.bufferNormals,
-                3
+                3,
             );
         }
 
@@ -95,13 +95,13 @@ export default class Geometry {
         type: GLenum,
         data: Float32Array | Uint16Array,
         count: number,
-        shaderAttribute?: boolean
+        shaderAttribute?: boolean,
     ) {
         this.attributes[name] = new BufferAttribute(
             type,
             data,
             count,
-            shaderAttribute
+            shaderAttribute,
         );
     }
 
@@ -109,7 +109,7 @@ export default class Geometry {
         this.attributesInstanced[name] = new BufferAttribute(
             gl.ARRAY_BUFFER,
             value,
-            count
+            count,
         );
     }
 
