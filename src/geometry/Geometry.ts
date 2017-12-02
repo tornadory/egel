@@ -146,7 +146,6 @@ export default class Geometry {
         for (let i = 0; i < this.bufferUvs.length; i += 2) {
             const a = this.bufferUvs[i];
             const b = this.bufferUvs[i + 1];
-
             const uv = new Vector2(a, b);
             this.uvs.push(uv);
         }

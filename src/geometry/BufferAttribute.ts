@@ -1,5 +1,6 @@
 // Core
 import * as Context from '../core/Context';
+import { createBuffer } from '../core/CreateBuffer';
 
 let gl: WebGLRenderingContext;
 
@@ -20,7 +21,7 @@ export default class BufferAttribute {
         this.type = type;
         this.itemSize = itemSize;
         this.numItems = data.length / itemSize;
-        this.buffer = Context.createBuffer(type, data);
+        this.buffer = createBuffer(type, data);
         this.shaderAttribute = shaderAttribute;
     }
 
