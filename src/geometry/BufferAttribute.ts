@@ -1,6 +1,6 @@
 // Core
 import * as Context from '../core/Context';
-import { createBuffer } from '../core/CreateBuffer';
+import { createBuffer } from '../core/CoreUtilities';
 
 let gl: WebGLRenderingContext;
 

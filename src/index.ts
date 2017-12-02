@@ -18,8 +18,8 @@ export { Context };
 import * as CoreConstants from './core/CoreConstants';
 export { CoreConstants };
 
-import * as CreateBuffer from './core/CreateBuffer';
-export { CreateBuffer };
+import * as CoreUtilities from './core/CoreUtilities';
+export { CoreUtilities };
 
 import Material from './core/Material';
 export { Material };
