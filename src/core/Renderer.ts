@@ -9,7 +9,12 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 // Core
 import * as Capabilities from './Capabilities';
 import * as Context from './Context';
-import { RENDERER_DEFAULT_HEIGHT, RENDERER_DEFAULT_RATIO, RENDERER_DEFAULT_WIDTH } from './CoreConstants';
+import {
+    MAX_DEVICE_PIXEL_RATIO,
+    RENDERER_DEFAULT_HEIGHT,
+    RENDERER_DEFAULT_RATIO,
+    RENDERER_DEFAULT_WIDTH,
+} from './CoreConstants';
 import Scene from './Scene';
 
 // Utilities
@@ -56,7 +61,7 @@ export default class Renderer {
         this.height = RENDERER_DEFAULT_HEIGHT;
         this.ratio = RENDERER_DEFAULT_RATIO;
         this.preserveDrawingBuffer = false;
-        this.pixelRatio = 1;
+        this.pixelRatio = Math.min(window.devicePixelRatio, MAX_DEVICE_PIXEL_RATIO);
         this.autoClear = true;
         this.clearColor = {
             r: 0,
@@ -79,8 +84,8 @@ export default class Renderer {
 
         if (support) {
             const context =
-            (this.canvas.getContext('webgl', attributes) as WebGLRenderingContext) ||
-            (this.canvas.getContext('experimental-webgl', attributes) as WebGLRenderingContext);
+                (this.canvas.getContext('webgl', attributes) as WebGLRenderingContext) ||
+                (this.canvas.getContext('experimental-webgl', attributes) as WebGLRenderingContext);
 
             Context.set(context);
         } else {
@@ -136,18 +141,18 @@ export default class Renderer {
 
     public setScissorTest(enable = false) {
         if (enable) {
-          gl.enable(gl.SCISSOR_TEST);
+            gl.enable(gl.SCISSOR_TEST);
         } else {
-          gl.disable(gl.SCISSOR_TEST);
+            gl.disable(gl.SCISSOR_TEST);
         }
     }
 
     public setScissor(x: number, y: number, width: number, height: number) {
         gl.scissor(
-          x * this.pixelRatio,
-          y * this.pixelRatio,
-          width * this.pixelRatio,
-          height * this.pixelRatio,
+            x * this.pixelRatio,
+            y * this.pixelRatio,
+            width * this.pixelRatio,
+            height * this.pixelRatio,
         );
     }
 

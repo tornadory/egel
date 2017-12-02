@@ -1,11 +1,3 @@
-// Default renderer settings
-export const RENDERER_DEFAULT_WIDTH: number = 1280;
-export const RENDERER_DEFAULT_HEIGHT: number = 720;
-export const RENDERER_DEFAULT_RATIO: number = RENDERER_DEFAULT_WIDTH / RENDERER_DEFAULT_HEIGHT;
-
-// Precision
-export const PRECISION: string = 'highp';
-
 // Culling
 export const CULL_NONE: number = -1;
 export const CULL_BACK: number = 0x0405;
@@ -18,3 +10,14 @@ export const DRAW_LINES: number = 1;
 export const DRAW_LINE_LOOP: number = 2;
 export const DRAW_LINE_STRIP: number = 3;
 export const DRAW_TRIANGLES: number = 4;
+
+// Maximum device pixel ratio
+export const MAX_DEVICE_PIXEL_RATIO = 4;
+
+// Default renderer settings
+export const RENDERER_DEFAULT_WIDTH: number = 1280;
+export const RENDERER_DEFAULT_HEIGHT: number = 720;
+export const RENDERER_DEFAULT_RATIO: number = RENDERER_DEFAULT_WIDTH / RENDERER_DEFAULT_HEIGHT;
+
+// Precision
+export const PRECISION: string = 'highp';
