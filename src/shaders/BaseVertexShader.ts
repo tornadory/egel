@@ -1,6 +1,6 @@
 export const baseVertexShader = `
-    #HOOK_PRECISION
-    #HOOK_DEFINES
+    <HOOK_PRECISION>
+    <HOOK_DEFINES>
 
     // Position
     uniform mat4 uProjectionMatrix;
@@ -34,7 +34,7 @@ export const baseVertexShader = `
     varying vec2 vUv;
     #endif
 
-    #HOOK_VERTEX_PRE
+    <HOOK_VERTEX_PRE>
 
     void main() {
         vDiffuse = uDiffuse;
@@ -50,7 +50,7 @@ export const baseVertexShader = `
         vUv = aUv;
         #endif
 
-        #HOOK_VERTEX_MAIN
+        <HOOK_VERTEX_MAIN>
 
         #ifdef normals
         vNormal = uNormalMatrix * aVertexNormal;
@@ -64,6 +64,6 @@ export const baseVertexShader = `
 
         gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(vPosition, 1.0);
 
-        #HOOK_VERTEX_END
+        <HOOK_VERTEX_END>
     }
 `;
