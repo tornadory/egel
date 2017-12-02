@@ -120,8 +120,8 @@ export default class Material {
                 location: null,
                 type: '4fv',
                 value: mat4.create(),
-            }
-        }
+            },
+        };
 
         this.uniforms = {
             uDiffuse: {
@@ -229,7 +229,7 @@ export default class Material {
                       uniform.location,
                       uniform.value[0],
                       uniform.value[1],
-                      uniform.value[2]
+                      uniform.value[2],
                     );
                     break;
                 }
@@ -239,7 +239,7 @@ export default class Material {
                       uniform.value[0],
                       uniform.value[1],
                       uniform.value[2],
-                      uniform.value[3]
+                      uniform.value[3],
                     );
                     break;
                 }
@@ -315,7 +315,7 @@ export default class Material {
             this.uniforms.uDiffuse.location,
             this.uniforms.uDiffuse.value[0],
             this.uniforms.uDiffuse.value[1],
-            this.uniforms.uDiffuse.value[2]
+            this.uniforms.uDiffuse.value[2],
         );
 
         // Camera
