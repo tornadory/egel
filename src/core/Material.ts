@@ -86,8 +86,8 @@ export default class Material {
     public create(geometry: Geometry) {
         gl = Context.get();
 
-        this.vertexShader = this.processShader(this.vertexShader, 'vertex', geometry);
-        this.fragmentShader = this.processShader(this.fragmentShader, 'fragment', geometry);
+        this.vertexShader = this.processShader(this.vertexShader, geometry);
+        this.fragmentShader = this.processShader(this.fragmentShader, geometry);
 
         this.program.link(this.vertexShader, this.fragmentShader);
 
@@ -153,7 +153,7 @@ export default class Material {
         });
     }
 
-    public processShader(shader: string, type: string, geometry: Geometry) {
+    public processShader(shader: string, geometry: Geometry) {
         gl = Context.get();
 
         let defines = '';
@@ -185,7 +185,7 @@ export default class Material {
         shader = shader.replace(/<HOOK_FRAGMENT_MAIN>/g, this.hookFragmentMain);
         shader = shader.replace(/<HOOK_FRAGMENT_END>/g, this.hookFragmentEnd);
 
-        return ShaderParser(shader, type);
+        return shader;
     }
 
     public setUniforms(

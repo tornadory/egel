@@ -55,6 +55,7 @@ const config = {
 	},
 
 	resolve: {
+		extensions: ['.ts', '.js', '.json'],
 		modules: [
 			path.resolve(__dirname, './node_modules'),
 		],
