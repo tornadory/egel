@@ -9,17 +9,17 @@ export function lookAt(eye: vec3, target: vec3, up: vec3) {
     vec3.sub(z, eye, target);
 
     if (vec3.squaredLength(z) === 0) {
-      // eye and target are in the same position
-      z[2] = 1;
+        // eye and target are in the same position
+        z[2] = 1;
     }
 
     vec3.normalize(z, z);
     vec3.cross(x, up, z);
 
     if (vec3.squaredLength(x) === 0) {
-      // eye and target are in the same vertical
-      z[2] += 0.0001;
-      vec3.cross(x, up, z);
+        // eye and target are in the same vertical
+        z[2] += 0.0001;
+        vec3.cross(x, up, z);
     }
 
     vec3.normalize(x, x);
