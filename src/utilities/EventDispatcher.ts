@@ -13,9 +13,9 @@ export default class EventDispatcher {
 
     public once(event: string, fn: () => void) {
         this.validate(fn);
-        const wrapper = () => {
-        this.off(event, wrapper);
-        fn.apply(this, arguments);
+        const wrapper = function() {
+            this.off(event, wrapper);
+            fn.apply(this, arguments);
         };
         this.on(event, wrapper);
     }
