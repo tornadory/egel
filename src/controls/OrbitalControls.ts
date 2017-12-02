@@ -128,14 +128,15 @@ export default class OrbitalControls {
     public onDown(event) {
         switch (event.which) {
             case 3:
-            this.mode = MODE_PAN;
-            this.offsetX = this.target.x;
-            this.offsetY = this.target.y;
-            break;
+                this.mode = MODE_PAN;
+                this.offsetX = this.target.x;
+                this.offsetY = this.target.y;
+                break;
             default: {
                 this.mode = MODE_DRAG;
                 this.offsetX = this.rotationX;
                 this.offsetY = this.rotationY;
+                break;
             }
         }
 

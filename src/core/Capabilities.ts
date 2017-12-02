@@ -10,16 +10,8 @@ function getMaxPrecision(
     precision: string,
 ) {
     if (precision === 'highp') {
-        if (
-            gl.getShaderPrecisionFormat(
-                gl.VERTEX_SHADER,
-                gl.HIGH_FLOAT,
-            ).precision > 0 &&
-            gl.getShaderPrecisionFormat(
-                gl.FRAGMENT_SHADER,
-                gl.HIGH_FLOAT,
-            ).precision > 0
-        ) {
+        if (gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.HIGH_FLOAT).precision > 0 &&
+            gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT).precision > 0) {
             return 'highp';
         }
 
@@ -28,16 +20,8 @@ function getMaxPrecision(
     }
 
     if (precision === 'mediump') {
-        if (
-            gl.getShaderPrecisionFormat(
-                gl.VERTEX_SHADER,
-                gl.MEDIUM_FLOAT,
-            ).precision > 0 &&
-            gl.getShaderPrecisionFormat(
-                gl.FRAGMENT_SHADER,
-                gl.MEDIUM_FLOAT,
-            ).precision > 0
-        ) {
+        if (gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.MEDIUM_FLOAT).precision > 0 &&
+            gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.MEDIUM_FLOAT).precision > 0) {
             return 'mediump';
         }
     }

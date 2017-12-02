@@ -19,7 +19,7 @@ import Scene from './Scene';
 
 // Utilities
 import { log, warn } from '../utilities/Console';
-import Support from '../utilities/Support';
+import WebGLSupport from '../utilities/WebGLSupport';
 
 let gl: WebGLRenderingContext;
 
@@ -80,9 +80,9 @@ export default class Renderer {
             preserveDrawingBuffer: this.preserveDrawingBuffer,
         };
 
-        const support = Support();
+        const webGLSupport = WebGLSupport();
 
-        if (support) {
+        if (webGLSupport) {
             const context =
                 (this.canvas.getContext('webgl', attributes) as WebGLRenderingContext) ||
                 (this.canvas.getContext('experimental-webgl', attributes) as WebGLRenderingContext);

@@ -73,6 +73,7 @@ export default class Color {
 
     public componentToHex(c: number) {
         const hex = c.toString(16);
+
         return hex.length === 1 ? `0${hex}` : hex;
     }
 
@@ -93,13 +94,13 @@ export default class Color {
     }
 
     public hexStringToRgb(hex: string) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
-    return result
-        ? vec3.fromValues(
-            parseInt(result[1], 16),
-            parseInt(result[2], 16),
-            parseInt(result[3], 16),
-        ) : null;
+        return result
+            ? vec3.fromValues(
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16),
+            ) : null;
     }
 }

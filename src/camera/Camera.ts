@@ -9,12 +9,12 @@ import Object3D from '../core/Object3D';
 import Vector3 from '../math/Vector3';
 
 interface Options {
-  near?: number;
-  far?: number;
-  fieldOfView?: number;
-  position?: Vector3;
-  target?: Vector3;
-  up?: Vector3;
+    near?: number;
+    far?: number;
+    fieldOfView?: number;
+    position?: Vector3;
+    target?: Vector3;
+    up?: Vector3;
 }
 
 export default class Camera {

@@ -14,7 +14,7 @@ interface Options {
     position?: Vector3;
     target?: Vector3;
     up?: Vector3;
-    }
+}
 
 export default class PerspectiveCamera extends Camera {
     constructor(options: Options) {
@@ -30,5 +30,5 @@ export default class PerspectiveCamera extends Camera {
             this.near,
             this.far,
         );
-  }
+    }
 }
