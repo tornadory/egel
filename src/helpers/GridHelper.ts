@@ -20,7 +20,7 @@ import { lerp } from '../math/Utilities';
 
 let gl: WebGLRenderingContext;
 
-const vertexShader = `
+const customVertexShader = `
     attribute vec3 aVertexPosition;
 
     uniform mat4 uProjectionMatrix;
@@ -31,7 +31,7 @@ const vertexShader = `
     }
 `;
 
-const fragmentShader = `
+const customFragmentShader = () => `
     precision ${capabilities.precision} float;
 
     void main() {
@@ -71,6 +71,9 @@ class GridGeometry extends Geometry {
 export default class GridHelper extends Mesh {
     constructor(size = 1, divisions = 10) {
         gl = Context.get();
+
+        const vertexShader = customVertexShader;
+        const fragmentShader = customFragmentShader();
 
         super(
             new GridGeometry(size, divisions),

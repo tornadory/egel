@@ -88,7 +88,7 @@ export default class Mesh extends Object3D {
                     this.geometry.attributesInstanced[attributeName].itemSize,
                 );
 
-                extensions.angleInstancedArrays.vertexAttribDivisorANGLE(
+                extensions.angleInstancedArraysExtension.vertexAttribDivisorANGLE(
                     this.material.program.attributeLocations[attributeName],
                     1,
                 );

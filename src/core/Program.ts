@@ -30,6 +30,8 @@ export default class Program {
         this.compiledVertexShader = this.compile('vertex', vertexShader);
         this.compiledFragmentShader = this.compile('fragment', fragmentShader);
 
+        debugger;
+
         if (!this.compiledVertexShader || !this.compiledFragmentShader) {
             return;
         }
@@ -71,6 +73,8 @@ export default class Program {
             warn(`Failed to compile shader: ${gl.getShaderInfoLog(shader)}`);
             return false;
         }
+
+        return shader;
     }
 
     public setAttributeLocation(attributeName: string) {

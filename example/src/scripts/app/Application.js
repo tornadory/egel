@@ -13,6 +13,7 @@ export default class Application {
 		this.renderer = new Egel.Renderer({
 			aspectRatio: this.width / this.height,
 		});
+
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
 		this.element.appendChild(this.renderer.canvas);
@@ -48,6 +49,7 @@ export default class Application {
 		this.controls.update();
 		this.renderer.setScissor(0, 0, this.width, this.height);
 		this.renderer.setViewport(0, 0, this.width, this.height);
+		this.camera.updateMatrixWorld();
 		this.renderer.render(this.scene, this.camera);
 	}
 

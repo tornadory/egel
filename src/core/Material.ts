@@ -89,8 +89,6 @@ export default class Material {
         this.vertexShader = this.processShader(this.vertexShader, geometry);
         this.fragmentShader = this.processShader(this.fragmentShader, geometry);
 
-        console.log(this.vertexShader, this.fragmentShader);
-
         this.program.link(this.vertexShader, this.fragmentShader);
 
         this.customUniforms = this.uniforms || {};
