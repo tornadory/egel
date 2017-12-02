@@ -1,4 +1,4 @@
-# egel
+# Egel
 
 [![dependencies](https://david-dm.org/timvanscherpenzeel/egel.svg)](https://david-dm.org/timvanscherpenzeel/egel)
 [![devDependencies](https://david-dm.org/timvanscherpenzeel/egel/dev-status.svg)](https://david-dm.org/timvanscherpenzeel/egel#info=devDependencies)
