@@ -1,8 +1,12 @@
 // Core
 import * as Context from './Context';
 
+// Loaders
+import ImageLoader from '../loaders/ImageLoader';
+
 // Utilities
 import { createCanvas } from '../utilities/Canvas';
+import { warn } from '../utilities/Console';
 import EventDispatcher from '../utilities/EventDispatcher';
 
 let gl: WebGLRenderingContext;
@@ -63,7 +67,7 @@ export default class Texture extends EventDispatcher {
         this.image = response;
         this.update(this.image);
         this.emit('loaded');
-    };
+    }
 
     public onTextureError = (error: string) => {
         warn(error);
