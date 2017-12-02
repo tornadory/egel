@@ -9,7 +9,7 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 // Core
 import * as Capabilities from './Capabilities';
 import * as Context from './Context';
-import { RENDERER_DEFAULT_HEIGHT, RENDERER_DEFAULT_RATIO, RENDERER_DEFAULT_WIDTH, WEBGL_CONTEXT } from './CoreConstants';
+import { RENDERER_DEFAULT_HEIGHT, RENDERER_DEFAULT_RATIO, RENDERER_DEFAULT_WIDTH } from './CoreConstants';
 import Scene from './Scene';
 
 // Utilities
