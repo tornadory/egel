@@ -11,8 +11,8 @@ import * as Capabilities from './Capabilities';
 import * as Context from './Context';
 import {
     MAX_DEVICE_PIXEL_RATIO,
-    RENDERER_DEFAULT_HEIGHT,
     RENDERER_DEFAULT_ASPECT_RATIO,
+    RENDERER_DEFAULT_HEIGHT,
     RENDERER_DEFAULT_WIDTH,
 } from './CoreConstants';
 import Scene from './Scene';

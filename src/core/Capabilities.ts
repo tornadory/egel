@@ -93,10 +93,12 @@ function getExtensions(gl: WebGLRenderingContext) {
     };
 }
 
-export let capabilities: any = {};
-export let extensions: any = {};
+let capabilities: any = {};
+let extensions: any = {};
 
 export function set(gl: WebGLRenderingContext) {
     capabilities = getCapabilities(gl);
     extensions = getExtensions(gl);
 }
+
+export { capabilities, extensions };

@@ -34,6 +34,9 @@ export default class Application {
 
 		this.controls.update();
 
+		this.grid = new Egel.GridHelper(10);
+		this.scene.add(this.grid);
+
 		this.onResize();
 
 		this.tick();

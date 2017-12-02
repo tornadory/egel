@@ -53,6 +53,10 @@ export { BufferAttribute };
 import Geometry from './geometry/Geometry';
 export { Geometry };
 
+// Helpers
+import GridHelper from './helpers/GridHelper';
+export { GridHelper };
+
 // Math
 import Color from './math/Color';
 export { Color };

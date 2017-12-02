@@ -17,13 +17,13 @@ export default class VertexArrayObject {
 
     public bind() {
         if (extensions.vertexArrayObjectExtension) {
-            extensions.vertexArrayObject.bindVertexArrayOES(this.vertexArrayObject);
+            extensions.vertexArrayObjectExtension.bindVertexArrayOES(this.vertexArrayObject);
         }
     }
 
     public unbind() {
         if (extensions.vertexArrayObjectExtension) {
-            extensions.vertexArrayObject.bindVertexArrayOES(null);
+            extensions.vertexArrayObjectExtension.bindVertexArrayOES(null);
         }
     }
 
