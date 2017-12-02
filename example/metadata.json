@@ -1,0 +1,22 @@
+{
+  "description": "",
+  "author": "Tim van Scherpenzeel",
+  "appleTouchIcon": "public/assets/favicons/apple-touch-icon.png",
+  "favicon32x32": "public/assets/favicons/favicon-32x32.png",
+  "favicon16x16": "public/assets/favicons/favicon-16x16.png",
+  "manifest": "public/assets/favicons/manifest.json",
+  "safariPinnedTabIcon": "public/assets/favicons/safari-pinned-tab.svg",
+  "safariPinnedTabColor": "#000000",
+  "browserConfig": "public/assets/favicons/browserconfig.xml",
+  "favicon": "public/assets/favicons/favicon.ico",
+  "themeColor": "#f8f8f8",
+  "twitterCard": "summary_large_image",
+  "twitterHandle": "@tvscherpenzeel",
+  "title": "",
+  "type": "website",
+  "url": "",
+  "shareImage": "public/assets/og-image.png",
+  "shareImageWidth": "1200",
+  "shareImageHeight": "1200",
+  "trackingId": ""
+}

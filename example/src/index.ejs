@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="<%= htmlWebpackPlugin.options.attributes.metadata.description %>">
+		<meta name="author" content="<%= htmlWebpackPlugin.options.attributes.metadata.author %>">
+
+		<link rel="apple-touch-icon" sizes="180x180" href="<%= htmlWebpackPlugin.options.attributes.metadata.appleTouchIcon %>">
+		<link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.attributes.metadata.favicon32x32 %>">
+		<link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.attributes.metadata.favicon16x16 %>">
+		<link rel="manifest" href="<%= htmlWebpackPlugin.options.attributes.metadata.manifest %>">
+		<link rel="mask-icon" href="<%= htmlWebpackPlugin.options.attributes.metadata.safariPinnedTabIcon %>" color="<%= htmlWebpackPlugin.options.attributes.metadata.safariPinnedTabColor %>">
+		<link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.attributes.metadata.favicon %>">
+		<meta name="msapplication-config" content="<%= htmlWebpackPlugin.options.attributes.metadata.browserConfig %>">
+		<meta name="theme-color" content="<%= htmlWebpackPlugin.options.attributes.metadata.themeColor %>">
+
+		<meta name="twitter:card" content="<%= htmlWebpackPlugin.options.attributes.metadata.twitterCard %>">
+		<meta name="twitter:site" content="<%= htmlWebpackPlugin.options.attributes.metadata.twitterHandle %>">
+		<meta property="og:title" content="<%= htmlWebpackPlugin.options.attributes.metadata.title %>">
+		<meta property="og:site_name" content="<%= htmlWebpackPlugin.options.attributes.metadata.title %>">
+		<meta property="og:description" content="<%= htmlWebpackPlugin.options.attributes.metadata.description %>">
+		<meta property="og:type" content="<%= htmlWebpackPlugin.options.attributes.metadata.type %>">
+		<meta property="og:url" content="<%= htmlWebpackPlugin.options.attributes.metadata.url %>">
+		<meta property="og:image" content="<%= htmlWebpackPlugin.options.attributes.metadata.shareImage %>">
+		<meta property="og:image:width" content="<%= htmlWebpackPlugin.options.attributes.metadata.shareImageWidth %>">
+		<meta property="og:image:height" content="<%= htmlWebpackPlugin.options.attributes.metadata.shareImageHeight %>">
+
+		<title><%= htmlWebpackPlugin.options.attributes.metadata.title %></title>
+	</head>
+	<body
+		data-environment="<%= htmlWebpackPlugin.options.attributes.environment %>"
+		data-version="<%= htmlWebpackPlugin.options.attributes.version %>"
+		data-branch="<%= htmlWebpackPlugin.options.attributes.branch %>"
+		data-revision="<%= htmlWebpackPlugin.options.attributes.revision %>"
+		data-date="<%= htmlWebpackPlugin.options.attributes.date %>"
+		data-time="<%= htmlWebpackPlugin.options.attributes.time %>"
+	>
+
+		<div id="app"></div>
+	</body>
+</html>

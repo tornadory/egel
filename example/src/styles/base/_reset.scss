@@ -1,0 +1,131 @@
+// Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`
+*, *:before, *:after {
+	box-sizing: inherit;
+	-webkit-appearance: inherit;
+}
+
+// IE10+ doesn't honor `<meta name="viewport">` in some cases
+@-ms-viewport {
+	width: device-width;
+}
+
+// General padding and margin reset on all elements
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+a {
+	text-decoration: none;
+	background-color: transparent; // Remove the gray background on active links in IE 10
+	-webkit-text-decoration-skip: objects; // Remove gaps in links underline in iOS 8+ and Safari 8+
+
+	&:active, &:hover {
+		outline-width: 0;
+	}
+}
+
+img {
+	vertical-align: middle;
+	border-style: none; // Remove the border on images inside links in IE 10-
+}
+
+svg:not(:root) {
+	overflow: hidden; // Hide the overflow in IE
+}
+
+// Avoid 300ms click delay on touch devices that support the `touch-action` CSS property (IE Mobile 10-11 + IE11 + Edge on touch devices)
+// http://caniuse.com/#feat=css-touch-action
+// https://patrickhlauke.github.io/touch/tests/results/#suppressing-300ms-delay
+a, area, button, [role="button"], input, label, select, summary, textarea {
+	touch-action: manipulation;
+}
+
+// The `appearance` property is used to display an element using a platform-native styling based on the users' operating system's theme
+input, textarea, select {
+	-webkit-appearance: none;
+	outline: 0;
+	border: 0;
+	background-color: transparent;
+	border-radius: 0;
+	margin: 0;
+}
+
+// Shim for HTML5 structural role elements to display correctly (IE10, older browsers)
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+	display: block;
+}
+
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+
+	&:before, &:after {
+		content: '';
+	}
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+button {
+	background: none;
+	-webkit-appearance: none;
+}
+
+html {
+	// Apply a natural box layout model to all elements, but allowing components to change apply same logic to appearance property
+	// https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+	box-sizing: border-box;
+	-webkit-appearance: none;
+
+	// Hint overflow style
+	-ms-overflow-style: scrollbar;
+
+	// Prevent adjustments of font size after orientation changes in IE and iOS
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	text-size-adjust: none;
+
+	// Fix tap highlighting on iOS
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-khtml-font-smoothing: antialiased;
+	-apple-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smooth: always;
+	text-rendering: optimizeLegibility;
+}
