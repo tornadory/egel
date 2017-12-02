@@ -2,7 +2,7 @@
 import { mat4 } from 'gl-matrix';
 
 // Core
-import { RENDERER_DEFAULT_RATIO } from '../core/CoreConstants';
+import { RENDERER_DEFAULT_ASPECT_RATIO } from '../core/CoreConstants';
 import Object3D from '../core/Object3D';
 
 // Math
@@ -11,7 +11,7 @@ import Vector3 from '../math/Vector3';
 interface Options {
   near?: number;
   far?: number;
-  fov?: number;
+  fieldOfView?: number;
   position?: Vector3;
   target?: Vector3;
   up?: Vector3;
@@ -25,7 +25,7 @@ export default class Camera {
     public isOrthographicCamera: boolean;
     public near: number;
     public far: number;
-    public fov: number;
+    public fieldOfView: number;
     public aspect: number;
     public position: Vector3;
     public target: Vector3;
@@ -39,8 +39,8 @@ export default class Camera {
         this.isOrthographicCamera = false;
         this.near = 0.1;
         this.far = 100;
-        this.fov = 70;
-        this.aspect = RENDERER_DEFAULT_RATIO;
+        this.fieldOfView = 70;
+        this.aspect = RENDERER_DEFAULT_ASPECT_RATIO;
         this.position = new Vector3();
         this.target = new Vector3();
         this.up = new Vector3(0, 1, 0);

@@ -14,7 +14,7 @@ interface Options {
     top?: number;
     near?: number;
     far?: number;
-    fov?: number;
+    fieldOfView?: number;
     position?: Vector3;
     target?: Vector3;
     up?: Vector3;

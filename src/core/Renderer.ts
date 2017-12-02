@@ -12,7 +12,7 @@ import * as Context from './Context';
 import {
     MAX_DEVICE_PIXEL_RATIO,
     RENDERER_DEFAULT_HEIGHT,
-    RENDERER_DEFAULT_RATIO,
+    RENDERER_DEFAULT_ASPECT_RATIO,
     RENDERER_DEFAULT_WIDTH,
 } from './CoreConstants';
 import Scene from './Scene';
@@ -26,7 +26,7 @@ let gl: WebGLRenderingContext;
 interface Options {
     width?: number;
     height?: number;
-    ratio?: number;
+    aspectRatio?: number;
     preserveDrawingBuffer?: boolean;
     pixelRatio?: number;
 }
@@ -48,7 +48,7 @@ interface ClearColor {
 export default class Renderer {
     public width: number;
     public height: number;
-    public ratio: number;
+    public aspectRatio: number;
     public preserveDrawingBuffer: boolean;
     public pixelRatio: number;
     public canvas: HTMLCanvasElement;
@@ -59,7 +59,7 @@ export default class Renderer {
     constructor(options?: Options) {
         this.width = RENDERER_DEFAULT_WIDTH;
         this.height = RENDERER_DEFAULT_HEIGHT;
-        this.ratio = RENDERER_DEFAULT_RATIO;
+        this.aspectRatio = RENDERER_DEFAULT_ASPECT_RATIO;
         this.preserveDrawingBuffer = false;
         this.pixelRatio = Math.min(window.devicePixelRatio, MAX_DEVICE_PIXEL_RATIO);
         this.autoClear = true;
@@ -122,7 +122,7 @@ export default class Renderer {
         if (newWidth !== this.width || newHeight !== this.height) {
             this.width = width * this.pixelRatio;
             this.height = height * this.pixelRatio;
-            this.ratio = this.width / this.height;
+            this.aspectRatio = this.width / this.height;
 
             this.canvas.width = this.width;
             this.canvas.height = this.height;
@@ -134,8 +134,8 @@ export default class Renderer {
         }
     }
 
-    public setDevicePixelRatio(ratio = 1) {
-        this.pixelRatio = ratio || 1;
+    public setDevicePixelRatio(pixelRatio = 1) {
+        this.pixelRatio = Math.min(pixelRatio, MAX_DEVICE_PIXEL_RATIO) || 1;
         this.setSize(this.width, this.height);
     }
 
