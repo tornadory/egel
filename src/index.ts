@@ -21,6 +21,9 @@ export { CoreConstants };
 import * as CoreUtilities from './core/CoreUtilities';
 export { CoreUtilities };
 
+import Framebuffer from './core/Framebuffer';
+export { Framebuffer };
+
 import Material from './core/Material';
 export { Material };
 
