@@ -34,7 +34,7 @@ const config = {
 	context: srcPath,
 	devtool: isDevelopment ? 'eval-cheap-module-source-map' : '',
 	entry: {
-		vendor: Object.keys(pkg.dependencies),
+		// vendor: Object.keys(pkg.dependencies),
 		app: './scripts/index',
 	},
 	output: {

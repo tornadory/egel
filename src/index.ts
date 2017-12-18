@@ -63,6 +63,10 @@ export { AxisHelper };
 import GridHelper from './helpers/GridHelper';
 export { GridHelper };
 
+// Loaders
+import FileLoader from './loaders/FileLoader';
+export { FileLoader };
+
 // Math
 import Color from './math/Color';
 export { Color };

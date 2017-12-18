@@ -63,6 +63,6 @@ export default class Camera {
     }
 
     public updateProjectionMatrix() {
-        // Override
+        // Extended by child
     }
 }
