@@ -67,6 +67,9 @@ export { GridHelper };
 import FileLoader from './loaders/FileLoader';
 export { FileLoader };
 
+import ImageLoader from './loaders/ImageLoader';
+export { ImageLoader };
+
 // Math
 import Color from './math/Color';
 export { Color };
