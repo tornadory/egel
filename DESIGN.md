@@ -26,11 +26,11 @@
 - Should include diffuse lighting, point lights, directional lights and area lights
 - IBL using HDR 
 
-## Loading
+### Loading
 - Simple promise based file loader should be included
 - Texture loader should extend this basic loader
 - Model loading (Draco / glTF2)
 - HDR images should be able to be loaded and parsed effectively
 
-## Postprocessing
+### Postprocessing
 - Framebuffer for postprocessing effects (dof, bloom, tone mapping, etc)
