@@ -5,25 +5,32 @@
 Egel is a WebGL only engline written in Typescript. The goal is to run a PBR rendering engine in real time on a large range of devices. The resulting build should be small, perform well and feature a set of minimal core features. Helpers and other visualizations that are helpful during the development process are to be split into their own packages. The goal is to provide a small framework that experiences can be build on top of. In the future I would like to build an UI debugging panel (with the different active textures, parameters and accompanying slides), audio engine, physics engine, profiler and a sequencer that extends the features of Egel. With this framework I would like to build experiences and demo's to show at demo parties. My personal goal is to get a better insight into PBR and its workflow.
 
 ## Research
+- https://github.com/KhronosGroup/glTF-WebGL-PBR
 - http://marcinignac.com/blog/modular-webgl-with-pex/
 - http://marcinignac.com/blog/pragmatic-pbr-intro/
 - http://marcinignac.com/blog/pragmatic-pbr-setup-and-gamma
 - http://marcinignac.com/blog/pragmatic-pbr-hdr/
 - http://blog.selfshadow.com/publications/s2012-shading-course/#course_content
 - http://blog.selfshadow.com/publications/s2015-shading-course/#course_content
-- [Moving Frostbite to Physically Based Rendering 3.0 paper (Sébastien Lagarde, Charles de Rousiers)](https://seblagarde.files.wordpress.com/2015/07/course_notes_moving_frostbite_to_pbr_v32.pdf)
-- [Moving Frostbite to Physically Based Rendering 3.0 presentation (Sébastien Lagarde, Charles de Rousiers)(https://seblagarde.files.wordpress.com/2015/07/s2014_pbs_frostbite_slides.pdf)
-- [Physically Based Shading At Disney](https://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf)
-- [Real Shading in Unreal Engine 4](https://cdn2.unrealengine.com/Resources/files/2013SiggraphPresentationsNotes-26915738.pdf)
-- [Physically Based Shading At Disney - Axum Graphics - Gareth Morgan](https://www.youtube.com/watch?v=EspjgunLpoo)
+- https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#appendix-b-brdf-implementation
 
-## Inspiration
+## Papers
+- [Moving Frostbite to Physically Based Rendering 3.0 paper - Sébastien Lagarde, Charles de Rousiers](https://seblagarde.files.wordpress.com/2015/07/course_notes_moving_frostbite_to_pbr_v32.pdf)
+- [Moving Frostbite to Physically Based Rendering 3.0 presentation (Sébastien Lagarde, Charles de Rousiers)(https://seblagarde.files.wordpress.com/2015/07/s2014_pbs_frostbite_slides.pdf)
+- [Physically Based Shading At Disney - Brent Burley, Walt Disney Animation Studios](https://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf)
+- [Real Shading in Unreal Engine 4 - Brian Karis, Epic Games](https://cdn2.unrealengine.com/Resources/files/2013SiggraphPresentationsNotes-26915738.pdf)
+- [Physically Based Shading At Disney - Gareth Morgan](https://www.youtube.com/watch?v=EspjgunLpoo)
+- [An Inexpensive BRDF Model For Physically-based Rendering - Christophe Schlick](https://www.cs.virginia.edu/~jdl/bib/appearance/analytic%20models/schlick94b.pdf)
+- [A Reflectance Model for Computer Graphics - Robert L. Cook, Kenneth E. Torrance](http://graphics.pixar.com/library/ReflectanceModel/paper.pdf)
+
+## Implementations
 - http://osgjs.org/examples/pbr/ (PBR implementation as used by Little Workshop's WebVR showroom experience)
 - https://github.com/amelierosser/medium (in terms of engine structure)
 - https://github.com/pissang/qtek (in terms of capabilities and shaders)
 - https://github.com/KhronosGroup/glTF-WebGL-PBR (in terms of PBR shader)
 - https://github.com/pex-gl/ (in terms of composibility)
 - https://github.com/yiwenl/Alfrid/ (in terms of capabilities and several optimizations)
+- https://github.com/frguthmann/VirtuaLightJS (in terms of capabilities)
 
 ## Must
 - Must result in an engine that is stable for personal use
