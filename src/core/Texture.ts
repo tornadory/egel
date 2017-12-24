@@ -64,7 +64,7 @@ export default class Texture extends EventDispatcher {
             .catch(this.onTextureError);
     }
 
-    public onTextureLoaded = (response) => {
+    public onTextureLoaded = (response: HTMLCanvasElement | HTMLImageElement) => {
         this.image = response;
         this.update(this.image);
         this.emit('loaded');
