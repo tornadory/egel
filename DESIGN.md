@@ -55,6 +55,7 @@ Egel is a WebGL only engline written in Typescript. The goal is to run a PBR ren
 - Must have environment map generation support based on camera position (128 x 128)
 
 ## Should
+- Should be written in a more functional style
 - Should support light maps
 - Should have several helper and performance tools in seperate packages (grid, axis, framebuffer visualizer, fps counter, performance metrics profiler (drawcalls, vertices))
 - Should have spot lights
