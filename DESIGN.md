@@ -1,9 +1,5 @@
 # Egel engine design
 
-## Statement
-
-Egel is a WebGL only engline written in Typescript. The goal is to run a PBR rendering engine in real time on a large range of devices. The resulting build should be small, perform well and feature a set of minimal core features. Helpers and other visualizations that are helpful during the development process are to be split into their own packages. The goal is to provide a small framework that experiences can be build on top of. In the future I would like to build an UI debugging panel (with the different active textures, parameters and accompanying slides), audio engine, physics engine, profiler and a sequencer that extends the features of Egel. With this framework I would like to build experiences and demo's to show at demo parties. My personal goal is to get a better insight into PBR and its workflow.
-
 ## Research
 - https://github.com/KhronosGroup/glTF-WebGL-PBR
 - http://marcinignac.com/blog/modular-webgl-with-pex/
