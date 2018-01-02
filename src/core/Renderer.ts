@@ -49,7 +49,14 @@ export default class Renderer {
     public width: number;
     public height: number;
     public aspectRatio: number;
+    public alpha: boolean;
+    public antialias: boolean;
+    public depth: boolean;
+    public failIfMajorPerformanceCaveat: boolean;
+    public premultipliedAlpha: boolean;
     public preserveDrawingBuffer: boolean;
+    public powerPreference: string;
+    public stencil: boolean;
     public pixelRatio: number;
     public canvas: HTMLCanvasElement;
     public viewport: Viewport;
@@ -60,7 +67,21 @@ export default class Renderer {
         this.width = RENDERER_DEFAULT_WIDTH;
         this.height = RENDERER_DEFAULT_HEIGHT;
         this.aspectRatio = RENDERER_DEFAULT_ASPECT_RATIO;
+
+        this.alpha = false;
+        this.antialias = false;
+        this.depth = false;
+
+        // https://blog.tojicode.com/2013/12/failifmajorperformancecaveat-with-great.html
+        this.failIfMajorPerformanceCaveat = false;
+        this.premultipliedAlpha = true;
         this.preserveDrawingBuffer = false;
+
+        // TODO: handle context loss, flag doesn't work without it
+        // https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2
+        this.powerPreference = 'default';
+        this.stencil = false;
+
         this.pixelRatio = Math.min(window.devicePixelRatio, MAX_DEVICE_PIXEL_RATIO);
         this.autoClear = true;
         this.clearColor = {
@@ -77,7 +98,14 @@ export default class Renderer {
         this.canvas.height = this.height;
 
         const attributes = {
+            alpha: this.alpha,
+            antialias: this.antialias,
+            depth: this.depth,
+            failIfMajorPerformanceCaveat: this.failIfMajorPerformanceCaveat,
+            premultipliedAlpha: this.premultipliedAlpha,
             preserveDrawingBuffer: this.preserveDrawingBuffer,
+            powerPreference: this.powerPreference,
+            stencil: this.stencil,
         };
 
         const webGLSupport = WebGLSupport();

@@ -11,6 +11,8 @@ export default class Application {
 
 		// Renderer
 		this.renderer = new Egel.Renderer({
+			depth: true,
+			// stencil: true,
 			aspectRatio: this.width / this.height,
 		});
 
