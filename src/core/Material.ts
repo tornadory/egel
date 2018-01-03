@@ -45,6 +45,7 @@ export default class Material {
     public name: string;
     public uniforms: any;
     public fieldOfView: number;
+    public hookShaderName: string;
     public hookVertexPre: string;
     public hookVertexMain: string;
     public hookVertexEnd: string;
@@ -65,6 +66,7 @@ export default class Material {
 
         this.name = '';
         this.uniforms = {};
+        this.hookShaderName = '';
         this.hookVertexPre = '';
         this.hookVertexMain = '';
         this.hookVertexEnd = '';
@@ -176,6 +178,7 @@ export default class Material {
             addDefine('normals');
         }
 
+        shader = shader.replace(/<HOOK_SHADER_NAME>/g, this.hookShaderName);
         shader = shader.replace(/<HOOK_PRECISION>/g, precision);
         shader = shader.replace(/<HOOK_DEFINES>/g, defines);
         shader = shader.replace(/<HOOK_VERTEX_PRE>/g, this.hookVertexPre);

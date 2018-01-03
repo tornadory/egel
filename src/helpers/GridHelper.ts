@@ -21,6 +21,8 @@ import { lerp } from '../math/Utilities';
 let gl: WebGLRenderingContext;
 
 const customVertexShader = `
+    #define SHADER_NAME GridHelperVertex
+
     attribute vec3 aVertexPosition;
 
     uniform mat4 uProjectionMatrix;
@@ -32,6 +34,8 @@ const customVertexShader = `
 `;
 
 const customFragmentShader = () => `
+    #define SHADER_NAME GridHelperFragment
+
     precision ${capabilities.precision} float;
 
     void main() {

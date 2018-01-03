@@ -1,4 +1,4 @@
-export const baseFragmentShader = `
+export const physicalFragmentShader = `
     #define SHADER_NAME <HOOK_SHADER_NAME>
 
     <HOOK_PRECISION>

@@ -26,6 +26,7 @@ function getMaxPrecision(
         }
     }
 
+    // Downgrade to low precision
     return 'lowp';
 }
 

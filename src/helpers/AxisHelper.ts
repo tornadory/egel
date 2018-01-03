@@ -18,6 +18,8 @@ import Geometry from '../geometry/Geometry';
 let gl: WebGLRenderingContext;
 
 const customVertexShader = `
+    #define SHADER_NAME AxisHelperVertex
+
 	attribute vec3 aVertexPosition;
 	attribute vec3 aVertexColor;
 
@@ -33,6 +35,8 @@ const customVertexShader = `
 `;
 
 const customFragmentShader = () => `
+    #define SHADER_NAME AxisHelperFragment
+
     precision ${capabilities.precision} float;
 
     varying vec3 vColor;
