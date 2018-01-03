@@ -13,6 +13,10 @@
 - http://blog.selfshadow.com/publications/s2012-shading-course/
 - https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#appendix-b-brdf-implementation
 - https://github.com/CIS565-Fall-2016/Project5-WebGL-Deferred-Shading-with-glTF/pulls
+- http://lousodrome.net/blog/light/tag/physically-based-rendering/page/2/
+- https://graphicrants.blogspot.nl/2013/08/specular-brdf-reference.html
+- https://simonstechblog.blogspot.nl/2011/12/microfacet-brdf.html
+- https://graphicrants.blogspot.nl/2013/08/specular-brdf-reference.html
 
 ## Papers
 - [Pragmatic PBR](https://github.com/vorg/pragmatic-pbr)
