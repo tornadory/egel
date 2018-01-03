@@ -67,8 +67,14 @@ export { GridHelper };
 import FileLoader from './loaders/FileLoader';
 export { FileLoader };
 
+import HDRLoader from './loaders/HDRLoader';
+export { HDRLoader };
+
 import ImageLoader from './loaders/ImageLoader';
 export { ImageLoader };
+
+import OBJLoader from './loaders/OBJLoader';
+export { OBJLoader };
 
 // Math
 import Color from './math/Color';
