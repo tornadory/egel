@@ -1,7 +1,7 @@
 # Design
 
 ## Statement
-Egel is a WebGL engine written in Typescript. It is not afraid to take learnings from other frameworks such as `medium` and `qtek`. The goal is to run a PBR rendering engine in real time on a large range of devices and modern browsers. The resulting build should be small, perform well and feature a set of minimal core features. Helpers and other visualizations that are helpful during the development process are to be split into their own packages. The goal is to provide a small framework that experiences can be build on top of. In the near future I would like to add a small range of debugging tools such as framebuffer visualization, render statistics (draw calls, memory usage) and a framecounter.
+Egel is a WebGL engine written in Typescript. My goal is to create a realtime PBR rendering engine that runs smooth on a large range of devices and modern browsers. The resulting build should be small, perform well and feature a set of minimal core features. Helpers and other visualizations that are helpful during the development process are to be split into their own packages. In the near future I would like to add a small range of debugging tools such as framebuffer visualization, render statistics (draw calls, memory usage) and a framecounter.
 
 ## Must
 - Must result in an engine that is stable for personal use
