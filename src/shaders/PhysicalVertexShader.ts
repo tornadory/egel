@@ -1,4 +1,4 @@
-export const baseVertexShader = `
+export const physicalVertexShader = `
     <HOOK_PRECISION>
     <HOOK_SHADER_NAME>
     <HOOK_DEFINES>

@@ -12,7 +12,7 @@ export const DRAW_LINE_STRIP: number = 3;
 export const DRAW_TRIANGLES: number = 4;
 
 // Maximum device pixel ratio
-export const MAX_DEVICE_PIXEL_RATIO: number = 2; // Could even be lowered to 1.5 - 1.75
+export const MAX_DEVICE_PIXEL_RATIO: number = 2;
 
 // Default renderer settings
 export const RENDERER_DEFAULT_WIDTH: number = window.innerWidth;
