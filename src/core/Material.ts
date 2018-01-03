@@ -178,9 +178,9 @@ export default class Material {
             addDefine('normals');
         }
 
+        shader = shader.replace(/<HOOK_SHADER_NAME>/g, this.hookShaderName);
         shader = shader.replace(/<HOOK_PRECISION>/g, precision);
         shader = shader.replace(/<HOOK_DEFINES>/g, defines);
-        shader = shader.replace(/<HOOK_SHADER_NAME>/g, this.hookShaderName);
         shader = shader.replace(/<HOOK_VERTEX_PRE>/g, this.hookVertexPre);
         shader = shader.replace(/<HOOK_VERTEX_MAIN>/g, this.hookVertexMain);
         shader = shader.replace(/<HOOK_VERTEX_END>/g, this.hookVertexEnd);

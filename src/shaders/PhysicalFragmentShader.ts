@@ -1,6 +1,7 @@
 export const physicalFragmentShader = `
-    <HOOK_PRECISION>
     #define SHADER_NAME <HOOK_SHADER_NAME>
+
+    <HOOK_PRECISION>
     <HOOK_DEFINES>
 
     // Color
