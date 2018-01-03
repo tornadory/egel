@@ -1,6 +1,6 @@
 export const baseVertexShader = `
     <HOOK_PRECISION>
-    <HOOK_SHADER_NAME>
+    #define SHADER_NAME <HOOK_SHADER_NAME>
     <HOOK_DEFINES>
 
     // Position
