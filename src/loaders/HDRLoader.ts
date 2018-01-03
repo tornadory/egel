@@ -1,5 +1,5 @@
 // Vendor
-import HDRParser from 'parse-hdr';
+import parseHDR from 'parse-hdr';
 
 export class ImageData {
     public width: number;
@@ -15,7 +15,15 @@ export class ImageData {
 
 export default function HDRLoader(filename): Promise<ImageData> {
     return new Promise((resolve: (image) => void, reject: (status) => void) => {
-        const request = new XMLHttpRequest();
-        // Use fetch
+        fetch(filename)
+            .then((response) => response.arrayBuffer())
+            .then((buffer) => parseHDR(buffer))
+            .then((hdr) => {
+                const image = new ImageData(hdr.shape[0], hdr.shape[1], hdr.data);
+                resolve(image);
+            })
+            .catch((error) => {
+                reject(error);
+            });
     });
 }
