@@ -1,6 +1,3 @@
-// Utilities
-import { log } from '../utilities/Console';
-
 export default function FileLoader(url: string, responseType?): Promise<any> {
     return new Promise((resolve: (response, status) => void, reject: (status) => void) => {
         const request = new XMLHttpRequest();

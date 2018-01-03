@@ -12,6 +12,7 @@
 - http://blog.selfshadow.com/publications/s2013-shading-course/
 - http://blog.selfshadow.com/publications/s2012-shading-course/
 - https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#appendix-b-brdf-implementation
+- https://github.com/CIS565-Fall-2016/Project5-WebGL-Deferred-Shading-with-glTF/pulls
 
 ## Papers
 - [Pragmatic PBR](https://github.com/vorg/pragmatic-pbr)
@@ -33,3 +34,4 @@
 - https://github.com/pex-gl/ (in terms of composibility)
 - https://github.com/yiwenl/Alfrid/ (in terms of capabilities and several optimizations)
 - https://github.com/frguthmann/VirtuaLightJS (in terms of capabilities)
+- https://github.com/tiansijie/WebGLpbr
