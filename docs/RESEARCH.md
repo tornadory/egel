@@ -5,6 +5,12 @@
 - https://github.com/KhronosGroup/glTF-WebGL-PBR
 - http://marcinignac.com/blog/modular-webgl-with-pex/
 - http://blog.selfshadow.com/archives/
+- http://blog.selfshadow.com/publications/s2017-shading-course/
+- http://blog.selfshadow.com/publications/s2016-shading-course/
+- http://blog.selfshadow.com/publications/s2015-shading-course/
+- http://blog.selfshadow.com/publications/s2014-shading-course/
+- http://blog.selfshadow.com/publications/s2013-shading-course/
+- http://blog.selfshadow.com/publications/s2012-shading-course/
 - https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/README.md#appendix-b-brdf-implementation
 
 ## Papers
