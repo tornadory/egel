@@ -60,7 +60,7 @@ export default class Application {
 				});
 
 				const mesh = new Egel.Mesh(geometry, material);
-				mesh.scale.set(0.25, 0.25, 0.25);
+				mesh.scale.set(0.5, 0.5, 0.5);
 				scene.add(mesh);
 			})
 			.catch((error) => {
