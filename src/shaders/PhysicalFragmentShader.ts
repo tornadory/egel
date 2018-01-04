@@ -31,7 +31,10 @@ export const PhysicalFragmentShader = `
 
         <HOOK_FRAGMENT_MAIN>
 
-        gl_FragColor = vec4(color.rgb, 1.0);
+        float lightDotProduct = dot(vNormal, vec3(1, 0.5, 0));
+        float surfaceBrightness = max(0.0, lightDotProduct);
+
+        gl_FragColor = vec4(color.rgb * surfaceBrightness, 1.0);
 
         <HOOK_FRAGMENT_END>
     }

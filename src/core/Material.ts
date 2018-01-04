@@ -315,6 +315,7 @@ export default class Material {
         mat4.identity(inversedModelViewMatrix);
         mat4.invert(inversedModelViewMatrix, modelMatrix);
 
+        // Construct normal matrix of size 3x3 from 4x4 inverse of the model view matrix
         mat3.identity(normalMatrix);
         mat3.fromMat4(normalMatrix, inversedModelViewMatrix);
         mat3.transpose(normalMatrix, normalMatrix);
