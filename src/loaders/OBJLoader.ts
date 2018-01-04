@@ -4,7 +4,7 @@ import FileLoader from './FileLoader';
 // Parsers
 import OBJParser from '../parsers/OBJParser';
 
-export default function OBJLoader(filename): Promise<any> {
+export default function(filename): Promise<any> {
     return new Promise((resolve: (data) => void, reject: (status) => void) => {
         FileLoader(filename)
             .then((response) => {

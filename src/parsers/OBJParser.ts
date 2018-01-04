@@ -1,8 +1,8 @@
 // Vendor
-import OBJ from 'webgl-obj-loader';
+import { Mesh } from 'webgl-obj-loader';
 
-export default function OBJParser(data) {
-    const mesh = new OBJ.Mesh(data);
+export default function(data) {
+    const mesh = new Mesh(data);
 
     return {
         vertices: new Float32Array(mesh.vertices),

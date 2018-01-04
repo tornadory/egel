@@ -1,6 +1,9 @@
 // Vendor
 import * as Egel from 'egel';
 
+// Scene
+const scene = new Egel.Scene();
+
 export default class Application {
 	constructor() {
 		this.width = window.innerWidth;
@@ -21,9 +24,6 @@ export default class Application {
 
 		this.element.appendChild(this.renderer.canvas);
 
-		// Scene
-		this.scene = new Egel.Scene();
-
 		// Camera
 		this.camera = new Egel.PerspectiveCamera({
 			fieldOfView: 45,
@@ -35,14 +35,34 @@ export default class Application {
 		this.camera.lookAt();
 
 		this.controls = new Egel.OrbitalControls(this.camera, this.renderer.canvas);
-
 		this.controls.update();
 
 		this.gridHelper = new Egel.GridHelper(10);
-		this.scene.add(this.gridHelper);
+		scene.add(this.gridHelper);
 
 		this.axisHelper = new Egel.AxisHelper();
-		this.scene.add(this.axisHelper);
+		scene.add(this.axisHelper);
+
+		new Egel.OBJLoader('public/assets/models/bunny.obj')
+			.then((data) => {
+				const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals);
+
+				const material = new Egel.Material({
+					uniforms: {
+						uDiffuse: {
+							type: '3f',
+							value: new Egel.Color(0xff0000).v,
+						},
+					},
+				});
+
+				const mesh = new Egel.Mesh(geometry, material);
+
+				scene.add(mesh);
+			})
+			.catch((error) => {
+				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+			});
 
 		this.onResize();
 
@@ -56,7 +76,7 @@ export default class Application {
 		this.renderer.setScissor(0, 0, this.width, this.height);
 		this.renderer.setViewport(0, 0, this.width, this.height);
 		this.camera.updateMatrixWorld();
-		this.renderer.render(this.scene, this.camera);
+		this.renderer.render(scene, this.camera);
 	}
 
 	tick() {
