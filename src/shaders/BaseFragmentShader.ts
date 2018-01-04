@@ -1,5 +1,5 @@
 export const baseFragmentShader = `
-    #define SHADER_NAME <HOOK_SHADER_NAME>
+    <HOOK_FRAGMENT_NAME>
 
     <HOOK_PRECISION>
     <HOOK_DEFINES>

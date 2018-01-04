@@ -81,7 +81,6 @@ export default class AxisHelper extends Mesh {
         super(
             new AxisGeometry(size),
             new Material({
-                name: 'AxisHelper',
                 vertexShader,
                 fragmentShader,
             }),

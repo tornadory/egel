@@ -80,7 +80,6 @@ export default class GridHelper extends Mesh {
         super(
             new GridGeometry(size, divisions),
             new Material({
-                name: 'GridHelper',
                 vertexShader,
                 fragmentShader,
             }),
