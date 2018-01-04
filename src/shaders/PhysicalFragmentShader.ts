@@ -1,4 +1,4 @@
-export const physicalFragmentShader = `
+export const PhysicalFragmentShader = `
     <HOOK_FRAGMENT_NAME>
 
     <HOOK_PRECISION>

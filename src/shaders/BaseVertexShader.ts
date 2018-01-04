@@ -1,4 +1,4 @@
-export const baseVertexShader = `
+export const BaseVertexShader = `
     <HOOK_VERTEX_NAME>
 
     <HOOK_PRECISION>

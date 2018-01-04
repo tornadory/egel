@@ -18,9 +18,9 @@ import Geometry from '../geometry/Geometry';
 import Color from '../math/Color';
 
 // Shaders
-import { baseFragmentShader } from '../shaders/BaseFragmentShader';
-import { baseVertexShader } from '../shaders/BaseVertexShader';
-import { physicalFragmentShader } from '../shaders/PhysicalFragmentShader';
+import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
+import { BaseVertexShader } from '../shaders/BaseVertexShader';
+import { PhysicalFragmentShader } from '../shaders/PhysicalFragmentShader';
 
 let gl: WebGLRenderingContext;
 const normalMatrix: mat3 = mat3.create();
@@ -68,18 +68,10 @@ export default class Material {
 
     constructor(options: Options = {}) {
         gl = Context.get();
-        let fragmentShader;
 
-        switch (options.type || '') {
-            case 'physical': {
-                fragmentShader = physicalFragmentShader;
-                break;
-            }
-            default: {
-                fragmentShader = baseFragmentShader;
-                break;
-            }
-        }
+        const fragmentShader = (options.type === 'physical')
+            ? PhysicalFragmentShader
+            : BaseFragmentShader;
 
         this.type = '';
         this.uniforms = {};
@@ -91,7 +83,7 @@ export default class Material {
         this.hookFragmentPre = '';
         this.hookFragmentMain = '';
         this.hookFragmentEnd = '';
-        this.vertexShader = baseVertexShader;
+        this.vertexShader = BaseVertexShader;
         this.fragmentShader = fragmentShader;
         this.drawType = DRAW_TRIANGLES;
         this.culling = CULL_NONE;
