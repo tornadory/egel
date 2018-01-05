@@ -17,6 +17,7 @@
 - https://graphicrants.blogspot.nl/2013/08/specular-brdf-reference.html
 - https://simonstechblog.blogspot.nl/2011/12/microfacet-brdf.html
 - https://graphicrants.blogspot.nl/2013/08/specular-brdf-reference.html
+- https://www.html5rocks.com/en/tutorials/performance/mystery/
 
 ## Papers
 - [Pragmatic PBR](https://github.com/vorg/pragmatic-pbr)
