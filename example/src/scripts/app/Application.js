@@ -31,7 +31,7 @@ export default class Application {
 			aspectRatio: this.width / this.height,
 		});
 
-		this.camera.position.set(10, 5, 10);
+		this.camera.position.set(3, 2, 3);
 		this.camera.lookAt();
 
 		this.controls = new Egel.OrbitalControls(this.camera, this.renderer.canvas);
