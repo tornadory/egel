@@ -1,7 +1,7 @@
 // Vendor
 import { Mesh } from 'webgl-obj-loader';
 
-export default function(data) {
+export default function OBJParser(data) {
     const mesh = new Mesh(data);
 
     return {

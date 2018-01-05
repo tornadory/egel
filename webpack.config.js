@@ -36,9 +36,10 @@ const config = {
 						['env', {
 							targets: {
 								browsers: [
+									'> 5%',
 									'last 2 versions',
+									'not ie <= 11',
 									'ios_saf >= 10.2',
-									'not IE <= 10',
 								],
 							},
 							modules: false,
