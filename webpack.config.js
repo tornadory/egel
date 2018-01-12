@@ -1,4 +1,4 @@
-// Vendor
+// Native
 const path = require('path');
 
 // Paths
