@@ -1,4 +1,4 @@
-// Vendor
+// Native
 const path = require('path');
 
 // Paths
@@ -34,6 +34,8 @@ const config = {
 				options: {
 					presets: [
 						['env', {
+							modules: false,
+							useBuiltIns: true,
 							targets: {
 								browsers: [
 									'> 5%',
@@ -42,7 +44,6 @@ const config = {
 									'ios_saf >= 10.2',
 								],
 							},
-							modules: false,
 						}],
 					],
 				},
