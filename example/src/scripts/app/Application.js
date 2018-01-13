@@ -60,7 +60,7 @@ export default class Application {
 					uniforms: {
 						uDiffuse: {
 							type: '3f',
-							value: new Egel.Color(0xff00f0).v,
+							value: new Egel.Vector3(0.5, 0.87, 1.0).v,
 						},
 					},
 				});

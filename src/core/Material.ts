@@ -14,13 +14,11 @@ import Program from './Program';
 // Geometry
 import Geometry from '../geometry/Geometry';
 
-// Math
-import Color from '../math/Color';
-
 // Shaders
 import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
 import { BaseVertexShader } from '../shaders/BaseVertexShader';
 import { PhysicalFragmentShader } from '../shaders/PhysicalFragmentShader';
+import { Vector3 } from '../index';
 
 let gl: WebGLRenderingContext;
 const normalMatrix: mat3 = mat3.create();
@@ -139,7 +137,7 @@ export default class Material {
             uDiffuse: {
                 location: null,
                 type: '3f',
-                value: new Color().v,
+                value: new Vector3().v,
             },
             uModelMatrix: {
                 location: null,

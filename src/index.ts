@@ -77,9 +77,6 @@ import OBJLoader from './loaders/OBJLoader';
 export { OBJLoader };
 
 // Math
-import Color from './math/Color';
-export { Color };
-
 import * as Utilities from './math/Utilities';
 export { Utilities };
 
