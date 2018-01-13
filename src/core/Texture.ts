@@ -33,7 +33,7 @@ export default class Texture extends EventDispatcher {
 
         gl = Context.get();
 
-        this.src = null;
+        this.src = undefined;
         this.magFilter = gl.NEAREST;
         this.minFilter = gl.NEAREST;
         this.wrapS = gl.CLAMP_TO_EDGE;
@@ -101,6 +101,6 @@ export default class Texture extends EventDispatcher {
     public dispose() {
         gl = Context.get();
         gl.deleteTexture(this.texture);
-        this.texture = null;
+        this.texture = undefined;
     }
 }

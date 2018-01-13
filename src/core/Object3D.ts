@@ -108,19 +108,19 @@ export default class Object3D {
 
         if (objectIndex !== -1) {
             this.parent.children.splice(objectIndex, 1);
-            this.parent = null;
+            this.parent = undefined;
         }
     }
 
     public dispose() {
         this.unsetParent();
         this.children = [];
-        this.localMatrix = null;
-        this.modelMatrix = null;
-        this.position = null;
-        this.rotation = null;
-        this.scale = null;
-        this.quaternion = null;
-        this.isObject3D = null;
+        this.localMatrix = undefined;
+        this.modelMatrix = undefined;
+        this.position = undefined;
+        this.rotation = undefined;
+        this.scale = undefined;
+        this.quaternion = undefined;
+        this.isObject3D = undefined;
     }
 }

@@ -32,6 +32,6 @@ export default class VertexArrayObject {
             extensions.vertexArrayObjectExtension.deleteVertexArrayOES(this.vertexArrayObject);
         }
 
-        this.vertexArrayObject = null;
+        this.vertexArrayObject = undefined;
     }
 }
