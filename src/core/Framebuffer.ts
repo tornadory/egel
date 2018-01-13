@@ -155,7 +155,7 @@ export default class Framebuffer {
         }
     }
 
-    public setSissorTest(enable = false) {
+    public setScissorTest(enable = false) {
         gl = Context.get();
 
         if (enable) {
@@ -165,7 +165,7 @@ export default class Framebuffer {
         }
     }
 
-    public setSissor(x: number, y: number, width: number, height: number) {
+    public setScissor(x: number, y: number, width: number, height: number) {
         gl = Context.get();
 
         gl.scissor(
