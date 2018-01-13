@@ -17,7 +17,7 @@ export default function HDRLoader(filename): Promise<ImageData> {
     return new Promise((resolve: (image) => void, reject: (status) => void) => {
         fetch(filename)
             .then((response) => response.arrayBuffer())
-            .then((buffer) => HDRParser(buffer))
+            .then((buffer: ArrayBuffer) => HDRParser(buffer))
             .then((hdr) => {
                 const image = new ImageData(hdr.shape[0], hdr.shape[1], hdr.data);
                 resolve(image);

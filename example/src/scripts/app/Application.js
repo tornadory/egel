@@ -1,5 +1,5 @@
 // Vendor
-import * as Egel from 'egel';
+import * as Egel from 'egel'; // eslint-disable-line
 import Stats from 'stats.js';
 
 // Stats
@@ -39,6 +39,7 @@ export default class Application {
 		this.camera.position.set(3, 2, 3);
 		this.camera.lookAt();
 
+		// Controls
 		this.controls = new Egel.OrbitalControls(this.camera, this.renderer.canvas);
 		this.controls.update();
 
