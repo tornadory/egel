@@ -9,14 +9,5 @@
   "safariPinnedTabColor": "#000000",
   "browserConfig": "public/assets/favicons/browserconfig.xml",
   "favicon": "public/assets/favicons/favicon.ico",
-  "themeColor": "#f8f8f8",
-  "twitterCard": "summary_large_image",
-  "twitterHandle": "@tvscherpenzeel",
-  "title": "",
-  "type": "website",
-  "url": "",
-  "shareImage": "public/assets/og-image.png",
-  "shareImageWidth": "1200",
-  "shareImageHeight": "1200",
-  "trackingId": ""
+  "themeColor": "#f8f8f8"
 }

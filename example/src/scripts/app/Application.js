@@ -49,18 +49,32 @@ export default class Application {
 		this.axisHelper = new Egel.AxisHelper();
 		scene.add(this.axisHelper);
 
+		const texture0 = new Egel.Texture({
+			src: 'public/assets/textures/example.png',
+		});
+
 		new Egel.OBJLoader('public/assets/models/bunny.obj')
 			.then((data) => {
-				const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals);
+				const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals, data.uvs);
 
 				const material = new Egel.Material({
 					hookVertexName: 'BunnyMeshVertex',
 					hookFragmentName: 'BunnyMeshFragment',
+					hookFragmentPre: `
+						uniform sampler2D uTexture0;
+					`,
+					hookFragmentMain: `
+						color = texture2D(uTexture0, vUv).rgb;
+					`,
 					type: 'physical',
 					uniforms: {
 						uDiffuse: {
 							type: '3f',
 							value: new Egel.Vector3(0.5, 0.87, 1.0).v,
+						},
+						uTexture0: {
+							type: 't',
+							value: texture0.texture,
 						},
 					},
 				});

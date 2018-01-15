@@ -17,7 +17,7 @@ export const PhysicalFragmentShader = `
 
     // Uv
     #ifdef uv
-    varying vec3 vUv;
+    varying vec2 vUv;
     #endif
 
     <HOOK_FRAGMENT_PRE>

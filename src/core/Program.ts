@@ -2,9 +2,19 @@
 import * as Context from './Context';
 
 // Utilities
-import { warn } from '../utilities/Console';
+import { log, warn } from '../utilities/Console';
 
 let gl: WebGLRenderingContext;
+
+const addLineNumbers = (str) => {
+    const lines = str.split('\n');
+
+    for (let i = 0; i < lines.length; i ++) {
+        lines[i] = `${(i + 1)}: ${lines[i]}`;
+    }
+
+    return lines.join('\n');
+};
 
 export default class Program {
     public program: WebGLProgram;
@@ -69,6 +79,7 @@ export default class Program {
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
             warn(`Failed to compile shader: ${gl.getShaderInfoLog(shader)}`);
+            log(addLineNumbers(source));
             return false;
         }
 
