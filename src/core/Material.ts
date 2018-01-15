@@ -18,7 +18,9 @@ import Geometry from '../geometry/Geometry';
 import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
 import { BaseVertexShader } from '../shaders/BaseVertexShader';
 import { PhysicalFragmentShader } from '../shaders/PhysicalFragmentShader';
-import { Vector3 } from '../index';
+
+// Math
+import Vector3 from '../math/Vector3';
 
 let gl: WebGLRenderingContext;
 const normalMatrix: mat3 = mat3.create();
