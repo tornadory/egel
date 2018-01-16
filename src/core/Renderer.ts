@@ -75,6 +75,8 @@ export default class Renderer {
         // https://blog.tojicode.com/2013/12/failifmajorperformancecaveat-with-great.html
         this.failIfMajorPerformanceCaveat = false;
         this.premultipliedAlpha = true;
+
+        // https://stackoverflow.com/a/27747016
         this.preserveDrawingBuffer = false;
 
         // TODO: handle context loss, flag doesn't work without it
