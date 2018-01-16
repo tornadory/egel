@@ -15,19 +15,19 @@ export default class Application {
 		this.height = window.innerHeight;
 
 		// Element
-		this.element = document.getElementById('app');
+		this.canvasElement = document.getElementById('app');
 
 		// Renderer
 		this.renderer = new Egel.Renderer({
 			depth: true,
-			// stencil: true,
+			stencil: true,
 			aspectRatio: this.width / this.height,
 		});
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
 
-		this.element.appendChild(this.renderer.canvas);
+		this.canvasElement.appendChild(this.renderer.canvas);
 
 		// Camera
 		this.camera = new Egel.PerspectiveCamera({
@@ -121,6 +121,6 @@ export default class Application {
 	}
 
 	addListeners() {
-		window.addEventListener('resize', _event => this.onResize(_event));
+		window.addEventListener('resize', event => this.onResize(event));
 	}
 }
