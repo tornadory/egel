@@ -1,5 +1,5 @@
 export const PhysicalFragmentShader = `
-    <HOOK_FRAGMENT_NAME>
+    <HOOK_NAME>
 
     <HOOK_PRECISION>
     <HOOK_DEFINES>

@@ -1,5 +1,5 @@
 export const BaseVertexShader = `
-    <HOOK_VERTEX_NAME>
+    <HOOK_NAME>
 
     <HOOK_PRECISION>
     <HOOK_DEFINES>

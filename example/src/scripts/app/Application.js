@@ -58,8 +58,7 @@ export default class Application {
 				const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals, data.uvs);
 
 				const material = new Egel.Material({
-					hookVertexName: 'BunnyMeshVertex',
-					hookFragmentName: 'BunnyMeshFragment',
+					hookName: 'BunnyMesh',
 					hookFragmentPre: `
 						uniform sampler2D uTexture0;
 					`,

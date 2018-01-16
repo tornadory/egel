@@ -30,11 +30,10 @@ interface Options {
     type?: string;
     uniforms?: any;
     fieldOfView?: number;
-    hookVertexName?: string;
+    hookName?: string;
     hookVertexPre?: string;
     hookVertexMain?: string;
     hookVertexEnd?: string;
-    hookFragmentName?: string;
     hookFragmentPre?: string;
     hookFragmentMain?: string;
     hookFragmentEnd?: string;
@@ -49,11 +48,10 @@ export default class Material {
     public type: string;
     public uniforms: any;
     public fieldOfView: number;
-    public hookVertexName: string;
+    public hookName: string;
     public hookVertexPre: string;
     public hookVertexMain: string;
     public hookVertexEnd: string;
-    public hookFragmentName: string;
     public hookFragmentPre: string;
     public hookFragmentMain: string;
     public hookFragmentEnd: string;
@@ -75,11 +73,10 @@ export default class Material {
 
         this.type = '';
         this.uniforms = {};
-        this.hookVertexName = '';
+        this.hookName = '';
         this.hookVertexPre = '';
         this.hookVertexMain = '';
         this.hookVertexEnd = '';
-        this.hookFragmentName = '';
         this.hookFragmentPre = '';
         this.hookFragmentMain = '';
         this.hookFragmentEnd = '';
@@ -190,11 +187,10 @@ export default class Material {
 
         shader = shader.replace(/<HOOK_PRECISION>/g, precision);
         shader = shader.replace(/<HOOK_DEFINES>/g, defines);
-        shader = shader.replace(/<HOOK_VERTEX_NAME>/g, `#define SHADER_NAME ${this.hookVertexName}`);
+        shader = shader.replace(/<HOOK_NAME>/g, `#define SHADER_NAME ${this.hookName}`);
         shader = shader.replace(/<HOOK_VERTEX_PRE>/g, this.hookVertexPre);
         shader = shader.replace(/<HOOK_VERTEX_MAIN>/g, this.hookVertexMain);
         shader = shader.replace(/<HOOK_VERTEX_END>/g, this.hookVertexEnd);
-        shader = shader.replace(/<HOOK_FRAGMENT_NAME>/g, `#define SHADER_NAME ${this.hookFragmentName}`);
         shader = shader.replace(/<HOOK_FRAGMENT_PRE>/g, this.hookFragmentPre);
         shader = shader.replace(/<HOOK_FRAGMENT_MAIN>/g, this.hookFragmentMain);
         shader = shader.replace(/<HOOK_FRAGMENT_END>/g, this.hookFragmentEnd);
