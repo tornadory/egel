@@ -19,7 +19,7 @@ Egel is a WebGL engine written in Typescript. My goal is to create a real-time P
 - Must have support for Variance Shadow Mapping. Real time shadows should be smooth.
 - Must have a clearly defined struture for creating meshes with materials
 - Must support postprocessing using framebuffers in an effect composer
-- Must include several postprocessing effects (bloom, FXAA, blur, DOF, SSAO)
+- Must include several postprocessing effects (bloom, FXAA (or another method of antialiasing), blur, DOF, SSAO)
 - Must support image based lighting using HDR's
 - Must have environment map generation support based on camera position (128 x 128)
 
