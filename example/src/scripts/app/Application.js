@@ -49,42 +49,50 @@ export default class Application {
 		this.axisHelper = new Egel.AxisHelper();
 		scene.add(this.axisHelper);
 
-		const texture0 = new Egel.Texture({
-			src: 'public/assets/textures/example.png',
-		});
+		// const texture0 = new Egel.Texture({
+		// 	src: 'public/assets/textures/example.png',
+		// });
 
-		new Egel.OBJLoader('public/assets/models/bunny.obj')
+		new Egel.GLTFLoader('public/assets/models/DamagedHelmet/DamagedHelmet.gltf')
 			.then((data) => {
-				const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals, data.uvs);
-
-				const material = new Egel.Material({
-					hookName: 'BunnyMesh',
-					hookFragmentPre: `
-						uniform sampler2D uTexture0;
-					`,
-					hookFragmentMain: `
-						color = texture2D(uTexture0, vUv).rgb;
-					`,
-					type: 'physical',
-					uniforms: {
-						uDiffuse: {
-							type: '3f',
-							value: new Egel.Vector3(0.5, 0.87, 1.0).v,
-						},
-						uTexture0: {
-							type: 't',
-							value: texture0.texture,
-						},
-					},
-				});
-
-				const mesh = new Egel.Mesh(geometry, material);
-				mesh.scale.set(0.5, 0.5, 0.5);
-				scene.add(mesh);
+				console.log(data);
 			})
 			.catch((error) => {
 				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
 			});
+
+		// new Egel.OBJLoader('public/assets/models/bunny.obj')
+		// 	.then((data) => {
+		// 		const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals, data.uvs);
+
+		// 		const material = new Egel.Material({
+		// 			hookName: 'BunnyMesh',
+		// 			hookFragmentPre: `
+		// 				uniform sampler2D uTexture0;
+		// 			`,
+		// 			hookFragmentMain: `
+		// 				color = texture2D(uTexture0, vUv).rgb;
+		// 			`,
+		// 			type: 'physical',
+		// 			uniforms: {
+		// 				uDiffuse: {
+		// 					type: '3f',
+		// 					value: new Egel.Vector3(0.5, 0.87, 1.0).v,
+		// 				},
+		// 				uTexture0: {
+		// 					type: 't',
+		// 					value: texture0.texture,
+		// 				},
+		// 			},
+		// 		});
+
+		// 		const mesh = new Egel.Mesh(geometry, material);
+		// 		mesh.scale.set(0.5, 0.5, 0.5);
+		// 		scene.add(mesh);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+		// 	});
 
 		this.onResize();
 
