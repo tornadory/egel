@@ -67,6 +67,9 @@ export { GridHelper };
 import FileLoader from './loaders/FileLoader';
 export { FileLoader };
 
+import GLTFLoader from './loaders/GLTFLoader';
+export { GLTFLoader };
+
 import HDRLoader from './loaders/HDRLoader';
 export { HDRLoader };
 
