@@ -49,17 +49,15 @@ export default class Application {
 		this.axisHelper = new Egel.AxisHelper();
 		scene.add(this.axisHelper);
 
-		// const texture0 = new Egel.Texture({
-		// 	src: 'public/assets/textures/example.png',
-		// });
-
 		new Egel.GLTFLoader('public/assets/models/DamagedHelmet/DamagedHelmet.gltf')
 			.then((data) => {
 				console.log(data);
+
+				// Should output geometry data and material data (including several textures)
 			})
-			.catch((error) => {
-				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
-			});
+			// .catch((error) => {
+			// 	console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+			// });
 
 		// new Egel.OBJLoader('public/assets/models/bunny.obj')
 		// 	.then((data) => {
