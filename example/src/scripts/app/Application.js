@@ -51,7 +51,7 @@ export default class Application {
 
 		new Egel.GLTFLoader('public/assets/models/DamagedHelmet/DamagedHelmet.gltf')
 			.then((data) => {
-				console.log(data);
+				// console.log(data);
 
 				// Should output geometry data and material data (including several textures)
 			})

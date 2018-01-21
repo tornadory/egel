@@ -13,15 +13,29 @@ export default function GLTFParser(json, filename) {
     const fetchGeometry = (gltf) => {
         const fetchedGeometry = gltf.buffers.map((buffer) => {
             FileLoader(`${filePath}/${buffer.uri}`, 'arraybuffer')
-                .then((buffer: ArrayBuffer) => parseGeometry(buffer))
+                .then((buffer: ArrayBuffer) => parseGeometry(gltf, buffer))
                 .catch((error) => {
                     warn(error);
                 });
         });
     };
 
-    const parseGeometry = (buffer) => {
-        console.log(buffer);
+    const parseMeshes = (gltf) => {
+        const parsedMeshes = gltf.meshes.map((mesh) => {
+            console.log(mesh);
+        });
+    };
+
+    const parseGeometry = (gltf, buffer) => {
+        console.log(gltf, buffer);
+
+        const parsedBufferViews = gltf.bufferViews.map((bufferView) => {
+            console.log(bufferView);
+        });
+
+        const parsedAccessors = gltf.accessors.map((accessor) => {
+            console.log(accessor);
+        });
     };
 
     const parseMaterials = (gltf) => {
@@ -50,12 +64,7 @@ export default function GLTFParser(json, filename) {
         return parsedMaterials;
     };
 
+    const meshes = parseMeshes(json);
     const geometry = fetchGeometry(json);
     const materials = parseMaterials(json);
-
-    // console.log(materials);
-
-    // parseMaterials = () => {
-
-    // };
 }
