@@ -67,6 +67,12 @@ export { GridHelper };
 import FileLoader from './loaders/FileLoader';
 export { FileLoader };
 
+<<<<<<< Updated upstream
+=======
+import HDRLoader from './loaders/HDRLoader';
+export { HDRLoader };
+
+>>>>>>> Stashed changes
 import ImageLoader from './loaders/ImageLoader';
 export { ImageLoader };
 

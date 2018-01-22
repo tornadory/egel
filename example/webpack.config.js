@@ -98,7 +98,7 @@ const config = {
 				}),
 			},
 			{
-				test: /\.(png|jpg|jpeg|gif|svg|mp3|ogv|mp4|webm|eot|otf|ttf|woff|woff2|gltf)$/,
+				test: /\.(png|jpg|jpeg|gif|svg|mp3|ogv|mp4|webm|eot|otf|ttf|woff|woff2)$/,
 				include: publicPath,
 				use: 'file-loader',
 			},
