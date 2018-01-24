@@ -64,8 +64,10 @@ export default class Mesh extends Object3D {
             if (attributeName !== 'aIndex') {
                 // enableVertexAttribArray
                 this.material.program.setAttributeLocation(attributeName);
+
                 // Bind buffer
                 this.geometry.attributes[attributeName].bind();
+
                 // vertexAttribPointer
                 this.material.program.setAttributePointer(
                     attributeName,
@@ -81,8 +83,10 @@ export default class Mesh extends Object3D {
             if (attributeName !== 'aIndex') {
                 // enableVertexAttribArray
                 this.material.program.setAttributeLocation(attributeName);
+
                 // Bind buffer
                 this.geometry.attributesInstanced[attributeName].bind();
+
                 // vertexAttribPointer
                 this.material.program.setAttributeInstancedPointer(
                     attributeName,
