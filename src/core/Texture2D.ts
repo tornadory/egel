@@ -19,7 +19,7 @@ interface Options {
     wrapT?: number;
 }
 
-export default class Texture extends EventDispatcher {
+export default class Texture2D extends EventDispatcher {
     public src: string;
     public magFilter: number;
     public minFilter: number;

@@ -39,8 +39,8 @@ export { Renderer };
 import Scene from './core/Scene';
 export { Scene };
 
-import Texture from './core/Texture';
-export { Texture };
+import Texture2D from './core/Texture2D';
+export { Texture2D };
 
 import VertexArrayObject from './core/VertexArrayObject';
 export { VertexArrayObject };
