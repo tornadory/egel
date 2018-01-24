@@ -69,11 +69,9 @@ function getCapabilities(gl: WebGLRenderingContext) {
 function getExtensions(gl: WebGLRenderingContext) {
     const angleInstancedArraysExtension = gl.getExtension('ANGLE_instanced_arrays') || false;
     const vertexArrayObjectExtension = gl.getExtension('OES_vertex_array_object') || false;
-    const textureFloatExtension = gl.getExtension('OES_texture_float') || false;
 
     return {
         angleInstancedArraysExtension,
-        textureFloatExtension,
         vertexArrayObjectExtension,
     };
 }
