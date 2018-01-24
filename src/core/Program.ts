@@ -138,6 +138,7 @@ export default class Program {
 
     public bind() {
         gl = Context.get();
+
         gl.useProgram(this.program);
     }
 

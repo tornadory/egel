@@ -53,6 +53,7 @@ export default class Mesh extends Object3D {
 
     public setInstanceCount(value: number) {
         gl = Context.get();
+
         this.instanceCount = value;
         this.isInstanced = true;
     }

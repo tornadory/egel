@@ -100,6 +100,7 @@ export default class Texture extends EventDispatcher {
 
     public dispose() {
         gl = Context.get();
+
         gl.deleteTexture(this.texture);
         this.texture = undefined;
     }
