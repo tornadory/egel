@@ -229,6 +229,7 @@ export default class Mesh extends Object3D {
         this.vertexArrayObject.dispose();
         this.geometry = undefined;
         this.material = undefined;
+
         super.dispose();
     }
 }
