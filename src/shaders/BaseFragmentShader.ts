@@ -11,12 +11,12 @@ export const BaseFragmentShader = `
     varying vec3 vPosition;
 
     // Normal
-    #ifdef normals
+    #ifdef HAS_NORMALS
     varying vec3 vNormal;
     #endif
 
     // Uv
-    #ifdef uv
+    #ifdef HAS_UVS
     varying vec2 vUv;
     #endif
 
@@ -25,7 +25,7 @@ export const BaseFragmentShader = `
     void main() {
         vec3 color = vDiffuse;
 
-        #ifdef normals
+        #ifdef HAS_NORMALS
         vec3 normal = normalize(vNormal);
         #endif
 

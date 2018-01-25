@@ -16,7 +16,7 @@ export const BaseVertexShader = `
     // Camera
     uniform vec3 uCameraPosition;
 
-    #ifdef vertexColors
+    #ifdef HAS_VERTEX_COLORS
     attribute vec3 aVertexColor;
     #endif
 
@@ -25,13 +25,13 @@ export const BaseVertexShader = `
     varying vec3 vDiffuse;
 
     // Normal
-    #ifdef normals
+    #ifdef HAS_NORMALS
     attribute vec3 aVertexNormal;
     varying vec3 vNormal;
     #endif
 
     // Uv
-    #ifdef uv
+    #ifdef HAS_UVS
     attribute vec2 aUv;
     varying vec2 vUv;
     #endif
@@ -44,17 +44,17 @@ export const BaseVertexShader = `
         // Override for custom positioning
         vec3 transformed = vec3(0.0);
 
-        #ifdef vertexColors
+        #ifdef HAS_VERTEX_COLORS
         vDiffuse = aVertexColor;
         #endif
 
-        #ifdef uv
+        #ifdef HAS_UVS
         vUv = aUv;
         #endif
 
         <HOOK_VERTEX_MAIN>
 
-        #ifdef normals
+        #ifdef HAS_NORMALS
         vNormal = uNormalMatrix * aVertexNormal;
         #endif
 

@@ -174,15 +174,15 @@ export default class Material {
         }
 
         if (geometry.bufferUvs) {
-            addDefine('uv');
+            addDefine('HAS_UVS');
         }
 
         if (geometry.bufferColors) {
-            addDefine('vertexColors');
+            addDefine('HAS_VERTEX_COLORS');
         }
 
         if (geometry.bufferNormals) {
-            addDefine('normals');
+            addDefine('HAS_NORMALS');
         }
 
         shader = shader.replace(/<HOOK_PRECISION>/g, precision);
