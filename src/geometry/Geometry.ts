@@ -10,7 +10,7 @@ import Vector2 from '../math/Vector2';
 import Vector3 from '../math/Vector3';
 
 // Utilities
-import { flatten } from '../utilities/Array';
+import { flatten } from '../utilities/Methods';
 
 let gl: WebGLRenderingContext;
 

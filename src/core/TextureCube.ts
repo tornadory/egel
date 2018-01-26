@@ -7,7 +7,6 @@ import ImageLoader from '../loaders/ImageLoader';
 // Utilities
 import { createCanvas } from '../utilities/Canvas';
 import { warn } from '../utilities/Console';
-import EventDispatcher from '../utilities/EventDispatcher';
 
 let gl: WebGLRenderingContext;
 
@@ -19,7 +18,7 @@ interface Options {
     wrapT?: number;
 }
 
-export default class Texture extends EventDispatcher {
+export default class TextureCube {
     public src: string[];
     public magFilter: number;
     public minFilter: number;
@@ -30,8 +29,6 @@ export default class Texture extends EventDispatcher {
     public images: Array<HTMLCanvasElement | HTMLImageElement>;
 
     constructor(options: Options) {
-        super();
-
         gl = Context.get();
 
         this.src = Array(6).fill('');
@@ -72,12 +69,10 @@ export default class Texture extends EventDispatcher {
     public onTextureLoaded = (response: Array<HTMLCanvasElement | HTMLImageElement>) => {
         this.images = response;
         this.update(this.images);
-        this.emit('loaded');
     }
 
     public onTextureError = (error: string) => {
         warn(error);
-        this.emit('error', error);
     }
 
     public update(images: Array<HTMLCanvasElement | HTMLImageElement>) {

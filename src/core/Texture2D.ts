@@ -7,7 +7,6 @@ import ImageLoader from '../loaders/ImageLoader';
 // Utilities
 import { createCanvas } from '../utilities/Canvas';
 import { warn } from '../utilities/Console';
-import EventDispatcher from '../utilities/EventDispatcher';
 
 let gl: WebGLRenderingContext;
 
@@ -19,7 +18,7 @@ interface Options {
     wrapT?: number;
 }
 
-export default class Texture2D extends EventDispatcher {
+export default class Texture2D {
     public src: string;
     public magFilter: number;
     public minFilter: number;
@@ -29,8 +28,6 @@ export default class Texture2D extends EventDispatcher {
     public image: HTMLImageElement | HTMLCanvasElement;
 
     constructor(options: Options) {
-        super();
-
         gl = Context.get();
 
         this.src = undefined;
@@ -67,12 +64,10 @@ export default class Texture2D extends EventDispatcher {
     public onTextureLoaded = (response: HTMLCanvasElement | HTMLImageElement) => {
         this.image = response;
         this.update(this.image);
-        this.emit('loaded');
     }
 
     public onTextureError = (error: string) => {
         warn(error);
-        this.emit('error', error);
     }
 
     public updateImage(src: string) {
