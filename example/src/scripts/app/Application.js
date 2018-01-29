@@ -65,7 +65,6 @@ export default class Application {
 					hookFragmentMain: `
 						color = texture2D(uTexture0, vUv).rgb;
 					`,
-					type: 'physical',
 					uniforms: {
 						uDiffuse: {
 							type: '3f',

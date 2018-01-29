@@ -17,7 +17,6 @@ import Geometry from '../geometry/Geometry';
 // Shaders
 import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
 import { BaseVertexShader } from '../shaders/BaseVertexShader';
-import { PhysicalFragmentShader } from '../shaders/PhysicalFragmentShader';
 
 // Math
 import Vector3 from '../math/Vector3';
@@ -67,10 +66,6 @@ export default class Material {
     constructor(options: Options = {}) {
         gl = Context.get();
 
-        const fragmentShader = (options.type === 'physical')
-            ? PhysicalFragmentShader
-            : BaseFragmentShader;
-
         this.type = '';
         this.uniforms = {};
         this.hookName = '';
@@ -81,7 +76,7 @@ export default class Material {
         this.hookFragmentMain = '';
         this.hookFragmentEnd = '';
         this.vertexShader = BaseVertexShader;
-        this.fragmentShader = fragmentShader;
+        this.fragmentShader = BaseFragmentShader;
         this.drawType = DRAW_TRIANGLES;
         this.culling = CULL_NONE;
         this.blending = false;

@@ -1,3 +1,6 @@
+// Utilities
+import { warn } from '../utilities/Console';
+
 export default function ImageLoader(src): Promise<HTMLImageElement> {
     return new Promise((resolve: (image) => void, reject: (status) => void) => {
         const image = new Image();
@@ -7,7 +10,7 @@ export default function ImageLoader(src): Promise<HTMLImageElement> {
         };
 
         image.onerror = () => {
-            reject(`Failed to load: ${src}`);
+            reject(warn(`Failed to load: ${src}`));
         };
 
         image.src = src;

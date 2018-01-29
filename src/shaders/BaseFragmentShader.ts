@@ -31,7 +31,7 @@ export const BaseFragmentShader = `
 
         <HOOK_FRAGMENT_MAIN>
 
-        gl_FragColor = vec4(color.rgb, 1.0);
+        gl_FragColor = vec4(color.rgb * normal * 0.5 + 0.5, 1.0);
 
         <HOOK_FRAGMENT_END>
     }
