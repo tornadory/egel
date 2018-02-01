@@ -196,8 +196,6 @@ export default class Renderer {
         scene: Scene,
         camera: Camera | PerspectiveCamera | OrthographicCamera,
     ) {
-        gl = Context.get();
-
         gl.viewport(
             this.viewport.x,
             this.viewport.y,

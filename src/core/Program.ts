@@ -56,8 +56,6 @@ export default class Program {
     }
 
     public compile(type: string, source: string) {
-        gl = Context.get();
-
         let shader;
 
         switch (type) {
@@ -86,8 +84,6 @@ export default class Program {
     public setAttributeLocation(attributeName: string) {
         if (!this.created) return;
 
-        gl = Context.get();
-
         this.attributeLocations[attributeName] = gl.getAttribLocation(
             this.program,
             attributeName,
@@ -97,8 +93,6 @@ export default class Program {
       }
 
     public setAttributePointer(attributeName: string, itemSize: number) {
-        gl = Context.get();
-
         gl.vertexAttribPointer(
             this.attributeLocations[attributeName],
             itemSize,
@@ -112,8 +106,6 @@ export default class Program {
     public setUniformLocation(uniforms: object, uniformName: string) {
         if (!this.created) return;
 
-        gl = Context.get();
-
         uniforms[uniformName].location = gl.getUniformLocation(
             this.program,
             uniformName,
@@ -121,14 +113,10 @@ export default class Program {
     }
 
     public bind() {
-        gl = Context.get();
-
         gl.useProgram(this.program);
     }
 
     public dispose() {
-        gl = Context.get();
-
         let attributeLocation;
 
         Object.keys(this.attributeLocations).forEach((attributeName) => {

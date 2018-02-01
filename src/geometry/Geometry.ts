@@ -142,8 +142,6 @@ export default class Geometry {
     }
 
     public updateVertices() {
-        gl = Context.get();
-
         this.vertices.forEach((vertex, i) => {
             this.bufferVertices.set(vertex.v, i * vertex.v.length);
         });
@@ -166,8 +164,6 @@ export default class Geometry {
     }
 
     public dispose() {
-        gl = Context.get();
-
         // Dispose attributes and buffers
         Object.keys(this.attributes).forEach((attributeName) => {
             this.attributes[attributeName].dispose(gl);

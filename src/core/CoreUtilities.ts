@@ -2,8 +2,6 @@ import * as Context from './Context';
 
 let gl: WebGLRenderingContext;
 
-gl = Context.get();
-
 export function createBuffer(
     type: GLenum,
     data: Float32Array | Uint16Array,

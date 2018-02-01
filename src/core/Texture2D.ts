@@ -75,8 +75,6 @@ export default class Texture2D {
     }
 
     public update(image: HTMLCanvasElement | HTMLImageElement) {
-        gl = Context.get();
-
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
@@ -93,8 +91,6 @@ export default class Texture2D {
     }
 
     public dispose() {
-        gl = Context.get();
-
         gl.deleteTexture(this.texture);
         this.texture = undefined;
     }

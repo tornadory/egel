@@ -69,6 +69,8 @@ class AxisGeometry extends Geometry {
           0, 0, 1,
         ]);
 
+        gl = Context.get();
+
         super(new Float32Array(vertices), undefined, undefined, undefined, colors);
       }
 }
@@ -89,8 +91,6 @@ export default class AxisHelper extends Mesh {
 
     public draw(camera: Camera | PerspectiveCamera | OrthographicCamera) {
         if (!this.visible) return;
-
-        gl = Context.get();
 
         // Update modelMatrix
         this.updateMatrix(camera);

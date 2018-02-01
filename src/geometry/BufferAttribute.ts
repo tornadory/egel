@@ -23,32 +23,25 @@ export default class BufferAttribute {
         this.numItems = data.length / itemSize;
         this.buffer = createBuffer(type, data);
         this.shaderAttribute = shaderAttribute;
+
+        gl = Context.get();
     }
 
     public bind() {
-        gl = Context.get();
-
         gl.bindBuffer(this.type, this.buffer);
     }
 
     public unbind() {
-        gl = Context.get();
-
         gl.bindBuffer(this.type, null);
     }
 
     public update(data: Float32Array) {
         this.bind();
-
-        gl = Context.get();
-
         gl.bufferSubData(this.type, 0, data);
         this.unbind();
     }
 
     public dispose() {
-        gl = Context.get();
-
         gl.deleteBuffer(this.buffer);
         this.buffer = undefined;
     }

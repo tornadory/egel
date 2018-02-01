@@ -156,8 +156,6 @@ export default class Framebuffer {
     }
 
     public setScissorTest(enable = false) {
-        gl = Context.get();
-
         if (enable) {
             gl.enable(gl.SCISSOR_TEST);
         } else {
@@ -166,8 +164,6 @@ export default class Framebuffer {
     }
 
     public setScissor(x: number, y: number, width: number, height: number) {
-        gl = Context.get();
-
         gl.scissor(
             x * this.pixelRatio,
             y * this.pixelRatio,
@@ -184,8 +180,6 @@ export default class Framebuffer {
     }
 
     public render(scene: Scene, camera: PerspectiveCamera | OrthographicCamera) {
-        gl = Context.get();
-
         gl.viewport(
             this.viewport.x,
             this.viewport.y,

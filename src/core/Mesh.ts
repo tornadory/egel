@@ -75,8 +75,6 @@ export default class Mesh extends Object3D {
         if (!this.visible) return;
         if (!this.material.program.created) return;
 
-        gl = Context.get();
-
         // Update ModelMatrix
         this.updateMatrix(camera);
         this.material.program.bind();

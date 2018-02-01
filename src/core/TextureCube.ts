@@ -75,8 +75,6 @@ export default class TextureCube {
     }
 
     public update(images: Array<HTMLCanvasElement | HTMLImageElement>) {
-        gl = Context.get();
-
         gl.bindTexture(gl.TEXTURE_CUBE_MAP, this.texture);
 
         const targets = [

@@ -88,8 +88,6 @@ export default class Material {
     }
 
     public create(geometry: Geometry) {
-        gl = Context.get();
-
         this.vertexShader = this.processShader(this.vertexShader, geometry);
         this.fragmentShader = this.processShader(this.fragmentShader, geometry);
 
@@ -158,8 +156,6 @@ export default class Material {
     }
 
     public processShader(shader: string, geometry: Geometry) {
-        gl = Context.get();
-
         let defines = '';
 
         const precision = `precision ${capabilities.precision} float;`;
@@ -199,8 +195,6 @@ export default class Material {
         modelMatrix: mat4,
         camera?: PerspectiveCamera | OrthographicCamera,
     ) {
-        gl = Context.get();
-
         Object.keys(this.customUniforms).forEach((uniformName) => {
             const uniform = this.uniforms[uniformName];
 

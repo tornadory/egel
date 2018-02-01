@@ -68,6 +68,8 @@ class GridGeometry extends Geometry {
             vertices = vertices.concat([x1, y1, z1, x2, y2, z2]);
         }
 
+        gl = Context.get();
+
         super(new Float32Array(vertices));
     }
 }
@@ -88,8 +90,6 @@ export default class GridHelper extends Mesh {
 
     public draw(camera: Camera | PerspectiveCamera | OrthographicCamera) {
         if (!this.visible) return;
-
-        gl = Context.get();
 
         // Update modelMatrix
         this.updateMatrix(camera);
