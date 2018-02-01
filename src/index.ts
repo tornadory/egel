@@ -70,9 +70,6 @@ export { FileLoader };
 import ImageLoader from './loaders/ImageLoader';
 export { ImageLoader };
 
-import OBJLoader from './loaders/OBJLoader';
-export { OBJLoader };
-
 // Math
 import * as Utilities from './math/Utilities';
 export { Utilities };

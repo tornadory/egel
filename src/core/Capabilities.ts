@@ -39,39 +39,15 @@ function getCapabilities(gl: WebGLRenderingContext) {
         precision = maxPrecision;
     }
 
-    const maxTextures: number = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
-    const maxVertexTextures: number = gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS);
-
-    const maxTextureSize: number = gl.getParameter(gl.MAX_TEXTURE_SIZE);
-    const maxCubemapSize: number = gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE);
-
-    const maxAttributes: number = gl.getParameter(gl.MAX_VERTEX_ATTRIBS);
-    const maxVertexUniforms: number = gl.getParameter(gl.MAX_VERTEX_UNIFORM_VECTORS);
-    const maxVaryings: number = gl.getParameter(gl.MAX_VARYING_VECTORS);
-    const maxFragmentUniforms: number = gl.getParameter(gl.MAX_FRAGMENT_UNIFORM_VECTORS);
-
     return {
-        maxTextures,
-        maxVertexTextures,
-
-        maxTextureSize,
-        maxCubemapSize,
-
-        maxAttributes,
-        maxVertexUniforms,
-        maxVaryings,
-        maxFragmentUniforms,
-
         precision,
     };
 }
 
 function getExtensions(gl: WebGLRenderingContext) {
-    const angleInstancedArraysExtension = gl.getExtension('ANGLE_instanced_arrays') || false;
     const vertexArrayObjectExtension = gl.getExtension('OES_vertex_array_object') || false;
 
     return {
-        angleInstancedArraysExtension,
         vertexArrayObjectExtension,
     };
 }

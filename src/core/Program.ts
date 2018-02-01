@@ -112,19 +112,6 @@ export default class Program {
         );
     }
 
-    public setAttributeInstancedPointer(attributeName: string, itemSize: number) {
-        gl = Context.get();
-
-        gl.vertexAttribPointer(
-            this.attributeLocations[attributeName],
-            itemSize,
-            gl.FLOAT,
-            false,
-            0,
-            0,
-        );
-    }
-
     public setUniformLocation(uniforms: object, uniformName: string) {
         if (!this.created) return;
 

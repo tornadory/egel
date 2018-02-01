@@ -107,7 +107,6 @@ export default class AxisHelper extends Mesh {
             this.vertexArrayObject.bind();
         } else {
             this.bindAttributes();
-            this.bindAttributesInstanced();
             this.bindIndexBuffer();
         }
 

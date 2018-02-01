@@ -119,7 +119,7 @@ export default class Renderer {
 
             Context.set(context);
         } else {
-            warn('WebGL is not supported');
+            warn('WebGL is not supported, please use a modern browser.');
             return;
         }
 
@@ -222,11 +222,7 @@ export default class Renderer {
 
         // Render the scene objects
         scene.objects.forEach((child) => {
-            if (child.isInstanced) {
-                child.drawInstance(camera);
-            } else {
-                child.draw(camera);
-            }
+            child.draw(camera);
         });
     }
 }

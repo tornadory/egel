@@ -210,11 +210,7 @@ export default class Framebuffer {
 
         // Render the scene objects
         scene.objects.forEach((child) => {
-            if (child.isInstanced) {
-                child.drawInstance(camera);
-            } else {
-                child.draw(camera);
-            }
+            child.draw(camera);
         });
 
         gl.bindTexture(gl.TEXTURE_2D, this.texture);

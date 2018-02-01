@@ -106,7 +106,6 @@ export default class GridHelper extends Mesh {
             this.vertexArrayObject.bind();
         } else {
             this.bindAttributes();
-            this.bindAttributesInstanced();
             this.bindIndexBuffer();
         }
 

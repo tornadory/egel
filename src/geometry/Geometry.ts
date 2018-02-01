@@ -21,7 +21,6 @@ export default class Geometry {
     public bufferUvs: Float32Array;
     public bufferColors: Float32Array;
     public attributes: any;
-    public attributesInstanced: any;
     public vertices: Vector3[];
     public faces: Face[];
     public uvs: Vector2[];
@@ -41,7 +40,6 @@ export default class Geometry {
         this.bufferUvs = uvs;
         this.bufferColors = colors;
         this.attributes = {};
-        this.attributesInstanced = {};
 
         // Vertex positions
         if (this.bufferVertices) {
@@ -102,14 +100,6 @@ export default class Geometry {
             data,
             count,
             shaderAttribute,
-        );
-    }
-
-    public addInstancedBufferAttribute(name, value, count) {
-        this.attributesInstanced[name] = new BufferAttribute(
-            gl.ARRAY_BUFFER,
-            value,
-            count,
         );
     }
 
@@ -184,14 +174,7 @@ export default class Geometry {
             this.attributes[attributeName] = undefined;
         });
 
-        Object.keys(this.attributesInstanced).forEach((attributeName) => {
-            this.attributesInstanced[attributeName].dispose(gl);
-            this.attributesInstanced[attributeName] = undefined;
-        });
-
         this.attributes = undefined;
-        this.attributesInstanced = undefined;
-
         this.bufferVertices = undefined;
         this.bufferIndices = undefined;
         this.bufferNormals = undefined;
