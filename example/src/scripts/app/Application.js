@@ -49,9 +49,9 @@ export default class Application {
 		this.axisHelper = new Egel.AxisHelper();
 		scene.add(this.axisHelper);
 
-		const texture0 = new Egel.Texture2D({
-			src: 'public/assets/textures/example.png',
-		});
+		// const texture0 = new Egel.Texture2D({
+		// 	src: 'public/assets/textures/example.png',
+		// });
 
 		// new Egel.OBJLoader('public/assets/models/bunny.obj')
 		// 	.then((data) => {

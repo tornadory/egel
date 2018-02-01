@@ -18,7 +18,6 @@ import {
 import Scene from './Scene';
 
 // Utilities
-import { log, warn } from '../utilities/Console';
 import WebGLSupport from '../utilities/WebGLSupport';
 
 let gl: WebGLRenderingContext;
@@ -119,7 +118,7 @@ export default class Renderer {
 
             Context.set(context);
         } else {
-            warn('WebGL is not supported, please use a modern browser.');
+            console.warn('WebGL is not supported, please use a modern browser.');
             return;
         }
 

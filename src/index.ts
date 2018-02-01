@@ -8,6 +8,10 @@ export { OrthographicCamera };
 import PerspectiveCamera from './camera/PerspectiveCamera';
 export { PerspectiveCamera };
 
+// Controls
+import OrbitalControls from './controls/OrbitalControls';
+export { OrbitalControls };
+
 // Core
 import * as Capabilities from './core/Capabilities';
 export { Capabilities };
@@ -42,16 +46,18 @@ export { Scene };
 import Texture2D from './core/Texture2D';
 export { Texture2D };
 
+import TextureCube from './core/TextureCube';
+export { TextureCube };
+
 import VertexArrayObject from './core/VertexArrayObject';
 export { VertexArrayObject };
-
-// Controls
-import OrbitalControls from './controls/OrbitalControls';
-export { OrbitalControls };
 
 // Geometry
 import BufferAttribute from './geometry/BufferAttribute';
 export { BufferAttribute };
+
+import Face from './geometry/Face';
+export { Face };
 
 import Geometry from './geometry/Geometry';
 export { Geometry };
@@ -71,6 +77,9 @@ import ImageLoader from './loaders/ImageLoader';
 export { ImageLoader };
 
 // Math
+import * as MathConstants from './math/MathConstants';
+export { MathConstants };
+
 import * as Utilities from './math/Utilities';
 export { Utilities };
 
@@ -79,3 +88,7 @@ export { Vector2 };
 
 import Vector3 from './math/Vector3';
 export { Vector3 };
+
+// Utilities
+import WebGLSupport from './utilities/WebGLSupport';
+export { WebGLSupport };

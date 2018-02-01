@@ -6,7 +6,6 @@ import ImageLoader from '../loaders/ImageLoader';
 
 // Utilities
 import { createCanvas } from '../utilities/Canvas';
-import { warn } from '../utilities/Console';
 
 let gl: WebGLRenderingContext;
 
@@ -67,7 +66,7 @@ export default class Texture2D {
     }
 
     public onTextureError = (error: string) => {
-        warn(error);
+        console.warn(error);
     }
 
     public updateImage(src: string) {

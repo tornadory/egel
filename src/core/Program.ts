@@ -1,9 +1,6 @@
 // Core
 import * as Context from './Context';
 
-// Utilities
-import { log, warn } from '../utilities/Console';
-
 let gl: WebGLRenderingContext;
 
 const addLineNumbers = (str) => {
@@ -52,7 +49,7 @@ export default class Program {
 
         if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
             const info = gl.getProgramInfoLog(this.program);
-            warn(`Failed to initialise shaders: ${info}`);
+            console.warn(`Failed to initialise shaders: ${info}`);
         }
 
         this.created = true;
@@ -78,8 +75,8 @@ export default class Program {
         gl.compileShader(shader);
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            warn(`Failed to compile shader: ${gl.getShaderInfoLog(shader)}`);
-            log(addLineNumbers(source));
+            console.warn(`Failed to compile shader: ${gl.getShaderInfoLog(shader)}`);
+            console.log(addLineNumbers(source));
             return false;
         }
 

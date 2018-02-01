@@ -2,9 +2,6 @@
 import * as Context from './Context';
 import { PRECISION } from './CoreConstants';
 
-// Utilities
-import { warn } from '../utilities/Console';
-
 function getMaxPrecision(
     gl: WebGLRenderingContext,
     precision: string,
@@ -35,7 +32,7 @@ function getCapabilities(gl: WebGLRenderingContext) {
     const maxPrecision = getMaxPrecision(gl, precision);
 
     if (maxPrecision !== precision) {
-        warn(`Capabilities: ${precision} not supported, using ${maxPrecision} instead`);
+        console.warn(`Capabilities: ${precision} not supported, using ${maxPrecision} instead`);
         precision = maxPrecision;
     }
 
