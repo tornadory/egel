@@ -1,3 +1,26 @@
+// Vendor
+// Exporting the whole of gl-matrix should prevent from including it multiple times in production
+import {
+    mat2,
+    mat2d,
+    mat3,
+    mat4,
+    quat,
+    vec2,
+    vec3,
+    vec4,
+} from 'gl-matrix';
+export {
+    mat2 as Mat2,
+    mat2d as Mat2d,
+    mat3 as Mat3,
+    mat4 as Mat4,
+    quat as Quat,
+    vec2 as Vec2,
+    vec3 as Vec3,
+    vec4 as Vec4,
+};
+
 // Camera
 import Camera from './camera/Camera';
 export { Camera };
