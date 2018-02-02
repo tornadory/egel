@@ -39,6 +39,7 @@ export default class Geometry {
         this.bufferNormals = normals;
         this.bufferUvs = uvs;
         this.bufferColors = colors;
+
         this.attributes = {};
 
         // Vertex positions

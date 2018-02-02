@@ -2,16 +2,7 @@
 import * as Egel from 'egel'; // eslint-disable-line
 import Stats from 'stats.js';
 
-console.log(
-	Egel.Mat2,
-	Egel.Mat2d,
-	Egel.Mat3,
-	Egel.Mat4,
-	Egel.Quat,
-	Egel.Vec2,
-	Egel.Vec3,
-	Egel.Vec4,
-);
+console.log(Egel);
 
 // Stats
 const stats = new Stats();

@@ -1,5 +1,4 @@
 // Vendor
-// Exporting the whole of gl-matrix should prevent from including it multiple times in production
 import {
     mat2,
     mat2d,
