@@ -2,7 +2,7 @@
   "name": "egel",
   "version": "0.0.8",
   "description": "A minimal framework around the WebGL API.",
-  "main": "dist/egel.js",
+  "main": "dist/egel.min.js",
   "scripts": {
     "start": "NODE_ENV=development webpack -d --progress --watch --display-modules",
     "lint": "eslint src/**/*.js && tslint --project './tsconfig.json'",
