@@ -1,15 +1,5 @@
 // Vendor
 import {
-    mat2,
-    mat2d,
-    mat3,
-    mat4,
-    quat,
-    vec2,
-    vec3,
-    vec4,
-} from 'gl-matrix';
-export {
     mat2 as Mat2,
     mat2d as Mat2d,
     mat3 as Mat3,
@@ -18,6 +8,16 @@ export {
     vec2 as Vec2,
     vec3 as Vec3,
     vec4 as Vec4,
+} from 'gl-matrix';
+export {
+    Mat2,
+    Mat2d,
+    Mat3,
+    Mat4,
+    Quat,
+    Vec2,
+    Vec3,
+    Vec4,
 };
 
 // Camera

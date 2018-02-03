@@ -1,5 +1,8 @@
 // Vendor
-import { mat4, vec3 } from 'gl-matrix';
+import {
+    mat4 as Mat4,
+    vec3 as Vec3,
+} from 'gl-matrix';
 
 // Camera
 import Camera from './Camera';
@@ -12,9 +15,9 @@ interface Options {
     near?: number;
     far?: number;
     fieldOfView?: number;
-    position?: vec3;
-    target?: vec3;
-    up?: vec3;
+    position?: Vec3;
+    target?: Vec3;
+    up?: Vec3;
 }
 
 export default class OrthographicCamera extends Camera {
@@ -33,7 +36,7 @@ export default class OrthographicCamera extends Camera {
     }
 
     public updateProjectionMatrix() {
-        mat4.ortho(
+        Mat4.ortho(
             this.projectionMatrix,
             this.left,
             this.right,

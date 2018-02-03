@@ -1,5 +1,8 @@
 // Vendor
-import { vec2, vec3 } from 'gl-matrix';
+import {
+    vec2 as Vec2,
+    vec3 as Vec3,
+} from 'gl-matrix';
 
 // Core
 import * as Context from '../core/Context';
@@ -20,9 +23,9 @@ export default class Geometry {
     public bufferUvs: Float32Array;
     public bufferColors: Float32Array;
     public attributes: any;
-    public vertices: vec3[];
+    public vertices: Vec3[];
     public faces: Face[];
-    public uvs: vec2[];
+    public uvs: Vec2[];
 
     constructor(
         vertices: Float32Array,
@@ -110,7 +113,7 @@ export default class Geometry {
             const a = this.bufferVertices[i];
             const b = this.bufferVertices[i + 1];
             const c = this.bufferVertices[i + 2];
-            const vertex = vec3.fromValues(a, b, c);
+            const vertex = Vec3.fromValues(a, b, c);
             this.vertices.push(vertex);
         }
     }
@@ -136,7 +139,7 @@ export default class Geometry {
         for (let i = 0; i < this.bufferUvs.length; i += 2) {
             const a = this.bufferUvs[i];
             const b = this.bufferUvs[i + 1];
-            const uv = vec2.fromValues(a, b);
+            const uv = Vec2.fromValues(a, b);
             this.uvs.push(uv);
         }
     }

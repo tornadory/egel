@@ -1,6 +1,3 @@
-// Vendor
-import { mat4 } from 'gl-matrix';
-
 // Camera
 import Camera from '../camera/Camera';
 import OrthographicCamera from '../camera/OrthographicCamera';

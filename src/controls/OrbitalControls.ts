@@ -1,5 +1,7 @@
 // Vendor
-import { vec3 } from 'gl-matrix';
+import {
+    vec3 as Vec3,
+} from 'gl-matrix';
 
 // Camera
 import PerspectiveCamera from '../camera/PerspectiveCamera';
@@ -14,7 +16,7 @@ const IS_MOUSEWHEEL_SUPPORTED = ('onmousewheel' in window);
 const MODE_DRAG = 'MODE_DRAG';
 const MODE_PAN = 'MODE_PAN';
 
-const UP = vec3.fromValues(0, 1, 0);
+const UP = Vec3.fromValues(0, 1, 0);
 const EASE_THRESHOLD = EPSILON;
 
 export default class OrbitalControls {
@@ -43,9 +45,9 @@ export default class OrbitalControls {
     public offsetY: number;
     public offsetPanX: number;
     public offsetPanY: number;
-    public target: vec3;
-    public targetOffset: vec3;
-    public direction: vec3;
+    public target: Vec3;
+    public targetOffset: Vec3;
+    public direction: Vec3;
     public lastZoomDistance: number;
     public width: number;
     public height: number;
@@ -88,10 +90,10 @@ export default class OrbitalControls {
         this.offsetPanX = 0;
         this.offsetPanY = 0;
 
-        this.target = vec3.create();
-        this.targetOffset = vec3.create();
+        this.target = Vec3.create();
+        this.targetOffset = Vec3.create();
 
-        this.direction = vec3.create();
+        this.direction = Vec3.create();
 
         this.width = window.innerWidth;
         this.height = window.innerHeight;
@@ -145,7 +147,7 @@ export default class OrbitalControls {
         this.startX = event.pageY / this.height;
         this.startY = event.pageX / this.width;
 
-        vec3.copy(this.targetOffset, this.target);
+        Vec3.copy(this.targetOffset, this.target);
         this.radiusOffset = this.radius;
 
         this.isDown = true;
@@ -159,16 +161,16 @@ export default class OrbitalControls {
                     const x = event.pageY / this.height;
                     const y = event.pageX / this.width;
 
-                    vec3.copy(this.direction, this.camera.position);
-                    vec3.subtract(this.direction, this.direction, this.target);
-                    vec3.normalize(this.direction, this.direction);
+                    Vec3.copy(this.direction, this.camera.position);
+                    Vec3.subtract(this.direction, this.direction, this.target);
+                    Vec3.normalize(this.direction, this.direction);
 
-                    const cross = vec3.cross(this.direction, this.direction, UP);
+                    const cross = Vec3.cross(this.direction, this.direction, UP);
                     const targetX = this.targetOffset[0] + -((this.startY - y) * this.panSpeed * cross[0]);
                     const targetY = this.targetOffset[1] + -((this.startX - x) * this.panSpeed);
                     const targetZ = this.targetOffset[2] + -((this.startY - y) * this.panSpeed * cross[2]);
 
-                    vec3.set(this.target, targetX, targetY, targetZ);
+                    Vec3.set(this.target, targetX, targetY, targetZ);
                     break;
                 }
                 default: {
@@ -202,13 +204,13 @@ export default class OrbitalControls {
         if (Math.abs(this.y - y) < EPSILON) this.y = y;
         if (Math.abs(this.z - z) < EPSILON) this.z = z;
 
-        vec3.set(this.camera.position, this.x, this.y, this.z);
-        vec3.add(this.camera.position, this.camera.position, this.target);
+        Vec3.set(this.camera.position, this.x, this.y, this.z);
+        Vec3.add(this.camera.position, this.camera.position, this.target);
         this.camera.lookAt(this.target[0], this.target[1], this.target[2]);
     }
 
     public reset() {
-        vec3.set(this.target, 0, 0, 0);
+        Vec3.set(this.target, 0, 0, 0);
         this.rotationX = this.defaultRotationX;
         this.rotationY = this.defaultRotationY;
         this.radius = this.defaultRadius;

@@ -1,5 +1,9 @@
 // Vendor
-import { mat4, quat, vec3 } from 'gl-matrix';
+import {
+    mat4 as Mat4,
+    quat as Quat,
+    vec3 as Vec3,
+} from 'gl-matrix';
 
 // Camera
 import Camera from '../camera/Camera';
@@ -10,75 +14,75 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 import { lookAt } from '../math/Utilities';
 
 let axisAngle = 0;
-const quaternionAxisAngle = vec3.create();
+const quaternionAxisAngle = Vec3.create();
 
 export default class Object3D {
     public children: Object3D[];
-    public localMatrix: mat4;
-    public modelMatrix: mat4;
-    public modelViewMatrix: mat4;
-    public position: vec3;
-    public rotation: vec3;
-    public scale: vec3;
+    public localMatrix: Mat4;
+    public modelMatrix: Mat4;
+    public modelViewMatrix: Mat4;
+    public position: Vec3;
+    public rotation: Vec3;
+    public scale: Vec3;
     public isObject3D: boolean;
     public parent: Object3D;
     public matrixAutoUpdate: boolean;
-    public quaternion: quat;
-    public quaternionLookAt: quat;
-    public lookAtUp: vec3;
+    public quaternion: Quat;
+    public quaternionLookAt: Quat;
+    public lookAtUp: Vec3;
 
     constructor() {
         this.children = [];
-        this.localMatrix = mat4.create();
-        this.modelMatrix = mat4.create();
-        this.modelViewMatrix = mat4.create();
+        this.localMatrix = Mat4.create();
+        this.modelMatrix = Mat4.create();
+        this.modelViewMatrix = Mat4.create();
         this.matrixAutoUpdate = true;
-        this.position = vec3.create();
-        this.rotation = vec3.create();
-        this.scale = vec3.fromValues(1, 1, 1);
+        this.position = Vec3.create();
+        this.rotation = Vec3.create();
+        this.scale = Vec3.fromValues(1, 1, 1);
         this.isObject3D = true;
-        this.quaternion = quat.create();
-        this.quaternionLookAt = quat.create();
-        this.lookAtUp = vec3.create(); // needs to be [0, 0, 0] although it should be [0, 1, 0]
+        this.quaternion = Quat.create();
+        this.quaternionLookAt = Quat.create();
+        this.lookAtUp = Vec3.create(); // needs to be [0, 0, 0] although it should be [0, 1, 0]
     }
 
     public updateMatrix(camera: Camera | PerspectiveCamera | OrthographicCamera) {
-        mat4.identity(this.modelViewMatrix);
+        Mat4.identity(this.modelViewMatrix);
 
         if (this.matrixAutoUpdate) {
             // Reset
-            mat4.identity(this.localMatrix);
-            mat4.identity(this.modelMatrix);
-            quat.identity(this.quaternion);
+            Mat4.identity(this.localMatrix);
+            Mat4.identity(this.modelMatrix);
+            Quat.identity(this.quaternion);
 
             // If Object3D has a parent, copy the computed modelMatrix into localMatrix
             if (this.parent) {
-                mat4.copy(this.localMatrix, this.parent.modelMatrix);
-                mat4.multiply(this.modelMatrix, this.modelMatrix, this.localMatrix);
+                Mat4.copy(this.localMatrix, this.parent.modelMatrix);
+                Mat4.multiply(this.modelMatrix, this.modelMatrix, this.localMatrix);
             }
 
             // Use lookAt quat as base
             // Note: this.rotation isn't updated if lookAt's used
-            quat.copy(this.quaternion, this.quaternionLookAt);
+            Quat.copy(this.quaternion, this.quaternionLookAt);
 
             // Apply local transitions to modelMatrix
-            mat4.translate(this.modelMatrix, this.modelMatrix, this.position);
-            quat.rotateX(this.quaternion, this.quaternion, this.rotation[0]);
-            quat.rotateY(this.quaternion, this.quaternion, this.rotation[1]);
-            quat.rotateZ(this.quaternion, this.quaternion, this.rotation[2]);
-            axisAngle = quat.getAxisAngle(quaternionAxisAngle, this.quaternion);
-            mat4.rotate(
+            Mat4.translate(this.modelMatrix, this.modelMatrix, this.position);
+            Quat.rotateX(this.quaternion, this.quaternion, this.rotation[0]);
+            Quat.rotateY(this.quaternion, this.quaternion, this.rotation[1]);
+            Quat.rotateZ(this.quaternion, this.quaternion, this.rotation[2]);
+            axisAngle = Quat.getAxisAngle(quaternionAxisAngle, this.quaternion);
+            Mat4.rotate(
                 this.modelMatrix,
                 this.modelMatrix,
                 axisAngle,
                 quaternionAxisAngle,
             );
-            mat4.scale(this.modelMatrix, this.modelMatrix, this.scale);
+            Mat4.scale(this.modelMatrix, this.modelMatrix, this.scale);
         }
 
         // Model View Matrix
         if (camera) {
-            mat4.multiply(
+            Mat4.multiply(
                 this.modelViewMatrix,
                 camera.worldInverseMatrix,
                 this.modelMatrix,
@@ -86,8 +90,8 @@ export default class Object3D {
         }
     }
 
-    public lookAt(target: vec3) {
-        quat.identity(this.quaternionLookAt);
+    public lookAt(target: Vec3) {
+        Quat.identity(this.quaternionLookAt);
         this.quaternionLookAt = lookAt(this.position, target, this.lookAtUp);
     }
 
