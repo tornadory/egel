@@ -38,7 +38,7 @@ export default class Application {
 			aspectRatio: this.width / this.height,
 		});
 
-		this.camera.position.set(3, 2, 3);
+		Egel.Vec3.set(this.camera.position, 3, 2, 3);
 		this.camera.lookAt();
 
 		// Controls

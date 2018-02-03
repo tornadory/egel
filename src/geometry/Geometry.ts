@@ -1,13 +1,15 @@
+// Vendor
+import {
+    vec2 as Vec2,
+    vec3 as Vec3,
+} from 'gl-matrix';
+
 // Core
 import * as Context from '../core/Context';
 
 // Geometry
 import BufferAttribute from './BufferAttribute';
 import Face from './Face';
-
-// Math
-import Vector2 from '../math/Vector2';
-import Vector3 from '../math/Vector3';
 
 // Utilities
 import { flatten } from '../utilities/Methods';
@@ -21,9 +23,9 @@ export default class Geometry {
     public bufferUvs: Float32Array;
     public bufferColors: Float32Array;
     public attributes: any;
-    public vertices: Vector3[];
+    public vertices: Vec3[];
     public faces: Face[];
-    public uvs: Vector2[];
+    public uvs: Vec2[];
 
     constructor(
         vertices: Float32Array,
@@ -111,7 +113,7 @@ export default class Geometry {
             const a = this.bufferVertices[i];
             const b = this.bufferVertices[i + 1];
             const c = this.bufferVertices[i + 2];
-            const vertex = new Vector3(a, b, c);
+            const vertex = Vec3.fromValues(a, b, c);
             this.vertices.push(vertex);
         }
     }
@@ -137,14 +139,14 @@ export default class Geometry {
         for (let i = 0; i < this.bufferUvs.length; i += 2) {
             const a = this.bufferUvs[i];
             const b = this.bufferUvs[i + 1];
-            const uv = new Vector2(a, b);
+            const uv = Vec2.fromValues(a, b);
             this.uvs.push(uv);
         }
     }
 
     public updateVertices() {
         this.vertices.forEach((vertex, i) => {
-            this.bufferVertices.set(vertex.v, i * vertex.v.length);
+            this.bufferVertices.set(vertex, i * vertex.length);
         });
 
         this.attributes.aVertexPosition.update(this.bufferVertices);
@@ -155,9 +157,9 @@ export default class Geometry {
 
         this.faces.forEach((face) => {
             face.updateFaceNormal();
-            normals[face.indices[0]] = face.normal.v;
-            normals[face.indices[1]] = face.normal.v;
-            normals[face.indices[2]] = face.normal.v;
+            normals[face.indices[0]] = face.normal;
+            normals[face.indices[1]] = face.normal;
+            normals[face.indices[2]] = face.normal;
         });
 
         this.bufferNormals.set(flatten(normals));

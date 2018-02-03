@@ -1,5 +1,9 @@
 // Vendor
-import { mat3, mat4 } from 'gl-matrix';
+import {
+    mat3 as Mat3,
+    mat4 as Mat4,
+    vec3 as Vec3,
+} from 'gl-matrix';
 
 // Camera
 import OrthographicCamera from '../camera/OrthographicCamera';
@@ -18,12 +22,9 @@ import Geometry from '../geometry/Geometry';
 import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
 import { BaseVertexShader } from '../shaders/BaseVertexShader';
 
-// Math
-import Vector3 from '../math/Vector3';
-
 let gl: WebGLRenderingContext;
-const normalMatrix: mat3 = mat3.create();
-const inversedModelViewMatrix: mat4 = mat4.create();
+const normalMatrix: Mat3 = Mat3.create();
+const inversedModelViewMatrix: Mat4 = Mat4.create();
 
 interface Options {
     type?: string;
@@ -121,7 +122,7 @@ export default class Material {
             uProjectionMatrix: {
                 location: null,
                 type: '4fv',
-                value: mat4.create(),
+                value: Mat4.create(),
             },
         };
 
@@ -129,22 +130,22 @@ export default class Material {
             uDiffuse: {
                 location: null,
                 type: '3f',
-                value: new Vector3().v,
+                value: Vec3.create(),
             },
             uModelMatrix: {
                 location: null,
                 type: '4fv',
-                value: mat4.create(),
+                value: Mat4.create(),
             },
             uModelViewMatrix: {
                 location: null,
                 type: '4fv',
-                value: mat4.create(),
+                value: Mat4.create(),
             },
             uNormalMatrix: {
                 location: null,
                 type: '4fv',
-                value: mat4.create(),
+                value: Mat4.create(),
             },
             ...this.customUniforms,
             ...projectionViewUniforms,
@@ -190,9 +191,9 @@ export default class Material {
     }
 
     public setUniforms(
-        projectionMatrix: mat4,
-        modelViewMatrix: mat4,
-        modelMatrix: mat4,
+        projectionMatrix: Mat4,
+        modelViewMatrix: Mat4,
+        modelMatrix: Mat4,
         camera?: PerspectiveCamera | OrthographicCamera,
     ) {
         Object.keys(this.customUniforms).forEach((uniformName) => {
@@ -297,13 +298,13 @@ export default class Material {
             modelMatrix,
         );
 
-        mat4.identity(inversedModelViewMatrix);
-        mat4.invert(inversedModelViewMatrix, modelMatrix);
+        Mat4.identity(inversedModelViewMatrix);
+        Mat4.invert(inversedModelViewMatrix, modelMatrix);
 
         // Construct normal matrix of size 3x3 from 4x4 inverse of the model view matrix
-        mat3.identity(normalMatrix);
-        mat3.fromMat4(normalMatrix, inversedModelViewMatrix);
-        mat3.transpose(normalMatrix, normalMatrix);
+        Mat3.identity(normalMatrix);
+        Mat3.fromMat4(normalMatrix, inversedModelViewMatrix);
+        Mat3.transpose(normalMatrix, normalMatrix);
         gl.uniformMatrix3fv(
             this.uniforms.uNormalMatrix.location,
             false,
@@ -322,9 +323,9 @@ export default class Material {
         if (camera && this.uniforms.uCameraPosition) {
             gl.uniform3f(
                 this.uniforms.uCameraPosition.location,
-                camera.position.v[0],
-                camera.position.v[1],
-                camera.position.v[2],
+                camera.position[0],
+                camera.position[1],
+                camera.position[2],
             );
         }
     }
