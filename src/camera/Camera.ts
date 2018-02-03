@@ -1,20 +1,17 @@
 // Vendor
-import { mat4 } from 'gl-matrix';
+import { mat4, vec3 } from 'gl-matrix';
 
 // Core
 import { RENDERER_DEFAULT_ASPECT_RATIO } from '../core/CoreConstants';
 import Object3D from '../core/Object3D';
 
-// Math
-import Vector3 from '../math/Vector3';
-
 interface Options {
     near?: number;
     far?: number;
     fieldOfView?: number;
-    position?: Vector3;
-    target?: Vector3;
-    up?: Vector3;
+    position?: vec3;
+    target?: vec3;
+    up?: vec3;
 }
 
 export default class Camera {
@@ -27,9 +24,9 @@ export default class Camera {
     public far: number;
     public fieldOfView: number;
     public aspectRatio: number;
-    public position: Vector3;
-    public target: Vector3;
-    public up: Vector3;
+    public position: vec3;
+    public target: vec3;
+    public up: vec3;
 
     constructor(options: Options) {
         this.projectionMatrix = mat4.create();
@@ -41,24 +38,24 @@ export default class Camera {
         this.far = 100;
         this.fieldOfView = 70;
         this.aspectRatio = RENDERER_DEFAULT_ASPECT_RATIO;
-        this.position = new Vector3();
-        this.target = new Vector3();
-        this.up = new Vector3(0, 1, 0);
+        this.position = vec3.create();
+        this.target = vec3.create();
+        this.up = vec3.fromValues(0, 1, 0);
 
         Object.assign(this, options);
     }
 
     public lookAt(x = 0, y = 0, z = 0) {
-        this.target.set(x, y, z);
+        vec3.set(this.target, x, y, z);
     }
 
     public updateMatrixWorld() {
         mat4.identity(this.worldInverseMatrix);
         mat4.lookAt(
             this.worldInverseMatrix,
-            this.position.v,
-            this.target.v,
-            this.up.v,
+            this.position,
+            this.target,
+            this.up,
         );
     }
 

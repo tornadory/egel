@@ -1,19 +1,16 @@
 // Vendor
-import { mat4 } from 'gl-matrix';
+import { mat4, vec3 } from 'gl-matrix';
 
 // Camera
 import Camera from './Camera';
-
-// Math
-import Vector3 from '../math/Vector3';
 
 interface Options {
     near?: number;
     far?: number;
     fieldOfView?: number;
-    position?: Vector3;
-    target?: Vector3;
-    up?: Vector3;
+    position?: vec3;
+    target?: vec3;
+    up?: vec3;
 }
 
 export default class PerspectiveCamera extends Camera {

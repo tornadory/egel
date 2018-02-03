@@ -1,5 +1,5 @@
 // Vendor
-import { mat3, mat4 } from 'gl-matrix';
+import { mat3, mat4, vec3 } from 'gl-matrix';
 
 // Camera
 import OrthographicCamera from '../camera/OrthographicCamera';
@@ -17,9 +17,6 @@ import Geometry from '../geometry/Geometry';
 // Shaders
 import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
 import { BaseVertexShader } from '../shaders/BaseVertexShader';
-
-// Math
-import Vector3 from '../math/Vector3';
 
 let gl: WebGLRenderingContext;
 const normalMatrix: mat3 = mat3.create();
@@ -129,7 +126,7 @@ export default class Material {
             uDiffuse: {
                 location: null,
                 type: '3f',
-                value: new Vector3().v,
+                value: vec3.create(),
             },
             uModelMatrix: {
                 location: null,
@@ -322,9 +319,9 @@ export default class Material {
         if (camera && this.uniforms.uCameraPosition) {
             gl.uniform3f(
                 this.uniforms.uCameraPosition.location,
-                camera.position.v[0],
-                camera.position.v[1],
-                camera.position.v[2],
+                camera.position[0],
+                camera.position[1],
+                camera.position[2],
             );
         }
     }

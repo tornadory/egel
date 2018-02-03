@@ -8,7 +8,6 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 
 // Math
 import { lookAt } from '../math/Utilities';
-import Vector3 from '../math/Vector3';
 
 let axisAngle = 0;
 const quaternionAxisAngle = vec3.create();
@@ -18,9 +17,9 @@ export default class Object3D {
     public localMatrix: mat4;
     public modelMatrix: mat4;
     public modelViewMatrix: mat4;
-    public position: Vector3;
-    public rotation: Vector3;
-    public scale: Vector3;
+    public position: vec3;
+    public rotation: vec3;
+    public scale: vec3;
     public isObject3D: boolean;
     public parent: Object3D;
     public matrixAutoUpdate: boolean;
@@ -34,9 +33,9 @@ export default class Object3D {
         this.modelMatrix = mat4.create();
         this.modelViewMatrix = mat4.create();
         this.matrixAutoUpdate = true;
-        this.position = new Vector3();
-        this.rotation = new Vector3();
-        this.scale = new Vector3(1, 1, 1);
+        this.position = vec3.create();
+        this.rotation = vec3.create();
+        this.scale = vec3.fromValues(1, 1, 1);
         this.isObject3D = true;
         this.quaternion = quat.create();
         this.quaternionLookAt = quat.create();
@@ -63,10 +62,10 @@ export default class Object3D {
             quat.copy(this.quaternion, this.quaternionLookAt);
 
             // Apply local transitions to modelMatrix
-            mat4.translate(this.modelMatrix, this.modelMatrix, this.position.v);
-            quat.rotateX(this.quaternion, this.quaternion, this.rotation.x);
-            quat.rotateY(this.quaternion, this.quaternion, this.rotation.y);
-            quat.rotateZ(this.quaternion, this.quaternion, this.rotation.z);
+            mat4.translate(this.modelMatrix, this.modelMatrix, this.position);
+            quat.rotateX(this.quaternion, this.quaternion, this.rotation[0]);
+            quat.rotateY(this.quaternion, this.quaternion, this.rotation[1]);
+            quat.rotateZ(this.quaternion, this.quaternion, this.rotation[2]);
             axisAngle = quat.getAxisAngle(quaternionAxisAngle, this.quaternion);
             mat4.rotate(
                 this.modelMatrix,
@@ -74,7 +73,7 @@ export default class Object3D {
                 axisAngle,
                 quaternionAxisAngle,
             );
-            mat4.scale(this.modelMatrix, this.modelMatrix, this.scale.v);
+            mat4.scale(this.modelMatrix, this.modelMatrix, this.scale);
         }
 
         // Model View Matrix
@@ -87,9 +86,9 @@ export default class Object3D {
         }
     }
 
-    public lookAt(target: Vector3) {
+    public lookAt(target: vec3) {
         quat.identity(this.quaternionLookAt);
-        this.quaternionLookAt = lookAt(this.position.v, target.v, this.lookAtUp);
+        this.quaternionLookAt = lookAt(this.position, target, this.lookAtUp);
     }
 
     public setParent(parent: Object3D) {

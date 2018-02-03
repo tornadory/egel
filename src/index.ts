@@ -105,12 +105,6 @@ export { MathConstants };
 import * as Utilities from './math/Utilities';
 export { Utilities };
 
-import Vector2 from './math/Vector2';
-export { Vector2 };
-
-import Vector3 from './math/Vector3';
-export { Vector3 };
-
 // Utilities
 import WebGLSupport from './utilities/WebGLSupport';
 export { WebGLSupport };
