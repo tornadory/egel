@@ -30,10 +30,6 @@ export { OrthographicCamera };
 import PerspectiveCamera from './camera/PerspectiveCamera';
 export { PerspectiveCamera };
 
-// Controls
-import OrbitalControls from './controls/OrbitalControls';
-export { OrbitalControls };
-
 // Core
 import * as Capabilities from './core/Capabilities';
 export { Capabilities };
@@ -83,13 +79,6 @@ export { Face };
 
 import Geometry from './geometry/Geometry';
 export { Geometry };
-
-// Helpers
-import AxisHelper from './helpers/AxisHelper';
-export { AxisHelper };
-
-import GridHelper from './helpers/GridHelper';
-export { GridHelper };
 
 // Loaders
 import FileLoader from './loaders/FileLoader';

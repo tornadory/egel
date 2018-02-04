@@ -1,21 +1,13 @@
-// Camera
-import Camera from '../camera/Camera';
-import OrthographicCamera from '../camera/OrthographicCamera';
-import PerspectiveCamera from '../camera/PerspectiveCamera';
+import { // eslint-disable-line
+	Capabilities,
+    Context,
+    Material,
+    Mesh,
+    Geometry,
+	MathUtilities,
+} from 'egel';
 
-// Core
-import { capabilities, extensions } from '../core/Capabilities';
-import * as Context from '../core/Context';
-import Material from '../core/Material';
-import Mesh from '../core/Mesh';
-
-// Geometry
-import Geometry from '../geometry/Geometry';
-
-// Math
-import { lerp } from '../math/MathUtilities';
-
-let gl: WebGLRenderingContext;
+let gl;
 
 const customVertexShader = `
     #define SHADER_NAME GridHelper
@@ -33,7 +25,7 @@ const customVertexShader = `
 const customFragmentShader = () => `
     #define SHADER_NAME GridHelper
 
-    precision ${capabilities.precision} float;
+    precision ${Capabilities.capabilities.precision} float;
 
     void main() {
         gl_FragColor = vec4(vec3(0.5), 1.0);
@@ -41,15 +33,15 @@ const customFragmentShader = () => `
 `;
 
 class GridGeometry extends Geometry {
-    constructor(size: number, divisions: number) {
+    constructor(size, divisions) {
         let vertices = [];
         const halfSize = size * 0.5;
 
         for (let i = 0; i < divisions + 1; i += 1) {
-            const x1 = lerp(-halfSize, halfSize, i / divisions);
+            const x1 = MathUtilities.lerp(-halfSize, halfSize, i / divisions);
             const y1 = 0;
             const z1 = -halfSize;
-            const x2 = lerp(-halfSize, halfSize, i / divisions);
+            const x2 = MathUtilities.lerp(-halfSize, halfSize, i / divisions);
             const y2 = 0;
             const z2 = halfSize;
             vertices = vertices.concat([x1, y1, z1, x2, y2, z2]);
@@ -58,10 +50,10 @@ class GridGeometry extends Geometry {
         for (let i = 0; i < divisions + 1; i += 1) {
             const x1 = -halfSize;
             const y1 = 0;
-            const z1 = lerp(-halfSize, halfSize, i / divisions);
+            const z1 = MathUtilities.lerp(-halfSize, halfSize, i / divisions);
             const x2 = halfSize;
             const y2 = 0;
-            const z2 = lerp(-halfSize, halfSize, i / divisions);
+            const z2 = MathUtilities.lerp(-halfSize, halfSize, i / divisions);
             vertices = vertices.concat([x1, y1, z1, x2, y2, z2]);
         }
 
@@ -85,7 +77,7 @@ export default class GridHelper extends Mesh {
         );
     }
 
-    public draw(camera: Camera | PerspectiveCamera | OrthographicCamera) {
+    draw(camera) {
         if (!this.visible) return;
 
         // Update modelMatrix
@@ -99,7 +91,7 @@ export default class GridHelper extends Mesh {
             camera,
         );
 
-        if (extensions.vertexArrayObjectExtension) {
+        if (Capabilities.extensions.vertexArrayObjectExtension) {
             this.vertexArrayObject.bind();
         } else {
             this.bindAttributes();
@@ -112,7 +104,7 @@ export default class GridHelper extends Mesh {
             this.geometry.attributes.aVertexPosition.numItems,
         );
 
-        if (extensions.vertexArrayObjectExtension) {
+        if (Capabilities.extensions.vertexArrayObjectExtension) {
             this.vertexArrayObject.unbind();
         }
     }

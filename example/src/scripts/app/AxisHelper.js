@@ -1,18 +1,12 @@
-// Camera
-import Camera from '../camera/Camera';
-import OrthographicCamera from '../camera/OrthographicCamera';
-import PerspectiveCamera from '../camera/PerspectiveCamera';
+import { // eslint-disable-line
+	Capabilities,
+    Context,
+    Material,
+    Mesh,
+    Geometry,
+} from 'egel';
 
-// Core
-import { capabilities, extensions } from '../core/Capabilities';
-import * as Context from '../core/Context';
-import Material from '../core/Material';
-import Mesh from '../core/Mesh';
-
-// Geometry
-import Geometry from '../geometry/Geometry';
-
-let gl: WebGLRenderingContext;
+let gl;
 
 const customVertexShader = `
     #define SHADER_NAME AxisHelper
@@ -34,7 +28,7 @@ const customVertexShader = `
 const customFragmentShader = () => `
     #define SHADER_NAME AxisHelper
 
-    precision ${capabilities.precision} float;
+    precision ${Capabilities.capabilities.precision} float;
 
     varying vec3 vColor;
 
@@ -44,7 +38,7 @@ const customFragmentShader = () => `
 `;
 
 class AxisGeometry extends Geometry {
-    constructor(size: number) {
+    constructor(size) {
         let vertices = [];
 
         // X-axis
@@ -86,7 +80,7 @@ export default class AxisHelper extends Mesh {
         );
     }
 
-    public draw(camera: Camera | PerspectiveCamera | OrthographicCamera) {
+    draw(camera) {
         if (!this.visible) return;
 
         // Update modelMatrix
@@ -100,7 +94,7 @@ export default class AxisHelper extends Mesh {
             camera,
         );
 
-        if (extensions.vertexArrayObjectExtension) {
+        if (Capabilities.extensions.vertexArrayObjectExtension) {
             this.vertexArrayObject.bind();
         } else {
             this.bindAttributes();
@@ -113,7 +107,7 @@ export default class AxisHelper extends Mesh {
             this.geometry.attributes.aVertexPosition.numItems,
         );
 
-        if (extensions.vertexArrayObjectExtension) {
+        if (Capabilities.extensions.vertexArrayObjectExtension) {
             this.vertexArrayObject.unbind();
         }
     }

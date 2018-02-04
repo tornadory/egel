@@ -1,14 +1,7 @@
-// Vendor
-import {
-    vec3 as Vec3,
-} from 'gl-matrix';
-
-// Camera
-import PerspectiveCamera from '../camera/PerspectiveCamera';
-
-// Math
-import { EPSILON, HALF_PI } from '../math/MathConstants';
-import { clamp } from '../math/MathUtilities';
+import { // eslint-disable-line
+    MathConstants,
+    Vec3,
+} from 'egel';
 
 const IS_WHEEL_SUPPORTED = ('onwheel' in window);
 const IS_MOUSEWHEEL_SUPPORTED = ('onmousewheel' in window);
@@ -17,49 +10,10 @@ const MODE_DRAG = 'MODE_DRAG';
 const MODE_PAN = 'MODE_PAN';
 
 const UP = Vec3.fromValues(0, 1, 0);
-const EASE_THRESHOLD = EPSILON;
+const EASE_THRESHOLD = MathConstants.EPSILON;
 
 export default class OrbitalControls {
-    public rotationSpeed: number;
-    public panSpeed: number;
-    public zoom: boolean;
-    public pan: boolean;
-    public smoothing: boolean;
-    public easing: number;
-    public isDragging: boolean;
-    public camera: PerspectiveCamera;
-    public element: HTMLElement;
-    public zoomMin: number;
-    public zoomMax: number;
-    public radius: number;
-    public radiusOffset: number;
-    public defaultRadius: number;
-    public rotationX: number;
-    public rotationY: number;
-    public defaultRotationX: number;
-    public defaultRotationY: number;
-    public x: number;
-    public y: number;
-    public z: number;
-    public offsetX: number;
-    public offsetY: number;
-    public offsetPanX: number;
-    public offsetPanY: number;
-    public target: Vec3;
-    public targetOffset: Vec3;
-    public direction: Vec3;
-    public lastZoomDistance: number;
-    public width: number;
-    public height: number;
-    public mode: string;
-    public isDown: boolean;
-    public startX: number;
-    public startY: number;
-
-    constructor(
-        camera: PerspectiveCamera,
-        element: HTMLCanvasElement | HTMLDivElement,
-    ) {
+    constructor(camera, element) {
         this.camera = camera;
         this.element = element;
 
@@ -101,7 +55,7 @@ export default class OrbitalControls {
         this.addListeners();
     }
 
-    public onKeypress(event) {
+    onKeypress(event) {
         switch (event.which) {
             case 114:
             case 82:
@@ -112,7 +66,7 @@ export default class OrbitalControls {
         }
     }
 
-    public onWheel(event) {
+    onWheel(event) {
         if (!this.zoom) return;
 
         const delta = event.deltaY ? event.deltaY : (event.detail ? event.detail : 0);
@@ -125,11 +79,11 @@ export default class OrbitalControls {
         this.update();
     }
 
-    public onContextMenu(event) {
+    onContextMenu(event) {
         event.preventDefault();
     }
 
-    public onDown(event) {
+    onDown(event) {
         switch (event.which) {
             case 3:
                 this.mode = MODE_PAN;
@@ -153,7 +107,7 @@ export default class OrbitalControls {
         this.isDown = true;
     }
 
-    public onMove(event) {
+    onMove(event) {
         if (this.isDown) {
             switch (this.mode) {
                 case MODE_PAN: {
@@ -178,7 +132,7 @@ export default class OrbitalControls {
                     const y = event.pageX / this.width;
                     this.rotationX = this.offsetX + -((this.startX - x) * this.rotationSpeed);
                     this.rotationY = this.offsetY + ((this.startY - y) * this.rotationSpeed);
-                    this.rotationX = clamp(this.rotationX, -HALF_PI, HALF_PI);
+                    this.rotationX = clamp(this.rotationX, -MathConstants.HALF_PI, MathConstants.HALF_PI);
                     break;
                 }
             }
@@ -187,11 +141,11 @@ export default class OrbitalControls {
         }
     }
 
-    public onUp(event) {
+    onUp(event) {
         this.isDown = false;
     }
 
-    public update() {
+    update() {
         const x = Math.sin(this.rotationY) * (this.radius * Math.cos(this.rotationX));
         const y = this.radius * Math.sin(this.rotationX);
         const z = Math.cos(this.rotationY) * (this.radius * Math.cos(this.rotationX));
@@ -200,16 +154,16 @@ export default class OrbitalControls {
         this.y += (y - this.y) * this.easing;
         this.z += (z - this.z) * this.easing;
 
-        if (Math.abs(this.x - x) < EPSILON) this.x = x;
-        if (Math.abs(this.y - y) < EPSILON) this.y = y;
-        if (Math.abs(this.z - z) < EPSILON) this.z = z;
+        if (Math.abs(this.x - x) < MathConstants.EPSILON) this.x = x;
+        if (Math.abs(this.y - y) < MathConstants.EPSILON) this.y = y;
+        if (Math.abs(this.z - z) < MathConstants.EPSILON) this.z = z;
 
         Vec3.set(this.camera.position, this.x, this.y, this.z);
         Vec3.add(this.camera.position, this.camera.position, this.target);
         this.camera.lookAt(this.target[0], this.target[1], this.target[2]);
     }
 
-    public reset() {
+    reset() {
         Vec3.set(this.target, 0, 0, 0);
         this.rotationX = this.defaultRotationX;
         this.rotationY = this.defaultRotationY;
@@ -217,7 +171,7 @@ export default class OrbitalControls {
         this.update();
     }
 
-    public addListeners() {
+    addListeners() {
         window.addEventListener('keypress', (event) => this.onKeypress(event), false);
         this.element.addEventListener('contextmenu', (event) => this.onContextMenu(event), false);
 
@@ -232,7 +186,7 @@ export default class OrbitalControls {
         this.element.addEventListener('mouseup', (event) => this.onUp(event), false);
     }
 
-    public dispose() {
+    dispose() {
         window.removeEventListener('keypress', (event) => this.onKeypress(event));
         this.element.removeEventListener('contextmenu', (event) => this.onContextMenu(event));
 

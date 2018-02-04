@@ -1,15 +1,22 @@
 // Vendor
-import * as Egel from 'egel'; // eslint-disable-line
 import Stats from 'stats.js';
+import { // eslint-disable-line
+	Renderer,
+	Scene,
+	PerspectiveCamera,
+	Vec3,
+} from 'egel';
 
-console.log(Egel);
+import AxisHelper from './AxisHelper';
+import GridHelper from './GridHelper';
+import OrbitalControls from './OrbitalControls';
 
 // Stats
 const stats = new Stats();
 document.body.appendChild(stats.dom);
 
 // Scene
-const scene = new Egel.Scene();
+const scene = new Scene();
 
 export default class Application {
 	constructor() {
@@ -20,7 +27,7 @@ export default class Application {
 		this.canvasElement = document.getElementById('app');
 
 		// Renderer
-		this.renderer = new Egel.Renderer({
+		this.renderer = new Renderer({
 			depth: true,
 			stencil: true,
 			aspectRatio: this.width / this.height,
@@ -32,34 +39,34 @@ export default class Application {
 		this.canvasElement.appendChild(this.renderer.canvas);
 
 		// Camera
-		this.camera = new Egel.PerspectiveCamera({
+		this.camera = new PerspectiveCamera({
 			fieldOfView: 45,
 			far: 500,
 			aspectRatio: this.width / this.height,
 		});
 
-		Egel.Vec3.set(this.camera.position, 3, 2, 3);
+		Vec3.set(this.camera.position, 3, 2, 3);
 		this.camera.lookAt();
 
 		// Controls
-		this.controls = new Egel.OrbitalControls(this.camera, this.renderer.canvas);
+		this.controls = new OrbitalControls(this.camera, this.renderer.canvas);
 		this.controls.update();
 
-		this.gridHelper = new Egel.GridHelper(10);
+		this.gridHelper = new GridHelper(10);
 		scene.add(this.gridHelper);
 
-		this.axisHelper = new Egel.AxisHelper();
+		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		// const texture0 = new Egel.Texture2D({
+		// const texture0 = new Texture2D({
 		// 	src: 'public/assets/textures/example.png',
 		// });
 
-		// new Egel.OBJLoader('public/assets/models/bunny.obj')
+		// new OBJLoader('public/assets/models/bunny.obj')
 		// 	.then((data) => {
-		// 		const geometry = new Egel.Geometry(data.vertices, data.indices, data.normals, data.uvs);
+		// 		const geometry = new Geometry(data.vertices, data.indices, data.normals, data.uvs);
 
-		// 		const material = new Egel.Material({
+		// 		const material = new Material({
 		// 			hookName: 'BunnyMesh',
 		// 			hookFragmentPre: `
 		// 				uniform sampler2D uTexture0;
@@ -70,7 +77,7 @@ export default class Application {
 		// 			uniforms: {
 		// 				uDiffuse: {
 		// 					type: '3f',
-		// 					value: new Egel.Vector3(0.5, 0.87, 1.0).v,
+		// 					value: new Vector3(0.5, 0.87, 1.0).v,
 		// 				},
 		// 				uTexture0: {
 		// 					type: 't',
@@ -79,7 +86,7 @@ export default class Application {
 		// 			},
 		// 		});
 
-		// 		const mesh = new Egel.Mesh(geometry, material);
+		// 		const mesh = new Mesh(geometry, material);
 		// 		mesh.scale.set(0.5, 0.5, 0.5);
 		// 		scene.add(mesh);
 		// 	})
