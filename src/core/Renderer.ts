@@ -165,6 +165,23 @@ export default class Renderer {
         this.setSize(this.width, this.height);
     }
 
+    public setScissorTest(enable = false) {
+        if (enable) {
+            gl.enable(gl.SCISSOR_TEST);
+        } else {
+            gl.disable(gl.SCISSOR_TEST);
+        }
+    }
+
+    public setScissor(x: number, y: number, width: number, height: number) {
+        gl.scissor(
+            x * this.pixelRatio,
+            y * this.pixelRatio,
+            width * this.pixelRatio,
+            height * this.pixelRatio,
+        );
+    }
+
     public setViewport(x: number, y: number, width: number, height: number) {
         this.viewport.x = x * this.pixelRatio;
         this.viewport.y = y * this.pixelRatio;
