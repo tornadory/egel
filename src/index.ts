@@ -102,8 +102,8 @@ export { ImageLoader };
 import * as MathConstants from './math/MathConstants';
 export { MathConstants };
 
-import * as Utilities from './math/Utilities';
-export { Utilities };
+import * as MathUtilities from './math/MathUtilities';
+export { MathUtilities };
 
 // Utilities
 import WebGLSupport from './utilities/WebGLSupport';

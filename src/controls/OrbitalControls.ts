@@ -8,7 +8,7 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 
 // Math
 import { EPSILON, HALF_PI } from '../math/MathConstants';
-import { clamp } from '../math/Utilities';
+import { clamp } from '../math/MathUtilities';
 
 const IS_WHEEL_SUPPORTED = ('onwheel' in window);
 const IS_MOUSEWHEEL_SUPPORTED = ('onmousewheel' in window);

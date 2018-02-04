@@ -11,7 +11,7 @@ import OrthographicCamera from '../camera/OrthographicCamera';
 import PerspectiveCamera from '../camera/PerspectiveCamera';
 
 // Math
-import { lookAt } from '../math/Utilities';
+import { lookAt } from '../math/MathUtilities';
 
 let axisAngle = 0;
 const quaternionAxisAngle = Vec3.create();

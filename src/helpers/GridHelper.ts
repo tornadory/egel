@@ -13,7 +13,7 @@ import Mesh from '../core/Mesh';
 import Geometry from '../geometry/Geometry';
 
 // Math
-import { lerp } from '../math/Utilities';
+import { lerp } from '../math/MathUtilities';
 
 let gl: WebGLRenderingContext;
 

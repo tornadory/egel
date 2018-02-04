@@ -146,15 +146,13 @@ const config = {
 
 // Service worker
 if (!isDevelopment) {
-	config.plugins.push(
-		new SWPrecacheWebpackPlugin({
-			dontCacheBustUrlsMatching: /\.\w{8}\./,
-			filename: 'service-worker.js',
-			minify: true,
-			navigateFallback: 'index.html',
-			staticFileGlobsIgnorePatterns: [/asset-manifest\.json$/],
-		})
-	);
+	config.plugins.push(new SWPrecacheWebpackPlugin({
+		dontCacheBustUrlsMatching: /\.\w{8}\./,
+		filename: 'service-worker.js',
+		minify: true,
+		navigateFallback: 'index.html',
+		staticFileGlobsIgnorePatterns: [/asset-manifest\.json$/],
+	}));
 }
 
 // Release log
