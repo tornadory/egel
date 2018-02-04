@@ -59,8 +59,6 @@ export default class Material {
     public fragmentShader: string;
     public drawType: number;
     public culling: number;
-    public blending: boolean;
-    public blendFunc: number[];
     public program: Program;
     public customUniforms: object;
 
@@ -80,8 +78,6 @@ export default class Material {
         this.fragmentShader = BaseFragmentShader;
         this.drawType = DRAW_TRIANGLES;
         this.culling = CULL_NONE;
-        this.blending = false;
-        this.blendFunc = [gl.SRC_ALPHA, gl.ONE];
 
         Object.assign(this, options);
 
