@@ -21,7 +21,7 @@ const customVertexShader = `
 
     void main(void) {
         vColor = aVertexColor;
-        
+
         gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
 	}
 `;
@@ -92,7 +92,6 @@ export default class AxisHelper extends Mesh {
             camera.projectionMatrix,
             this.modelViewMatrix,
             this.modelMatrix,
-            camera,
         );
 
         if (Capabilities.extensions.vertexArrayObjectExtension) {

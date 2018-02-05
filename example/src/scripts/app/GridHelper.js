@@ -88,7 +88,6 @@ export default class GridHelper extends Mesh {
             camera.projectionMatrix,
             this.modelViewMatrix,
             this.modelMatrix,
-            camera,
         );
 
         if (Capabilities.extensions.vertexArrayObjectExtension) {

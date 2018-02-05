@@ -190,7 +190,6 @@ export default class Material {
         projectionMatrix: Mat4,
         modelViewMatrix: Mat4,
         modelMatrix: Mat4,
-        camera?: PerspectiveCamera | OrthographicCamera,
     ) {
         Object.keys(this.customUniforms).forEach((uniformName) => {
             const uniform = this.uniforms[uniformName];

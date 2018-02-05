@@ -86,7 +86,6 @@ export default class Mesh extends Object3D {
             camera.projectionMatrix,
             this.modelViewMatrix,
             this.modelMatrix,
-            camera,
         );
 
         if (extensions.vertexArrayObjectExtension) {
