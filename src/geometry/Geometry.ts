@@ -59,7 +59,7 @@ export default class Geometry {
         // Vertex indices
         if (this.bufferIndices) {
             this.addAttribute(
-                'aIndex',
+                'aVertexIndex',
                 gl.ELEMENT_ARRAY_BUFFER,
                 this.bufferIndices,
                 1,

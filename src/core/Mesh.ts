@@ -45,7 +45,7 @@ export default class Mesh extends Object3D {
     public bindAttributes() {
         // Attributes
         Object.keys(this.geometry.attributes).forEach((attributeName) => {
-            if (attributeName !== 'aIndex') {
+            if (attributeName !== 'aVertexIndex') {
                 // enableVertexAttribArray
                 this.material.program.setAttributeLocation(attributeName);
 
@@ -64,7 +64,7 @@ export default class Mesh extends Object3D {
     public bindIndexBuffer() {
         // Bind index buffer
         if (this.geometry.bufferIndices) {
-            this.geometry.attributes.aIndex.bind();
+            this.geometry.attributes.aVertexIndex.bind();
         }
     }
 
@@ -96,10 +96,10 @@ export default class Mesh extends Object3D {
             this.bindIndexBuffer();
         }
 
-        if (this.geometry.attributes.aIndex) {
+        if (this.geometry.attributes.aVertexIndex) {
             gl.drawElements(
                 this.material.drawType,
-                this.geometry.attributes.aIndex.numItems,
+                this.geometry.attributes.aVertexIndex.numItems,
                 gl.UNSIGNED_SHORT,
                 0,
             );
