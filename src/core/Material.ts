@@ -314,16 +314,6 @@ export default class Material {
             this.uniforms.uDiffuse.value[1],
             this.uniforms.uDiffuse.value[2],
         );
-
-        // Camera
-        if (camera && this.uniforms.uCameraPosition) {
-            gl.uniform3f(
-                this.uniforms.uCameraPosition.location,
-                camera.position[0],
-                camera.position[1],
-                camera.position[2],
-            );
-        }
     }
 
     public dispose() {

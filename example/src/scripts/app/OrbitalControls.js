@@ -1,5 +1,6 @@
 import { // eslint-disable-line
     MathConstants,
+    MathUtilities,
     Vec3,
 } from 'egel';
 
@@ -10,7 +11,6 @@ const MODE_DRAG = 'MODE_DRAG';
 const MODE_PAN = 'MODE_PAN';
 
 const UP = Vec3.fromValues(0, 1, 0);
-const EASE_THRESHOLD = MathConstants.EPSILON;
 
 export default class OrbitalControls {
     constructor(camera, element) {
@@ -74,7 +74,7 @@ export default class OrbitalControls {
         const speed = 3;
 
         this.radius += value * speed;
-        this.radius = clamp(this.radius, this.zoomMin, this.zoomMax);
+        this.radius = MathUtilities.clamp(this.radius, this.zoomMin, this.zoomMax);
 
         this.update();
     }
@@ -132,7 +132,7 @@ export default class OrbitalControls {
                     const y = event.pageX / this.width;
                     this.rotationX = this.offsetX + -((this.startX - x) * this.rotationSpeed);
                     this.rotationY = this.offsetY + ((this.startY - y) * this.rotationSpeed);
-                    this.rotationX = clamp(this.rotationX, -MathConstants.HALF_PI, MathConstants.HALF_PI);
+                    this.rotationX = MathUtilities.clamp(this.rotationX, -MathConstants.HALF_PI, MathConstants.HALF_PI);
                     break;
                 }
             }
@@ -172,33 +172,33 @@ export default class OrbitalControls {
     }
 
     addListeners() {
-        window.addEventListener('keypress', (event) => this.onKeypress(event), false);
-        this.element.addEventListener('contextmenu', (event) => this.onContextMenu(event), false);
+        window.addEventListener('keypress', event => this.onKeypress(event), false);
+        this.element.addEventListener('contextmenu', event => this.onContextMenu(event), false);
 
         if (IS_WHEEL_SUPPORTED) {
-            window.addEventListener('wheel', (event) => this.onWheel(event));
+            window.addEventListener('wheel', event => this.onWheel(event));
         } else if (IS_MOUSEWHEEL_SUPPORTED) {
-            window.addEventListener('mousewheel', (event) => this.onWheel(event));
+            window.addEventListener('mousewheel', event => this.onWheel(event));
         }
 
-        this.element.addEventListener('mousedown', (event) => this.onDown(event), false);
-        this.element.addEventListener('mousemove', (event) => this.onMove(event), false);
-        this.element.addEventListener('mouseup', (event) => this.onUp(event), false);
+        this.element.addEventListener('mousedown', event => this.onDown(event), false);
+        this.element.addEventListener('mousemove', event => this.onMove(event), false);
+        this.element.addEventListener('mouseup', event => this.onUp(event), false);
     }
 
     dispose() {
-        window.removeEventListener('keypress', (event) => this.onKeypress(event));
-        this.element.removeEventListener('contextmenu', (event) => this.onContextMenu(event));
+        window.removeEventListener('keypress', event => this.onKeypress(event));
+        this.element.removeEventListener('contextmenu', event => this.onContextMenu(event));
 
         if (IS_WHEEL_SUPPORTED) {
-            window.addEventListener('wheel', (event) => this.onWheel(event));
+            window.addEventListener('wheel', event => this.onWheel(event));
         } else if (IS_MOUSEWHEEL_SUPPORTED) {
-            window.addEventListener('mousewheel', (event) => this.onWheel(event));
+            window.addEventListener('mousewheel', event => this.onWheel(event));
         }
 
-        this.element.removeEventListener('mousedown', (event) => this.onDown(event), false);
-        this.element.removeEventListener('mousemove', (event) => this.onMove(event), false);
-        this.element.removeEventListener('mouseup', (event) => this.onUp(event), false);
+        this.element.removeEventListener('mousedown', event => this.onDown(event), false);
+        this.element.removeEventListener('mousemove', event => this.onMove(event), false);
+        this.element.removeEventListener('mouseup', event => this.onUp(event), false);
 
         this.camera = undefined;
         this.element = undefined;
