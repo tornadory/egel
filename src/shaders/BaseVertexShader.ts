@@ -12,10 +12,7 @@ export const BaseVertexShader = `
     attribute vec3 aVertexPosition;
     varying vec3 vPosition;
     varying vec4 vWorldPosition;
-
-    // Camera
-    uniform vec3 uCameraPosition;
-
+å
     #ifdef HAS_VERTEX_COLORS
     attribute vec3 aVertexColor;
     #endif
@@ -38,7 +35,7 @@ export const BaseVertexShader = `
 
     <HOOK_VERTEX_PRE>
 
-    void main() {
+    void main(void) {
         vDiffuse = uDiffuse;
 
         // Override for custom positioning
@@ -62,7 +59,7 @@ export const BaseVertexShader = `
         vPosition = aVertexPosition + transformed;
 
         // Calculate world position of vertex with transformed
-        vWorldPosition = uModelMatrix * vec4(aVertexPosition + transformed, 1.0);
+        vWorldPosition = uModelMatrix * vec4(aVertexPosition, 1.0);
 
         gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(vPosition, 1.0);
 

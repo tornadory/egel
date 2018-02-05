@@ -19,8 +19,9 @@ const customVertexShader = `
 
     varying vec3 vColor;
 
-    void main(void){
+    void main(void) {
         vColor = aVertexColor;
+        
         gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
 	}
 `;
@@ -32,7 +33,7 @@ const customFragmentShader = () => `
 
     varying vec3 vColor;
 
-	void main(void){
+	void main(void) {
 	    gl_FragColor = vec4(vColor, 1.0);
 	}
 `;

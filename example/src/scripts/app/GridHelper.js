@@ -17,7 +17,7 @@ const customVertexShader = `
     uniform mat4 uProjectionMatrix;
     uniform mat4 uModelViewMatrix;
 
-    void main() {
+    void main(void) {
         gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
     }
 `;
@@ -27,7 +27,7 @@ const customFragmentShader = () => `
 
     precision ${Capabilities.capabilities.precision} float;
 
-    void main() {
+    void main(void) {
         gl_FragColor = vec4(vec3(0.5), 1.0);
     }
 `;
