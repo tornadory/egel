@@ -29,7 +29,6 @@ const inversedModelViewMatrix: Mat4 = Mat4.create();
 interface Options {
     type?: string;
     uniforms?: any;
-    fieldOfView?: number;
     hookName?: string;
     hookVertexPre?: string;
     hookVertexMain?: string;
@@ -44,10 +43,8 @@ interface Options {
 }
 
 export default class Material {
-    public name: string;
     public type: string;
     public uniforms: any;
-    public fieldOfView: number;
     public hookName: string;
     public hookVertexPre: string;
     public hookVertexMain: string;
@@ -59,6 +56,7 @@ export default class Material {
     public fragmentShader: string;
     public drawType: number;
     public culling: number;
+
     public program: Program;
     public customUniforms: object;
 
@@ -114,15 +112,12 @@ export default class Material {
             }
         });
 
-        const projectionViewUniforms = {
+        this.uniforms = {
             uProjectionMatrix: {
                 location: null,
                 type: '4fv',
                 value: Mat4.create(),
             },
-        };
-
-        this.uniforms = {
             uModelMatrix: {
                 location: null,
                 type: '4fv',
@@ -139,7 +134,6 @@ export default class Material {
                 value: Mat4.create(),
             },
             ...this.customUniforms,
-            ...projectionViewUniforms,
         };
 
         Object.keys(this.uniforms).forEach((uniformName) => {

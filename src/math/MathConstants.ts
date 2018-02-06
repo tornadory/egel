@@ -1,7 +1,0 @@
-export const EPSILON = 0.000001;
-
-export const QUARTER_PI = 0.7853981633974483;
-
-export const HALF_PI = 1.5707963267948966;
-
-export const DOUBLE_PI = 6.283185307179586;

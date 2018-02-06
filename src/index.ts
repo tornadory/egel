@@ -88,9 +88,6 @@ import ImageLoader from './loaders/ImageLoader';
 export { ImageLoader };
 
 // Math
-import * as MathConstants from './math/MathConstants';
-export { MathConstants };
-
 import * as MathUtilities from './math/MathUtilities';
 export { MathUtilities };
 

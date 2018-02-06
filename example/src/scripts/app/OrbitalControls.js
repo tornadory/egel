@@ -1,5 +1,4 @@
 import { // eslint-disable-line
-    MathConstants,
     MathUtilities,
     Vec3,
 } from 'egel';
@@ -10,6 +9,8 @@ const IS_MOUSEWHEEL_SUPPORTED = ('onmousewheel' in window);
 const MODE_DRAG = 'MODE_DRAG';
 const MODE_PAN = 'MODE_PAN';
 
+const HALF_PI = 1.5707963267948966;
+const EPSILON = 0.000001;
 const UP = Vec3.fromValues(0, 1, 0);
 
 export default class OrbitalControls {
@@ -132,7 +133,7 @@ export default class OrbitalControls {
                     const y = event.pageX / this.width;
                     this.rotationX = this.offsetX + -((this.startX - x) * this.rotationSpeed);
                     this.rotationY = this.offsetY + ((this.startY - y) * this.rotationSpeed);
-                    this.rotationX = MathUtilities.clamp(this.rotationX, -MathConstants.HALF_PI, MathConstants.HALF_PI);
+                    this.rotationX = MathUtilities.clamp(this.rotationX, -HALF_PI, HALF_PI);
                     break;
                 }
             }
@@ -154,9 +155,9 @@ export default class OrbitalControls {
         this.y += (y - this.y) * this.easing;
         this.z += (z - this.z) * this.easing;
 
-        if (Math.abs(this.x - x) < MathConstants.EPSILON) this.x = x;
-        if (Math.abs(this.y - y) < MathConstants.EPSILON) this.y = y;
-        if (Math.abs(this.z - z) < MathConstants.EPSILON) this.z = z;
+        if (Math.abs(this.x - x) < EPSILON) this.x = x;
+        if (Math.abs(this.y - y) < EPSILON) this.y = y;
+        if (Math.abs(this.z - z) < EPSILON) this.z = z;
 
         Vec3.set(this.camera.position, this.x, this.y, this.z);
         Vec3.add(this.camera.position, this.camera.position, this.target);

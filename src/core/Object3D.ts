@@ -62,7 +62,7 @@ export default class Object3D {
             }
 
             // Use lookAt quat as base
-            // Note: this.rotation isn't updated if lookAt's used
+            // This.rotation isn't updated if lookAt's used
             Quat.copy(this.quaternion, this.quaternionLookAt);
 
             // Apply local transitions to modelMatrix
