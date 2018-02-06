@@ -113,6 +113,11 @@ export default class Material {
         });
 
         this.uniforms = {
+            uDiffuse: {
+                location: null,
+                type: '3f',
+                value: Vec3.create(),
+            },
             uProjectionMatrix: {
                 location: null,
                 type: '4fv',
@@ -179,6 +184,7 @@ export default class Material {
         projectionMatrix: Mat4,
         modelViewMatrix: Mat4,
         modelMatrix: Mat4,
+        camera?: PerspectiveCamera | OrthographicCamera,
     ) {
         Object.keys(this.customUniforms).forEach((uniformName) => {
             const uniform = this.uniforms[uniformName];
@@ -265,6 +271,13 @@ export default class Material {
             }
         });
 
+        gl.uniform3f(
+           this.uniforms.uDiffuse.location,
+           this.uniforms.uDiffuse.value[0],
+           this.uniforms.uDiffuse.value[1],
+           this.uniforms.uDiffuse.value[2],
+        );
+
         gl.uniformMatrix4fv(
             this.uniforms.uProjectionMatrix.location,
             false,
@@ -276,6 +289,7 @@ export default class Material {
             false,
             modelViewMatrix,
         );
+
         gl.uniformMatrix4fv(
             this.uniforms.uModelMatrix.location,
             false,

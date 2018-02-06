@@ -12,10 +12,14 @@ export const BaseVertexShader = `
     attribute vec3 aVertexPosition;
     varying vec3 vPosition;
     varying vec4 vWorldPosition;
-å
+
     #ifdef HAS_VERTEX_COLORS
     attribute vec3 aVertexColor;
     #endif
+
+    // Color
+    uniform vec3 uDiffuse;
+    varying vec3 vDiffuse;
 
     // Normal
     #ifdef HAS_NORMALS
@@ -32,6 +36,8 @@ export const BaseVertexShader = `
     <HOOK_VERTEX_PRE>
 
     void main(void) {
+        vDiffuse = uDiffuse;
+
         // Override for custom positioning
         vec3 transformed = vec3(0.0);
 

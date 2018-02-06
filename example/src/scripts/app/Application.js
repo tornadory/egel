@@ -1,14 +1,19 @@
 // Vendor
 import Stats from 'stats.js';
 import { // eslint-disable-line
+	Geometry,
+	Material,
+	Mesh,
 	Renderer,
 	Scene,
 	PerspectiveCamera,
+	Texture2D,
 	Vec3,
 } from 'egel';
 
 import AxisHelper from './AxisHelper';
 import GridHelper from './GridHelper';
+import OBJLoader from './OBJLoader';
 import OrbitalControls from './OrbitalControls';
 
 // Stats
@@ -58,37 +63,42 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		// const texture0 = new Texture2D({
-		// 	src: 'public/assets/textures/example.png',
-		// });
+		const texture0 = new Texture2D({
+			src: 'public/assets/textures/example.png',
+		});
 
-		// new OBJLoader('public/assets/models/bunny.obj')
-		// 	.then((data) => {
-		// 		const geometry = new Geometry(data.vertices, data.indices, data.normals, data.uvs);
+		new OBJLoader('public/assets/models/bunny.obj')
+			.then((data) => {
+				const geometry = new Geometry(data.vertices, data.indices, data.normals, data.uvs);
 
-		// 		const material = new Material({
-		// 			hookName: 'BunnyMesh',
-		// 			hookFragmentPre: `
-		// 				uniform sampler2D uTexture0;
-		// 			`,
-		// 			hookFragmentMain: `
-		// 				color = texture2D(uTexture0, vUv).rgb;
-		// 			`,
-		// 			uniforms: {
-		// 				uTexture0: {
-		// 					type: 't',
-		// 					value: texture0.texture,
-		// 				},
-		// 			},
-		// 		});
+				const material = new Material({
+					hookName: 'BunnyMesh',
+					hookFragmentPre: `
+						uniform sampler2D uTexture0;
+					`,
+					hookFragmentMain: `
+						color = texture2D(uTexture0, vUv).rgb;
+					`,
+					uniforms: {
+						uDiffuse: {
+							type: '3f',
+							value: Vec3.fromValues(0.5, 0.87, 1.0),
+						},
+						uTexture0: {
+							type: 't',
+							value: texture0.texture,
+						},
+					},
+				});
 
-		// 		const mesh = new Mesh(geometry, material);
-		// 		mesh.scale.set(0.5, 0.5, 0.5);
-		// 		scene.add(mesh);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
-		// 	});
+				const mesh = new Mesh(geometry, material);
+				Vec3.set(mesh.scale, 0.5, 0.5, 0.5);
+				// mesh.scale.set(0.5, 0.5, 0.5);
+				scene.add(mesh);
+			})
+			.catch((error) => {
+				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+			});
 
 		this.onResize();
 

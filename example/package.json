@@ -13,7 +13,8 @@
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
   "dependencies": {
-    "stats.js": "^0.17.0"
+    "stats.js": "^0.17.0",
+    "webgl-obj-loader": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.4",
