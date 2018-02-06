@@ -69,7 +69,12 @@ export default class Application {
 
 		new OBJLoader('public/assets/models/bunny.obj')
 			.then((data) => {
-				const geometry = new Geometry(data.vertices, data.indices, data.normals, data.uvs);
+				const geometry = new Geometry(
+					data.vertices,
+					data.indices,
+					data.normals,
+					data.uvs,
+				);
 
 				const material = new Material({
 					hookName: 'BunnyMesh',
@@ -93,6 +98,7 @@ export default class Application {
 
 				const mesh = new Mesh(geometry, material);
 				Vec3.set(mesh.scale, 0.5, 0.5, 0.5);
+
 				scene.add(mesh);
 			})
 			.catch((error) => {
