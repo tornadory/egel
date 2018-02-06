@@ -78,13 +78,24 @@ export default class Geometry {
 
         // Uvs
         if (this.bufferUvs) {
-            this.addAttribute('aUv', gl.ARRAY_BUFFER, this.bufferUvs, 2);
+            this.addAttribute(
+                'aUv',
+                gl.ARRAY_BUFFER,
+                this.bufferUvs,
+                2,
+            );
+
             this.generateUvs();
         }
 
         // Vertex colors
         if (this.bufferColors) {
-            this.addAttribute('aVertexColor', gl.ARRAY_BUFFER, this.bufferColors, 3);
+            this.addAttribute(
+                'aVertexColor',
+                gl.ARRAY_BUFFER,
+                this.bufferColors,
+                3,
+            );
         }
     }
 
