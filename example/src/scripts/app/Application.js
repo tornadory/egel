@@ -93,7 +93,6 @@ export default class Application {
 
 				const mesh = new Mesh(geometry, material);
 				Vec3.set(mesh.scale, 0.5, 0.5, 0.5);
-				// mesh.scale.set(0.5, 0.5, 0.5);
 				scene.add(mesh);
 			})
 			.catch((error) => {
