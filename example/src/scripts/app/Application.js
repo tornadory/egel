@@ -75,10 +75,6 @@ export default class Application {
 		// 				color = texture2D(uTexture0, vUv).rgb;
 		// 			`,
 		// 			uniforms: {
-		// 				uDiffuse: {
-		// 					type: '3f',
-		// 					value: new Vector3(0.5, 0.87, 1.0).v,
-		// 				},
 		// 				uTexture0: {
 		// 					type: 't',
 		// 					value: texture0.texture,
