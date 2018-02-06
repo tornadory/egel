@@ -19,7 +19,6 @@ interface Options {
 export default class PerspectiveCamera extends Camera {
     constructor(options: Options) {
         super(options);
-        this.isPespectiveCamera = true;
     }
 
     public updateProjectionMatrix() {

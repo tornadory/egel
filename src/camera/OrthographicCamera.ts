@@ -32,7 +32,6 @@ export default class OrthographicCamera extends Camera {
         this.right = options.right || 1;
         this.bottom = options.bottom || -1;
         this.top = options.top || 1;
-        this.isOrthographicCamera = true;
     }
 
     public updateProjectionMatrix() {

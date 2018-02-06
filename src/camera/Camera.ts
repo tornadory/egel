@@ -20,9 +20,6 @@ interface Options {
 export default class Camera {
     public projectionMatrix: Mat4;
     public worldInverseMatrix: Mat4;
-    public isCamera: boolean;
-    public isPespectiveCamera: boolean;
-    public isOrthographicCamera: boolean;
     public near: number;
     public far: number;
     public fieldOfView: number;
@@ -34,9 +31,6 @@ export default class Camera {
     constructor(options: Options) {
         this.projectionMatrix = Mat4.create();
         this.worldInverseMatrix = Mat4.create();
-        this.isCamera = true;
-        this.isPespectiveCamera = false;
-        this.isOrthographicCamera = false;
         this.near = 0.1;
         this.far = 100;
         this.fieldOfView = 70;
