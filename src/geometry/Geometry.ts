@@ -11,9 +11,6 @@ import * as Context from '../core/Context';
 import BufferAttribute from './BufferAttribute';
 import Face from './Face';
 
-// Utilities
-import { flatten } from '../utilities/Methods';
-
 let gl: WebGLRenderingContext;
 
 export default class Geometry {
@@ -142,28 +139,6 @@ export default class Geometry {
             const uv = Vec2.fromValues(a, b);
             this.uvs.push(uv);
         }
-    }
-
-    public updateVertices() {
-        this.vertices.forEach((vertex, i) => {
-            this.bufferVertices.set(vertex, i * vertex.length);
-        });
-
-        this.attributes.aVertexPosition.update(this.bufferVertices);
-    }
-
-    public updateNormals() {
-        const normals = [];
-
-        this.faces.forEach((face) => {
-            face.updateFaceNormal();
-            normals[face.indices[0]] = face.normal;
-            normals[face.indices[1]] = face.normal;
-            normals[face.indices[2]] = face.normal;
-        });
-
-        this.bufferNormals.set(flatten(normals));
-        this.attributes.aVertexNormal.update(this.bufferNormals);
     }
 
     public dispose() {
