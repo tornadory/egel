@@ -84,6 +84,9 @@ export default class Application {
 					hookFragmentMain: `
 						color = texture2D(uTexture0, vUv).rgb;
 					`,
+					hookFragmentEnd: `
+						gl_FragColor = vec4(color.rgb * normal, 1.0);
+					`,
 					uniforms: {
 						uDiffuse: {
 							type: '3f',
