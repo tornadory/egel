@@ -118,12 +118,12 @@ export default class Object3D {
     public dispose() {
         this.unsetParent();
         this.children = [];
-        this.localMatrix = undefined;
-        this.modelMatrix = undefined;
-        this.position = undefined;
-        this.rotation = undefined;
-        this.scale = undefined;
-        this.quaternion = undefined;
-        this.isObject3D = undefined;
+        delete this.localMatrix;
+        delete this.modelMatrix;
+        delete this.position;
+        delete this.rotation;
+        delete this.scale;
+        delete this.quaternion;
+        delete this.isObject3D;
     }
 }

@@ -29,7 +29,7 @@ export default class Texture2D {
     constructor(options: Options) {
         gl = Context.get();
 
-        this.src = undefined;
+        this.src = null;
         this.magFilter = gl.NEAREST;
         this.minFilter = gl.NEAREST;
         this.wrapS = gl.CLAMP_TO_EDGE;
@@ -92,6 +92,6 @@ export default class Texture2D {
 
     public dispose() {
         gl.deleteTexture(this.texture);
-        this.texture = undefined;
+        delete this.texture;
     }
 }
