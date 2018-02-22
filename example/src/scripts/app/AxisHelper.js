@@ -1,5 +1,5 @@
 import { // eslint-disable-line
-	Capabilities,
+    Capabilities,
     Context,
     Material,
     Mesh,
@@ -29,7 +29,7 @@ const customVertexShader = `
 const customFragmentShader = () => `
     #define SHADER_NAME AxisHelper
 
-    precision ${Capabilities.capabilities.precision} float;
+    precision highp float;
 
     varying vec3 vColor;
 

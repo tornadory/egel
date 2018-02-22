@@ -1,5 +1,4 @@
 import { // eslint-disable-line
-	Capabilities,
     Context,
     Material,
     Mesh,
@@ -25,7 +24,7 @@ const customVertexShader = `
 const customFragmentShader = () => `
     #define SHADER_NAME GridHelper
 
-    precision ${Capabilities.capabilities.precision} float;
+    precision highp float;
 
     void main(void) {
         gl_FragColor = vec4(vec3(0.5), 1.0);

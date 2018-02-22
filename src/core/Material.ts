@@ -10,7 +10,6 @@ import OrthographicCamera from '../camera/OrthographicCamera';
 import PerspectiveCamera from '../camera/PerspectiveCamera';
 
 // Core
-import { capabilities } from './Capabilities';
 import * as Context from './Context';
 import { CULL_NONE, DRAW_TRIANGLES } from './CoreConstants';
 import Program from './Program';
@@ -127,10 +126,12 @@ export default class Material {
     public processShader(shader: string, geometry: Geometry) {
         let defines = '';
 
-        const precision = `precision ${capabilities.precision} float;`;
-
         function addDefine(define) {
             defines += `#define ${define} \n`;
+        }
+
+        if (this.name) {
+            addDefine(`SHADER_NAME ${this.name}`);
         }
 
         if (geometry.bufferUvs) {
@@ -145,12 +146,7 @@ export default class Material {
             addDefine('HAS_NORMALS');
         }
 
-        if (this.name) {
-            addDefine(`SHADER_NAME ${this.name}`);
-        }
-
         return `
-            ${precision}
             ${defines}
             ${shader}
         `;

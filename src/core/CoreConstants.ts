@@ -18,6 +18,3 @@ export const MAX_DEVICE_PIXEL_RATIO: number = 2;
 export const RENDERER_DEFAULT_WIDTH: number = window.innerWidth;
 export const RENDERER_DEFAULT_HEIGHT: number = window.innerHeight;
 export const RENDERER_DEFAULT_ASPECT_RATIO: number = RENDERER_DEFAULT_WIDTH / RENDERER_DEFAULT_HEIGHT;
-
-// Precision
-export const PRECISION: string = 'highp';
