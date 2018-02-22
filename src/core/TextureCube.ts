@@ -46,7 +46,7 @@ export default class TextureCube {
 
         const images = [];
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i += 1) {
             images.push(canvas);
         }
 
