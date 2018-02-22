@@ -3,18 +3,22 @@ import { // eslint-disable-line
 } from 'egel';
 
 import {
-    Mesh
+    Mesh,
 } from 'webgl-obj-loader';
 
 function OBJParser(data) {
     const mesh = new Mesh(data);
 
-    return {
+    console.log(mesh);
+
+    const meshData = {
         vertices: new Float32Array(mesh.vertices),
         normals: new Float32Array(mesh.vertexNormals),
         indices: new Uint16Array(mesh.indices),
         uvs: new Float32Array(mesh.textures),
     };
+
+    return meshData;
 }
 
 export default function OBJLoader(filename) {

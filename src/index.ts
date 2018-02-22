@@ -43,9 +43,6 @@ export { CoreConstants };
 import * as CoreUtilities from './core/CoreUtilities';
 export { CoreUtilities };
 
-import Framebuffer from './core/Framebuffer';
-export { Framebuffer };
-
 import Material from './core/Material';
 export { Material };
 
@@ -57,6 +54,9 @@ export { Object3D };
 
 import Renderer from './core/Renderer';
 export { Renderer };
+
+import RenderTarget from './core/RenderTarget';
+export { RenderTarget };
 
 import Scene from './core/Scene';
 export { Scene };

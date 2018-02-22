@@ -30,7 +30,7 @@ interface ClearColor {
     a: number;
 }
 
-export default class Framebuffer {
+export default class RenderTarget {
     public width: number;
     public height: number;
     public ratio: number;
