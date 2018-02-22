@@ -1,4 +1,5 @@
 import { // eslint-disable-line
+    Capabilities,
     Context,
     Material,
     Mesh,
@@ -9,8 +10,6 @@ import { // eslint-disable-line
 let gl;
 
 const customVertexShader = `
-    #define SHADER_NAME GridHelper
-
     attribute vec3 aVertexPosition;
 
     uniform mat4 uProjectionMatrix;
@@ -21,9 +20,7 @@ const customVertexShader = `
     }
 `;
 
-const customFragmentShader = () => `
-    #define SHADER_NAME GridHelper
-
+const customFragmentShader = `
     precision highp float;
 
     void main(void) {
@@ -65,11 +62,12 @@ class GridGeometry extends Geometry {
 export default class GridHelper extends Mesh {
     constructor(size = 1, divisions = 10) {
         const vertexShader = customVertexShader;
-        const fragmentShader = customFragmentShader();
+        const fragmentShader = customFragmentShader;
 
         super(
             new GridGeometry(size, divisions),
             new Material({
+                name: 'GridHelper',
                 vertexShader,
                 fragmentShader,
             }),

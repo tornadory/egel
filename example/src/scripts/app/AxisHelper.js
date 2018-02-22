@@ -9,8 +9,6 @@ import { // eslint-disable-line
 let gl;
 
 const customVertexShader = `
-    #define SHADER_NAME AxisHelper
-
     attribute vec3 aVertexPosition;
     attribute vec3 aVertexColor;
 
@@ -26,9 +24,7 @@ const customVertexShader = `
 	}
 `;
 
-const customFragmentShader = () => `
-    #define SHADER_NAME AxisHelper
-
+const customFragmentShader = `
     precision highp float;
 
     varying vec3 vColor;
@@ -70,11 +66,12 @@ class AxisGeometry extends Geometry {
 export default class AxisHelper extends Mesh {
     constructor(size = 1) {
         const vertexShader = customVertexShader;
-        const fragmentShader = customFragmentShader();
+        const fragmentShader = customFragmentShader;
 
         super(
             new AxisGeometry(size),
             new Material({
+                name: 'AxisHelper',
                 vertexShader,
                 fragmentShader,
             }),

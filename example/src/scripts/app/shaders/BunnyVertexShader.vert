@@ -1,3 +1,5 @@
+precision highp float;
+
 // Uniforms
 uniform mat4 uProjectionMatrix;
 uniform mat4 uModelViewMatrix;

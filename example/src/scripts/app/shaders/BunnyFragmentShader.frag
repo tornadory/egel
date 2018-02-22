@@ -1,3 +1,5 @@
+precision highp float;
+
 // Uniforms
 uniform sampler2D uTexture0;
 
