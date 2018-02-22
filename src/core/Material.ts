@@ -18,10 +18,6 @@ import Program from './Program';
 // Geometry
 import Geometry from '../geometry/Geometry';
 
-// Shaders
-import { BaseFragmentShader } from '../shaders/BaseFragmentShader';
-import { BaseVertexShader } from '../shaders/BaseVertexShader';
-
 let gl: WebGLRenderingContext;
 const normalMatrix: Mat3 = Mat3.create();
 const inversedModelViewMatrix: Mat4 = Mat4.create();
@@ -29,13 +25,7 @@ const inversedModelViewMatrix: Mat4 = Mat4.create();
 interface Options {
     type?: string;
     uniforms?: any;
-    hookName?: string;
-    hookVertexPre?: string;
-    hookVertexMain?: string;
-    hookVertexEnd?: string;
-    hookFragmentPre?: string;
-    hookFragmentMain?: string;
-    hookFragmentEnd?: string;
+    name?: string;
     vertexShader?: string;
     fragmentShader?: string;
     drawType?: number;
@@ -45,13 +35,7 @@ interface Options {
 export default class Material {
     public type: string;
     public uniforms: any;
-    public hookName: string;
-    public hookVertexPre: string;
-    public hookVertexMain: string;
-    public hookVertexEnd: string;
-    public hookFragmentPre: string;
-    public hookFragmentMain: string;
-    public hookFragmentEnd: string;
+    public name: string;
     public vertexShader: string;
     public fragmentShader: string;
     public drawType: number;
@@ -65,15 +49,9 @@ export default class Material {
 
         this.type = '';
         this.uniforms = {};
-        this.hookName = '';
-        this.hookVertexPre = '';
-        this.hookVertexMain = '';
-        this.hookVertexEnd = '';
-        this.hookFragmentPre = '';
-        this.hookFragmentMain = '';
-        this.hookFragmentEnd = '';
-        this.vertexShader = BaseVertexShader;
-        this.fragmentShader = BaseFragmentShader;
+        this.name = '';
+        this.vertexShader = '';
+        this.fragmentShader = '';
         this.drawType = DRAW_TRIANGLES;
         this.culling = CULL_NONE;
 
@@ -167,17 +145,15 @@ export default class Material {
             addDefine('HAS_NORMALS');
         }
 
-        shader = shader.replace(/<HOOK_PRECISION>/g, precision);
-        shader = shader.replace(/<HOOK_DEFINES>/g, defines);
-        shader = shader.replace(/<HOOK_NAME>/g, `#define SHADER_NAME ${this.hookName}`);
-        shader = shader.replace(/<HOOK_VERTEX_PRE>/g, this.hookVertexPre);
-        shader = shader.replace(/<HOOK_VERTEX_MAIN>/g, this.hookVertexMain);
-        shader = shader.replace(/<HOOK_VERTEX_END>/g, this.hookVertexEnd);
-        shader = shader.replace(/<HOOK_FRAGMENT_PRE>/g, this.hookFragmentPre);
-        shader = shader.replace(/<HOOK_FRAGMENT_MAIN>/g, this.hookFragmentMain);
-        shader = shader.replace(/<HOOK_FRAGMENT_END>/g, this.hookFragmentEnd);
+        if (this.name) {
+            addDefine(`SHADER_NAME ${this.name}`);
+        }
 
-        return shader;
+        return `
+            ${precision}
+            ${defines}
+            ${shader}
+        `;
     }
 
     public setUniforms(
