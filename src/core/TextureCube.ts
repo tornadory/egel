@@ -30,7 +30,7 @@ export default class TextureCube {
     constructor(options: Options) {
         gl = Context.get();
 
-        this.src = Array(6).fill('');
+        this.src = ['', '', '', '', '', ''];
         this.magFilter = gl.LINEAR;
         this.minFilter = gl.LINEAR;
         this.wrapS = gl.CLAMP_TO_EDGE;
@@ -46,7 +46,7 @@ export default class TextureCube {
 
         const images = [];
 
-        for (let i = 0; i < 6; i += 1) {
+        for (let i = 0; this.src.length; i += 1) {
             images.push(canvas);
         }
 
