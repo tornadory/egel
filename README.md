@@ -9,6 +9,20 @@ A minimal framework around the WebGL API.
 
 ![Screenshot](/example/screenshot.png?raw=true)
 
+## Default vertex attributes
+- aVertexPosition
+- aVertexIndex
+- aVertexNormal
+- aUv
+- aVertexColor
+
+## Default fragment uniforms
+- uDiffuse
+- uProjectionMatrix
+- uModelMatrix
+- uModelViewMatrix
+- uNormalMatrix
+
 ## Installation
 
 Make sure you have [Node.js](http://nodejs.org/) installed.
