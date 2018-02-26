@@ -71,12 +71,7 @@ export default class Object3D {
             Quat.rotateY(this.quaternion, this.quaternion, this.rotation[1]);
             Quat.rotateZ(this.quaternion, this.quaternion, this.rotation[2]);
             axisAngle = Quat.getAxisAngle(quaternionAxisAngle, this.quaternion);
-            Mat4.rotate(
-                this.modelMatrix,
-                this.modelMatrix,
-                axisAngle,
-                quaternionAxisAngle,
-            );
+            Mat4.rotate(this.modelMatrix, this.modelMatrix, axisAngle, quaternionAxisAngle);
             Mat4.scale(this.modelMatrix, this.modelMatrix, this.scale);
         }
 

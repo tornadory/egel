@@ -1,10 +1,7 @@
 precision highp float;
 
 // Uniforms
-uniform sampler2D uTexture0;
-
-// Position
-varying vec3 vPosition;
+// uniform sampler2D uTexture0;
 
 // Color
 varying vec3 vDiffuse;
@@ -21,7 +18,7 @@ varying vec2 vUv;
 
 void main(void) {
     vec3 color = vDiffuse;
-    color = texture2D(uTexture0, vUv).rgb;
+    // color = texture2D(uTexture0, vUv).rgb;
 
     #ifdef HAS_NORMALS
     vec3 normal = normalize(vNormal);

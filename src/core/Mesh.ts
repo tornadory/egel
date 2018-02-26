@@ -82,11 +82,7 @@ export default class Mesh extends Object3D {
             gl.cullFace(this.material.culling);
         }
 
-        this.material.setUniforms(
-            camera.projectionMatrix,
-            this.modelViewMatrix,
-            this.modelMatrix,
-        );
+        this.material.setUniforms(camera.projectionMatrix, this.modelViewMatrix, this.modelMatrix);
 
         if (extensions.vertexArrayObjectExtension) {
             this.vertexArrayObject.bind();
@@ -103,11 +99,7 @@ export default class Mesh extends Object3D {
                 0,
             );
           } else {
-            gl.drawArrays(
-                this.material.drawType,
-                0,
-                this.geometry.attributes.aVertexPosition.numItems,
-            );
+            gl.drawArrays(this.material.drawType, 0, this.geometry.attributes.aVertexPosition.numItems);
         }
 
         if (extensions.vertexArrayObjectExtension) {

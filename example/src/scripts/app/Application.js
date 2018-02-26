@@ -44,6 +44,8 @@ export default class Application {
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
+		this.renderer.setScissor(0, 0, this.width, this.height);
+		this.renderer.setViewport(0, 0, this.width, this.height);
 
 		this.canvasElement.appendChild(this.renderer.canvas);
 
@@ -67,9 +69,9 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		const texture0 = new Texture2D({
-			src: 'public/assets/textures/example.png',
-		});
+		// const texture0 = new Texture2D({
+		// 	src: 'public/assets/textures/example.png',
+		// });
 
 		new OBJLoader('public/assets/models/bunny.obj')
 			.then((data) => {
@@ -89,10 +91,10 @@ export default class Application {
 							type: '3f',
 							value: Vec3.fromValues(0.5, 0.87, 1.0),
 						},
-						uTexture0: {
-							type: 't',
-							value: texture0.texture,
-						},
+						// uTexture0: {
+						// 	type: 't',
+						// 	value: texture0.texture,
+						// },
 					},
 				});
 
@@ -116,8 +118,6 @@ export default class Application {
 		stats.begin();
 
 		this.controls.update();
-		this.renderer.setScissor(0, 0, this.width, this.height);
-		this.renderer.setViewport(0, 0, this.width, this.height);
 		this.camera.updateMatrixWorld();
 		this.renderer.render(scene, this.camera);
 

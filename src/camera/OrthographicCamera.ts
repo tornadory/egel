@@ -35,14 +35,6 @@ export default class OrthographicCamera extends Camera {
     }
 
     public updateProjectionMatrix() {
-        Mat4.ortho(
-            this.projectionMatrix,
-            this.left,
-            this.right,
-            this.bottom,
-            this.top,
-            this.near,
-            this.far,
-        );
+        Mat4.ortho(this.projectionMatrix, this.left, this.right, this.bottom, this.top, this.near, this.far);
     }
 }

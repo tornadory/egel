@@ -43,59 +43,30 @@ export default class Geometry {
 
         // Vertex positions
         if (this.bufferVertices) {
-            this.addAttribute(
-                'aVertexPosition',
-                gl.ARRAY_BUFFER,
-                this.bufferVertices,
-                3,
-            );
-
+            this.addAttribute('aVertexPosition', gl.ARRAY_BUFFER, this.bufferVertices, 3);
             this.generateVertices();
         }
 
         // Vertex indices
         if (this.bufferIndices) {
-            this.addAttribute(
-                'aVertexIndex',
-                gl.ELEMENT_ARRAY_BUFFER,
-                this.bufferIndices,
-                1,
-                false,
-            );
-
+            this.addAttribute('aVertexIndex', gl.ELEMENT_ARRAY_BUFFER, this.bufferIndices, 1, false);
             this.generateFaces();
         }
 
         // Vertex normals
         if (this.bufferNormals) {
-            this.addAttribute(
-                'aVertexNormal',
-                gl.ARRAY_BUFFER,
-                this.bufferNormals,
-                3,
-            );
+            this.addAttribute('aVertexNormal', gl.ARRAY_BUFFER, this.bufferNormals, 3);
         }
 
         // Uvs
         if (this.bufferUvs) {
-            this.addAttribute(
-                'aUv',
-                gl.ARRAY_BUFFER,
-                this.bufferUvs,
-                2,
-            );
-
+            this.addAttribute('aUv', gl.ARRAY_BUFFER, this.bufferUvs, 2);
             this.generateUvs();
         }
 
         // Vertex colors
         if (this.bufferColors) {
-            this.addAttribute(
-                'aVertexColor',
-                gl.ARRAY_BUFFER,
-                this.bufferColors,
-                3,
-            );
+            this.addAttribute('aVertexColor', gl.ARRAY_BUFFER, this.bufferColors, 3);
         }
     }
 
@@ -106,12 +77,7 @@ export default class Geometry {
         count: number,
         shaderAttribute?: boolean,
     ) {
-        this.attributes[name] = new BufferAttribute(
-            type,
-            data,
-            count,
-            shaderAttribute,
-        );
+        this.attributes[name] = new BufferAttribute(type, data, count, shaderAttribute);
     }
 
     public generateVertices() {

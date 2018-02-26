@@ -84,32 +84,18 @@ export default class Program {
     public setAttributeLocation(attributeName: string) {
         if (!this.created) return;
 
-        this.attributeLocations[attributeName] = gl.getAttribLocation(
-            this.program,
-            attributeName,
-        );
-
+        this.attributeLocations[attributeName] = gl.getAttribLocation(this.program, attributeName);
         gl.enableVertexAttribArray(this.attributeLocations[attributeName]);
       }
 
     public setAttributePointer(attributeName: string, itemSize: number) {
-        gl.vertexAttribPointer(
-            this.attributeLocations[attributeName],
-            itemSize,
-            gl.FLOAT,
-            false,
-            0,
-            0,
-        );
+        gl.vertexAttribPointer(this.attributeLocations[attributeName], itemSize, gl.FLOAT, false, 0, 0);
     }
 
     public setUniformLocation(uniforms: object, uniformName: string) {
         if (!this.created) return;
 
-        uniforms[uniformName].location = gl.getUniformLocation(
-            this.program,
-            uniformName,
-        );
+        uniforms[uniformName].location = gl.getUniformLocation(this.program, uniformName);
     }
 
     public bind() {

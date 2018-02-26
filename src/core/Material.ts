@@ -187,12 +187,7 @@ export default class Material {
                     break;
                 }
                 case '3f': {
-                    gl.uniform3f(
-                        uniform.location,
-                        uniform.value[0],
-                        uniform.value[1],
-                        uniform.value[2],
-                    );
+                    gl.uniform3f(uniform.location, uniform.value[0], uniform.value[1], uniform.value[2]);
                     break;
                 }
                 case '4f': {
@@ -250,23 +245,11 @@ export default class Material {
            this.uniforms.uDiffuse.value[2],
         );
 
-        gl.uniformMatrix4fv(
-            this.uniforms.uProjectionMatrix.location,
-            false,
-            projectionMatrix,
-        );
+        gl.uniformMatrix4fv(this.uniforms.uProjectionMatrix.location, false, projectionMatrix);
 
-        gl.uniformMatrix4fv(
-            this.uniforms.uModelViewMatrix.location,
-            false,
-            modelViewMatrix,
-        );
+        gl.uniformMatrix4fv(this.uniforms.uModelViewMatrix.location, false, modelViewMatrix);
 
-        gl.uniformMatrix4fv(
-            this.uniforms.uModelMatrix.location,
-            false,
-            modelMatrix,
-        );
+        gl.uniformMatrix4fv(this.uniforms.uModelMatrix.location, false, modelMatrix);
 
         Mat4.identity(inversedModelViewMatrix);
         Mat4.invert(inversedModelViewMatrix, modelMatrix);
@@ -275,11 +258,7 @@ export default class Material {
         Mat3.identity(normalMatrix);
         Mat3.fromMat4(normalMatrix, inversedModelViewMatrix);
         Mat3.transpose(normalMatrix, normalMatrix);
-        gl.uniformMatrix3fv(
-            this.uniforms.uNormalMatrix.location,
-            false,
-            normalMatrix,
-        );
+        gl.uniformMatrix3fv(this.uniforms.uNormalMatrix.location, false, normalMatrix);
     }
 
     public dispose() {

@@ -9,8 +9,6 @@ import {
 function OBJParser(data) {
     const mesh = new Mesh(data);
 
-    console.log(mesh);
-
     const meshData = {
         vertices: new Float32Array(mesh.vertices),
         normals: new Float32Array(mesh.vertexNormals),

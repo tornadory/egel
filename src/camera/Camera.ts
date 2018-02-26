@@ -48,12 +48,7 @@ export default class Camera {
 
     public updateMatrixWorld() {
         Mat4.identity(this.worldInverseMatrix);
-        Mat4.lookAt(
-            this.worldInverseMatrix,
-            this.position,
-            this.target,
-            this.up,
-        );
+        Mat4.lookAt(this.worldInverseMatrix, this.position, this.target, this.up);
     }
 
     public updateProjectionMatrix() {
