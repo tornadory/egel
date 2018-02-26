@@ -28,6 +28,7 @@ export default class OrthographicCamera extends Camera {
 
     constructor(options: Options = {}) {
         super(options);
+
         this.left = options.left || -1;
         this.right = options.right || 1;
         this.bottom = options.bottom || -1;
