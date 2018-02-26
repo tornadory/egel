@@ -44,8 +44,6 @@ export default class Application {
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
-		this.renderer.setScissor(0, 0, this.width, this.height);
-		this.renderer.setViewport(0, 0, this.width, this.height);
 
 		this.canvasElement.appendChild(this.renderer.canvas);
 
@@ -118,6 +116,8 @@ export default class Application {
 		stats.begin();
 
 		this.controls.update();
+		this.renderer.setScissor(0, 0, this.width, this.height);
+		this.renderer.setViewport(0, 0, this.width, this.height);
 		this.camera.updateMatrixWorld();
 		this.renderer.render(scene, this.camera);
 
