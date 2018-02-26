@@ -67,9 +67,9 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		// const texture0 = new Texture2D({
-		// 	src: 'public/assets/textures/example.png',
-		// });
+		const texture0 = new Texture2D({
+			src: 'public/assets/textures/example.png',
+		});
 
 		new OBJLoader('public/assets/models/bunny.obj')
 			.then((data) => {
@@ -89,10 +89,10 @@ export default class Application {
 							type: '3f',
 							value: Vec3.fromValues(0.5, 0.87, 1.0),
 						},
-						// uTexture0: {
-						// 	type: 't',
-						// 	value: texture0.texture,
-						// },
+						uTexture0: {
+							type: 't',
+							value: texture0.texture,
+						},
 					},
 				});
 

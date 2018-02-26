@@ -90,11 +90,6 @@ export default class Material {
         });
 
         this.uniforms = {
-            uDiffuse: {
-                location: null,
-                type: '3f',
-                value: Vec3.create(),
-            },
             uProjectionMatrix: {
                 location: null,
                 type: '4fv',
@@ -237,13 +232,6 @@ export default class Material {
                 }
             }
         });
-
-        gl.uniform3f(
-           this.uniforms.uDiffuse.location,
-           this.uniforms.uDiffuse.value[0],
-           this.uniforms.uDiffuse.value[1],
-           this.uniforms.uDiffuse.value[2],
-        );
 
         gl.uniformMatrix4fv(this.uniforms.uProjectionMatrix.location, false, projectionMatrix);
 

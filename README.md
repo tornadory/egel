@@ -17,7 +17,6 @@ A minimal framework around the WebGL API.
 - aVertexColor
 
 ## Default fragment uniforms
-- uDiffuse
 - uProjectionMatrix
 - uModelMatrix
 - uModelViewMatrix
