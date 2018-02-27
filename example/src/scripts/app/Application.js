@@ -87,7 +87,7 @@ export default class Application {
 					uniforms: {
 						uDiffuse: {
 							type: '3f',
-							value: Vec3.fromValues(0.5, 0.87, 1.0),
+							value: Vec3.fromValues(0.5, 0.37, 0.5),
 						},
 						uTexture0: {
 							type: 't',
