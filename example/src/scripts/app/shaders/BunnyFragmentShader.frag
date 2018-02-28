@@ -11,13 +11,13 @@ varying vec4 vWorldPosition;
 varying vec3 vDiffuse;
 
 // Normal
-#ifdef HAS_NORMALS
+#ifdef HAS_VERTEX_NORMALS
 varying vec3 vNormal;
 #endif
 
 // Uv
-#ifdef HAS_UVS
-varying vec2 vUv;
+#ifdef HAS_TEXTURE_COORDS
+varying vec2 vTextureCoord;
 #endif
 
 vec3 CalculatePointLight(
@@ -59,9 +59,9 @@ vec3 CalculatePointLight(
 
 void main(void) {
     vec3 color = vDiffuse;
-    // color = texture2D(uTexture0, vUv).rgb;
+    color = texture2D(uTexture0, vTextureCoord).rgb;
 
-    #ifdef HAS_NORMALS
+    #ifdef HAS_VERTEX_NORMALS
     vec3 normal = normalize(vNormal);
     #endif
 

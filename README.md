@@ -13,8 +13,8 @@ A minimal framework around the WebGL API.
 - aVertexPosition
 - aVertexIndex
 - aVertexNormal
-- aUv
 - aVertexColor
+- aTextureCoord
 
 ## Default fragment uniforms
 - uProjectionMatrix

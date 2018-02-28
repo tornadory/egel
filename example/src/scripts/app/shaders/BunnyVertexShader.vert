@@ -14,15 +14,15 @@ uniform vec3 uDiffuse;
 varying vec3 vDiffuse;
 
 // Normal
-#ifdef HAS_NORMALS
+#ifdef HAS_VERTEX_NORMALS
 attribute vec3 aVertexNormal;
 varying vec3 vNormal;
 #endif
 
-// Uv
-#ifdef HAS_UVS
-attribute vec2 aUv;
-varying vec2 vUv;
+// Texture coordinates
+#ifdef HAS_TEXTURE_COORDS
+attribute vec2 aTextureCoord;
+varying vec2 vTextureCoord;
 #endif
 
 void main(void) {
@@ -31,11 +31,11 @@ void main(void) {
     // Override for custom positioning
     vec3 transformed = vec3(0.0);
 
-    #ifdef HAS_UVS
-    vUv = aUv;
+    #ifdef HAS_TEXTURE_COORDS
+    vTextureCoord = aTextureCoord;
     #endif
 
-    #ifdef HAS_NORMALS
+    #ifdef HAS_VERTEX_NORMALS
     vNormal = uNormalMatrix * aVertexNormal;
     #endif
 

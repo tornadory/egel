@@ -129,16 +129,19 @@ export default class Material {
             addDefine(`SHADER_NAME ${this.name}`);
         }
 
-        if (geometry.bufferUvs) {
-            addDefine('HAS_UVS');
+        // Vertex normals
+        if (geometry.bufferNormals) {
+            addDefine('HAS_VERTEX_NORMALS');
         }
 
+        // Vertex colors
         if (geometry.bufferColors) {
             addDefine('HAS_VERTEX_COLORS');
         }
 
-        if (geometry.bufferNormals) {
-            addDefine('HAS_NORMALS');
+        // Texture coordinates
+        if (geometry.bufferUvs) {
+            addDefine('HAS_TEXTURE_COORDS');
         }
 
         return `
