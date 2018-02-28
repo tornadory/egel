@@ -1,7 +1,7 @@
 precision highp float;
 
 // Uniforms
-// uniform sampler2D uTexture0;
+uniform sampler2D uTexture0;
 
 // Position
 varying vec3 vPosition;
@@ -51,8 +51,8 @@ vec3 CalculatePointLight(
     vec3 ambient = (ambientColor * ambientIntensity) * vDiffuse;
     vec3 diffuse = diff * vDiffuse;
     vec3 specular = specularColor * spec * specularIntensity;
-    ambient  *= attenuation;
-    diffuse  *= attenuation;
+    ambient *= attenuation;
+    diffuse *= attenuation;
     specular *= attenuation;
     return (ambient + diffuse + specular);
 }
@@ -74,5 +74,5 @@ void main(void) {
         normal
     );
 
-    gl_FragColor = vec4(color, 0.5);
+    gl_FragColor = vec4(color, 1.0);
 }	
