@@ -21,10 +21,14 @@ varying vec2 vUv;
 #endif
 
 vec3 CalculatePointLight(
-    vec3 light,
+    vec3 lightPosition,
+    vec3 ambientColor,
+    float ambientIntensity,
+    vec3 specularColor,
+    vec3 specularIntensity,
     vec3 normal
 ) {
-    vec3 lightDirection = normalize(light - vWorldPosition.xyz);
+    vec3 lightDirection = normalize(lightPosition - vWorldPosition.xyz);
 
     // diffuse shading
     float diff = max(dot(normal, lightDirection), 0.0);
@@ -34,21 +38,19 @@ vec3 CalculatePointLight(
 
     // Fix the spec from showing on the backside by multiplying it by the lambert term
     float spec = diff * pow(max(dot(lightDirection, reflectDirection), 0.0), 0.25);
+    
     // attenuation
     float constant = 1.0;
     float linear = 0.09;
     float quadratic = 0.032;
 
-    float dist = length(light);
+    float dist = length(lightPosition);
     float attenuation = 1.0 / (constant + linear * dist + quadratic * (dist * dist));
-
-    vec3 ambientColor = vec3(0.5);
-    float ambientIntensity = 0.5;
 
     // combine results
     vec3 ambient = (ambientColor * ambientIntensity) * vDiffuse;
     vec3 diffuse = diff * vDiffuse;
-    vec3 specular = vec3(0.5) * spec * vec3(1);
+    vec3 specular = specularColor * spec * specularIntensity;
     ambient  *= attenuation;
     diffuse  *= attenuation;
     specular *= attenuation;
@@ -63,7 +65,14 @@ void main(void) {
     vec3 normal = normalize(vNormal);
     #endif
 
-    color += CalculatePointLight(vec3(0.5, 1.0, 2.0), normal);
+    color += CalculatePointLight(
+        vec3(0.5, 1.0, 2.0), // lightPosition
+        vec3(1.0, 0.73, 0.5), // ambientColor
+        0.5, // ambientIntensity
+        vec3(0.25), // specularColor
+        vec3(1), // specularIntensity
+        normal
+    );
 
-    gl_FragColor = vec4(color.rgb, 1.0);
+    gl_FragColor = vec4(color, 0.5);
 }	
