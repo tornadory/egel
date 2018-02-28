@@ -125,6 +125,7 @@ export default class Material {
             defines += `#define ${define} \n`;
         }
 
+        // Shader name
         if (this.name) {
             addDefine(`SHADER_NAME ${this.name}`);
         }
