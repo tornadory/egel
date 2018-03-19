@@ -1,6 +1,6 @@
 {
   "name": "egel",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "A minimal framework around the WebGL API.",
   "main": "dist/egel.min.js",
   "scripts": {
