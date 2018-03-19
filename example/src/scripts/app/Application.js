@@ -116,8 +116,6 @@ export default class Application {
 		stats.begin();
 
 		this.controls.update();
-		this.renderer.setScissor(0, 0, this.width, this.height);
-		this.renderer.setViewport(0, 0, this.width, this.height);
 		this.camera.updateMatrixWorld();
 		this.renderer.render(scene, this.camera);
 
@@ -134,6 +132,7 @@ export default class Application {
 		this.height = window.innerHeight;
 
 		this.renderer.setSize(this.width, this.height);
+		this.renderer.setScissor(0, 0, this.width, this.height);
 		this.camera.aspectRatio = this.width / this.height;
 		this.camera.updateProjectionMatrix();
 	}
