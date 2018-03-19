@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "gl-matrix": "^2.4.0",
-    "webgl-constants": "0.0.2"
+    "webgl-constants": "0.0.3"
   },
   "devDependencies": {
     "@types/gl-matrix": "^2.4.0",
