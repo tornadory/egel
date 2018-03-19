@@ -9,7 +9,7 @@ import { // eslint-disable-line
 	PerspectiveCamera,
 	Texture2D,
 	Vec3,
-} from 'egel';
+} from 'egel.min';
 
 import AxisHelper from './AxisHelper';
 import GridHelper from './GridHelper';

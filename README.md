@@ -37,3 +37,7 @@ Make sure you have [Node.js](http://nodejs.org/) installed.
 	npm run dist
 
 	npm run deploy
+
+## Licence
+
+My work is released under the [MIT license](https://raw.githubusercontent.com/TimvanScherpenzeel/egel/master/LICENSE).

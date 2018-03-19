@@ -1,6 +1,6 @@
 {
   "name": "egel",
-  "version": "0.0.26",
+  "version": "0.0.31",
   "description": "A minimal framework around the WebGL API.",
   "main": "dist/egel.min.js",
   "scripts": {
@@ -16,7 +16,8 @@
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
   "dependencies": {
-    "gl-matrix": "^2.4.0"
+    "gl-matrix": "^2.4.0",
+    "webgl-constants": "0.0.11"
   },
   "devDependencies": {
     "@types/gl-matrix": "^2.4.0",

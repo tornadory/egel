@@ -1,3 +1,10 @@
+// Vendor
+import {
+    GL_ARRAY_BUFFER,
+    GL_DYNAMIC_DRAW,
+    GL_STATIC_DRAW,
+} from 'webgl-constants';
+
 import * as Context from './Context';
 
 let gl: WebGLRenderingContext;
@@ -10,8 +17,8 @@ export function createBuffer(
     gl = Context.get();
 
     const buffer = gl.createBuffer();
-    const usage = isDynamic ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW;
-    const ArrayView = type === gl.ARRAY_BUFFER ? Float32Array : Uint16Array;
+    const usage = isDynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW;
+    const ArrayView = type === GL_ARRAY_BUFFER ? Float32Array : Uint16Array;
 
     gl.bindBuffer(type, buffer);
     gl.bufferData(type, new ArrayView(data), usage);

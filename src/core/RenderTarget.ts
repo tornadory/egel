@@ -1,3 +1,24 @@
+// Vendor
+import {
+    GL_CLAMP_TO_EDGE,
+    GL_COLOR_ATTACHMENT0,
+    GL_COLOR_BUFFER_BIT,
+    GL_DATA_UNSIGNED_BYTE,
+    GL_DEPTH_ATTACHMENT,
+    GL_DEPTH_BUFFER_BIT,
+    GL_DEPTH_COMPONENT16,
+    GL_FRAMEBUFFER,
+    GL_LINEAR,
+    GL_RENDERBUFFER,
+    GL_RGBA,
+    GL_SCISSOR_TEST,
+    GL_TEXTURE_2D,
+    GL_TEXTURE_MAG_FILTER,
+    GL_TEXTURE_MIN_FILTER,
+    GL_TEXTURE_WRAP_S,
+    GL_TEXTURE_WRAP_T,
+} from 'webgl-constants';
+
 // Camera
 import Camera from '../camera/Camera';
 import OrthographicCamera from '../camera/OrthographicCamera';
@@ -64,24 +85,24 @@ export default class RenderTarget {
         gl = Context.get();
 
         this.frameBuffer = gl.createFramebuffer();
-        gl.bindFramebuffer(gl.FRAMEBUFFER, this.frameBuffer);
+        gl.bindFramebuffer(GL_FRAMEBUFFER, this.frameBuffer);
 
         this.texture = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.width, this.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.bindTexture(GL_TEXTURE_2D, this.texture);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.width, this.height, 0, GL_RGBA, GL_DATA_UNSIGNED_BYTE, null);
 
         this.renderBuffer = gl.createRenderbuffer();
-        gl.bindRenderbuffer(gl.RENDERBUFFER, this.renderBuffer);
-        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, this.width, this.height);
-        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texture, 0);
-        gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, this.renderBuffer);
-        gl.bindTexture(gl.TEXTURE_2D, null);
-        gl.bindRenderbuffer(gl.RENDERBUFFER, null);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        gl.bindRenderbuffer(GL_RENDERBUFFER, this.renderBuffer);
+        gl.renderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, this.width, this.height);
+        gl.framebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this.texture, 0);
+        gl.framebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this.renderBuffer);
+        gl.bindTexture(GL_TEXTURE_2D, null);
+        gl.bindRenderbuffer(GL_RENDERBUFFER, null);
+        gl.bindFramebuffer(GL_FRAMEBUFFER, null);
     }
 
     public setClearColor(r = 0, g = 0, b = 0, a = 1) {
@@ -100,12 +121,12 @@ export default class RenderTarget {
             this.height = height * this.pixelRatio;
             this.ratio = this.width / this.height;
 
-            gl.bindTexture(gl.TEXTURE_2D, this.texture);
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.width, this.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-            gl.bindTexture(gl.TEXTURE_2D, null);
-            gl.bindRenderbuffer(gl.RENDERBUFFER, this.renderBuffer);
-            gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, this.width, this.height);
-            gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+            gl.bindTexture(GL_TEXTURE_2D, this.texture);
+            gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.width, this.height, 0, GL_RGBA, GL_DATA_UNSIGNED_BYTE, null);
+            gl.bindTexture(GL_TEXTURE_2D, null);
+            gl.bindRenderbuffer(GL_RENDERBUFFER, this.renderBuffer);
+            gl.renderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, this.width, this.height);
+            gl.bindRenderbuffer(GL_RENDERBUFFER, null);
 
             this.setViewport(0, 0, width, height);
         }
@@ -113,9 +134,9 @@ export default class RenderTarget {
 
     public setScissorTest(enable = false) {
         if (enable) {
-            gl.enable(gl.SCISSOR_TEST);
+            gl.enable(GL_SCISSOR_TEST);
         } else {
-            gl.disable(gl.SCISSOR_TEST);
+            gl.disable(GL_SCISSOR_TEST);
         }
     }
 
@@ -143,7 +164,7 @@ export default class RenderTarget {
             this.viewport.height,
         );
 
-        gl.bindFramebuffer(gl.FRAMEBUFFER, this.frameBuffer);
+        gl.bindFramebuffer(GL_FRAMEBUFFER, this.frameBuffer);
 
         if (this.autoClear) {
             gl.clearColor(
@@ -152,7 +173,7 @@ export default class RenderTarget {
                 this.clearColor.b,
                 this.clearColor.a,
             );
-            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
 
         // Update the scene
@@ -163,10 +184,10 @@ export default class RenderTarget {
             child.draw(camera);
         });
 
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        gl.bindTexture(gl.TEXTURE_2D, null);
+        gl.bindTexture(GL_TEXTURE_2D, this.texture);
+        gl.bindTexture(GL_TEXTURE_2D, null);
 
         // Reset
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        gl.bindFramebuffer(GL_FRAMEBUFFER, null);
     }
 }

@@ -1,3 +1,9 @@
+// Vendor
+import {
+    GL_CULL_FACE,
+    GL_DATA_UNSIGNED_SHORT,
+} from 'webgl-constants';
+
 // Camera
 import Camera from '../camera/Camera';
 import OrthographicCamera from '../camera/OrthographicCamera';
@@ -78,7 +84,7 @@ export default class Mesh extends Object3D {
 
         // Enable culling
         if (this.material.culling !== -1) {
-            gl.enable(gl.CULL_FACE);
+            gl.enable(GL_CULL_FACE);
             gl.cullFace(this.material.culling);
         }
 
@@ -95,7 +101,7 @@ export default class Mesh extends Object3D {
             gl.drawElements(
                 this.material.drawType,
                 this.geometry.attributes.aVertexIndex.numItems,
-                gl.UNSIGNED_SHORT,
+                GL_DATA_UNSIGNED_SHORT,
                 0,
             );
           } else {
@@ -107,7 +113,7 @@ export default class Mesh extends Object3D {
         }
 
         if (this.material.culling !== -1) {
-            gl.disable(gl.CULL_FACE);
+            gl.disable(GL_CULL_FACE);
         }
     }
 

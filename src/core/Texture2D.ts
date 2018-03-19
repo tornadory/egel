@@ -1,3 +1,17 @@
+// Vendor
+import {
+    GL_CLAMP_TO_EDGE,
+    GL_DATA_UNSIGNED_BYTE,
+    GL_NEAREST,
+    GL_RGBA,
+    GL_TEXTURE_2D,
+    GL_TEXTURE_MAG_FILTER,
+    GL_TEXTURE_MIN_FILTER,
+    GL_TEXTURE_WRAP_S,
+    GL_TEXTURE_WRAP_T,
+    GL_UNPACK_FLIP_Y_WEBGL,
+} from 'webgl-constants';
+
 // Core
 import * as Context from './Context';
 
@@ -30,10 +44,10 @@ export default class Texture2D {
         gl = Context.get();
 
         this.src = null;
-        this.magFilter = gl.NEAREST;
-        this.minFilter = gl.NEAREST;
-        this.wrapS = gl.CLAMP_TO_EDGE;
-        this.wrapT = gl.CLAMP_TO_EDGE;
+        this.magFilter = GL_NEAREST;
+        this.minFilter = GL_NEAREST;
+        this.wrapS = GL_CLAMP_TO_EDGE;
+        this.wrapT = GL_CLAMP_TO_EDGE;
 
         Object.assign(this, options);
 
@@ -41,13 +55,13 @@ export default class Texture2D {
 
         this.texture = gl.createTexture();
 
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, this.magFilter);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, this.minFilter);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, this.wrapS);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, this.wrapT);
-        gl.bindTexture(gl.TEXTURE_2D, null);
+        gl.bindTexture(GL_TEXTURE_2D, this.texture);
+        gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, canvas);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this.magFilter);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this.minFilter);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this.wrapS);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this.wrapT);
+        gl.bindTexture(GL_TEXTURE_2D, null);
 
         if (this.src) {
             this.load(this.src);
@@ -75,10 +89,10 @@ export default class Texture2D {
     }
 
     public update(image: HTMLCanvasElement | HTMLImageElement) {
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-        gl.bindTexture(gl.TEXTURE_2D, null);
+        gl.bindTexture(GL_TEXTURE_2D, this.texture);
+        gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, true);
+        gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, image);
+        gl.bindTexture(GL_TEXTURE_2D, null);
     }
 
     public dispose() {

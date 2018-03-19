@@ -29,7 +29,7 @@ const config = {
 			},
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!(gl-matrix)\/).*/,
+				exclude: /node_modules\/(?!(gl-matrix|webgl-constants)\/).*/,
 				loader: 'babel-loader?cacheDirectory=true',
 				options: {
 					presets: [

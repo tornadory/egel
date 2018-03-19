@@ -1,3 +1,12 @@
+// Vendor
+import {
+    GL_COMPILE_STATUS,
+    GL_DATA_FLOAT,
+    GL_FRAGMENT_SHADER,
+    GL_LINK_STATUS,
+    GL_VERTEX_SHADER,
+} from 'webgl-constants';
+
 // Core
 import * as Context from './Context';
 
@@ -47,7 +56,7 @@ export default class Program {
         gl.linkProgram(this.program);
         gl.validateProgram(this.program);
 
-        if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
+        if (!gl.getProgramParameter(this.program, GL_LINK_STATUS)) {
             const info = gl.getProgramInfoLog(this.program);
             console.warn(`Failed to initialise shaders: ${info}`);
         }
@@ -60,10 +69,10 @@ export default class Program {
 
         switch (type) {
             case 'vertex':
-                shader = gl.createShader(gl.VERTEX_SHADER);
+                shader = gl.createShader(GL_VERTEX_SHADER);
                 break;
             case 'fragment':
-                shader = gl.createShader(gl.FRAGMENT_SHADER);
+                shader = gl.createShader(GL_FRAGMENT_SHADER);
                 break;
             default:
                 break;
@@ -72,7 +81,7 @@ export default class Program {
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
 
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        if (!gl.getShaderParameter(shader, GL_COMPILE_STATUS)) {
             console.warn(`Failed to compile shader: ${gl.getShaderInfoLog(shader)}`);
             console.log(addLineNumbers(source));
             return false;
@@ -89,7 +98,7 @@ export default class Program {
       }
 
     public setAttributePointer(attributeName: string, itemSize: number) {
-        gl.vertexAttribPointer(this.attributeLocations[attributeName], itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(this.attributeLocations[attributeName], itemSize, GL_DATA_FLOAT, false, 0, 0);
     }
 
     public setUniformLocation(uniforms: object, uniformName: string) {
