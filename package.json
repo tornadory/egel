@@ -16,7 +16,8 @@
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
   "dependencies": {
-    "gl-matrix": "^2.4.0"
+    "gl-matrix": "^2.4.0",
+    "webgl-constants": "0.0.2"
   },
   "devDependencies": {
     "@types/gl-matrix": "^2.4.0",
