@@ -1,3 +1,23 @@
+// Vendor
+import {
+    GL_CLAMP_TO_EDGE,
+    GL_LINEAR,
+    GL_RGBA,
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
+    GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+    GL_TEXTURE_CUBE_MAP,
+    GL_TEXTURE_MAG_FILTER,
+    GL_TEXTURE_MIN_FILTER,
+    GL_TEXTURE_WRAP_S,
+    GL_TEXTURE_WRAP_T,
+    GL_UNPACK_FLIP_Y_WEBGL,
+    GL_DATA_UNSIGNED_BYTE,
+} from 'webgl-constants';
+
 // Core
 import * as Context from './Context';
 
@@ -31,10 +51,10 @@ export default class TextureCube {
         gl = Context.get();
 
         this.src = ['', '', '', '', '', ''];
-        this.magFilter = gl.LINEAR;
-        this.minFilter = gl.LINEAR;
-        this.wrapS = gl.CLAMP_TO_EDGE;
-        this.wrapT = gl.CLAMP_TO_EDGE;
+        this.magFilter = GL_LINEAR;
+        this.minFilter = GL_LINEAR;
+        this.wrapS = GL_CLAMP_TO_EDGE;
+        this.wrapT = GL_CLAMP_TO_EDGE;
 
         Object.assign(this, options);
 
@@ -75,30 +95,30 @@ export default class TextureCube {
     }
 
     public update(images: Array<HTMLCanvasElement | HTMLImageElement>) {
-        gl.bindTexture(gl.TEXTURE_CUBE_MAP, this.texture);
+        gl.bindTexture(GL_TEXTURE_CUBE_MAP, this.texture);
 
         const targets = [
-            gl.TEXTURE_CUBE_MAP_POSITIVE_X,
-            gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-            gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-            gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
-            gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
-            gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
+            GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+            GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
+            GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+            GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
+            GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+            GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
         ];
 
         for (let i = 0; i < 6; i += 1) {
             const image = images[i];
 
-            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+            gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, false);
 
-            gl.texImage2D(targets[i], 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+            gl.texImage2D(targets[i], 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, image);
 
-            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, this.magFilter);
-            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, this.minFilter);
-            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, this.wrapS);
-            gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, this.wrapT);
+            gl.texParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, this.magFilter);
+            gl.texParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, this.minFilter);
+            gl.texParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, this.wrapS);
+            gl.texParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, this.wrapT);
         }
 
-        gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+        gl.bindTexture(GL_TEXTURE_CUBE_MAP, null);
     }
 }

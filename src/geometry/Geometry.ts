@@ -3,6 +3,10 @@ import {
     vec2 as Vec2,
     vec3 as Vec3,
 } from 'gl-matrix';
+import {
+    GL_ARRAY_BUFFER,
+    GL_ELEMENT_ARRAY_BUFFER,
+} from 'webgl-constants';
 
 // Core
 import * as Context from '../core/Context';
@@ -43,29 +47,29 @@ export default class Geometry {
 
         // Vertex positions
         if (this.bufferVertices) {
-            this.addAttribute('aVertexPosition', gl.ARRAY_BUFFER, this.bufferVertices, 3);
+            this.addAttribute('aVertexPosition', GL_ARRAY_BUFFER, this.bufferVertices, 3);
             this.generateVertices();
         }
 
         // Vertex indices
         if (this.bufferIndices) {
-            this.addAttribute('aVertexIndex', gl.ELEMENT_ARRAY_BUFFER, this.bufferIndices, 1, false);
+            this.addAttribute('aVertexIndex', GL_ELEMENT_ARRAY_BUFFER, this.bufferIndices, 1, false);
             this.generateFaces();
         }
 
         // Vertex normals
         if (this.bufferNormals) {
-            this.addAttribute('aVertexNormal', gl.ARRAY_BUFFER, this.bufferNormals, 3);
+            this.addAttribute('aVertexNormal', GL_ARRAY_BUFFER, this.bufferNormals, 3);
         }
 
         // Vertex colors
         if (this.bufferColors) {
-            this.addAttribute('aVertexColor', gl.ARRAY_BUFFER, this.bufferColors, 3);
+            this.addAttribute('aVertexColor', GL_ARRAY_BUFFER, this.bufferColors, 3);
         }
 
         // Texture coordinates
         if (this.bufferUvs) {
-            this.addAttribute('aTextureCoord', gl.ARRAY_BUFFER, this.bufferUvs, 2);
+            this.addAttribute('aTextureCoord', GL_ARRAY_BUFFER, this.bufferUvs, 2);
             this.generateUvs();
         }
     }

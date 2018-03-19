@@ -1,3 +1,11 @@
+// Vendor
+import {
+    GL_COLOR_BUFFER_BIT,
+    GL_DEPTH_BUFFER_BIT,
+    GL_DEPTH_TEST,
+    GL_SCISSOR_TEST,
+} from 'webgl-constants';
+
 // Camera
 import Camera from '../camera/Camera';
 import OrthographicCamera from '../camera/OrthographicCamera';
@@ -131,7 +139,7 @@ export default class Renderer {
         };
 
         this.setClearColor();
-        gl.enable(gl.DEPTH_TEST);
+        gl.enable(GL_DEPTH_TEST);
     }
 
     public setClearColor(r = 0, g = 0, b = 0, a = 1) {
@@ -167,9 +175,9 @@ export default class Renderer {
 
     public setScissorTest(enable = false) {
         if (enable) {
-            gl.enable(gl.SCISSOR_TEST);
+            gl.enable(GL_SCISSOR_TEST);
         } else {
-            gl.disable(gl.SCISSOR_TEST);
+            gl.disable(GL_SCISSOR_TEST);
         }
     }
 
@@ -208,7 +216,7 @@ export default class Renderer {
         );
 
         if (this.autoClear) {
-            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
 
         // Update the scene

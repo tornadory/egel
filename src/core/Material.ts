@@ -5,12 +5,16 @@ import {
     vec3 as Vec3,
 } from 'gl-matrix';
 import {
+    GL_NONE,
+    GL_TEXTURE_2D,
+    GL_TEXTURE_CUBE_MAP,
     GL_TEXTURE0,
     GL_TEXTURE1,
     GL_TEXTURE2,
     GL_TEXTURE3,
     GL_TEXTURE4,
     GL_TEXTURE5,
+    GL_TRIANGLES,
 } from 'webgl-constants';
 
 // Camera
@@ -19,7 +23,6 @@ import PerspectiveCamera from '../camera/PerspectiveCamera';
 
 // Core
 import * as Context from './Context';
-import { CULL_NONE, DRAW_TRIANGLES } from './CoreConstants';
 import Program from './Program';
 
 // Geometry
@@ -59,8 +62,8 @@ export default class Material {
         this.name = '';
         this.vertexShader = '';
         this.fragmentShader = '';
-        this.drawType = DRAW_TRIANGLES;
-        this.culling = CULL_NONE;
+        this.drawType = GL_TRIANGLES;
+        this.culling = GL_NONE;
 
         Object.assign(this, options);
 
@@ -172,13 +175,13 @@ export default class Material {
                 case 't': {
                     gl.uniform1i(uniform.location, uniform.textureIndex);
                     gl.activeTexture(uniform.activeTexture);
-                    gl.bindTexture(gl.TEXTURE_2D, uniform.value);
+                    gl.bindTexture(GL_TEXTURE_2D, uniform.value);
                     break;
                 }
                 case 'tc': {
                     gl.uniform1i(uniform.location, uniform.textureIndex);
                     gl.activeTexture(uniform.activeTexture);
-                    gl.bindTexture(gl.TEXTURE_CUBE_MAP, uniform.value);
+                    gl.bindTexture(GL_TEXTURE_CUBE_MAP, uniform.value);
                     break;
                 }
                 case 'i': {
