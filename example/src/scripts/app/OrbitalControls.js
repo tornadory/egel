@@ -1,5 +1,4 @@
 import { // eslint-disable-line
-    MathUtilities,
     Vec3,
 } from 'egel';
 
@@ -12,6 +11,10 @@ const MODE_PAN = 'MODE_PAN';
 const HALF_PI = 1.5707963267948966;
 const EPSILON = 0.000001;
 const UP = Vec3.fromValues(0, 1, 0);
+
+function clamp(value, min, max) {
+    return Math.max(Math.min(value, max), min);
+}
 
 export default class OrbitalControls {
     constructor(camera, element) {
@@ -75,7 +78,7 @@ export default class OrbitalControls {
         const speed = 3;
 
         this.radius += value * speed;
-        this.radius = MathUtilities.clamp(this.radius, this.zoomMin, this.zoomMax);
+        this.radius = clamp(this.radius, this.zoomMin, this.zoomMax);
 
         this.update();
     }
@@ -133,7 +136,7 @@ export default class OrbitalControls {
                     const y = event.pageX / this.width;
                     this.rotationX = this.offsetX + -((this.startX - x) * this.rotationSpeed);
                     this.rotationY = this.offsetY + ((this.startY - y) * this.rotationSpeed);
-                    this.rotationX = MathUtilities.clamp(this.rotationX, -HALF_PI, HALF_PI);
+                    this.rotationX = clamp(this.rotationX, -HALF_PI, HALF_PI);
                     break;
                 }
             }
