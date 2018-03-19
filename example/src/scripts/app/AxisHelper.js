@@ -4,7 +4,7 @@ import { // eslint-disable-line
     Material,
     Mesh,
     Geometry,
-} from 'egel';
+} from 'egel.min';
 
 let gl;
 

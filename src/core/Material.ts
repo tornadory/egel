@@ -4,6 +4,14 @@ import {
     mat4 as Mat4,
     vec3 as Vec3,
 } from 'gl-matrix';
+import {
+    GL_TEXTURE0,
+    GL_TEXTURE1,
+    GL_TEXTURE2,
+    GL_TEXTURE3,
+    GL_TEXTURE4,
+    GL_TEXTURE5,
+} from 'webgl-constants';
 
 // Camera
 import OrthographicCamera from '../camera/OrthographicCamera';
@@ -68,12 +76,12 @@ export default class Material {
         this.customUniforms = this.uniforms || {};
 
         const textureIndices = [
-            gl.TEXTURE0,
-            gl.TEXTURE1,
-            gl.TEXTURE2,
-            gl.TEXTURE3,
-            gl.TEXTURE4,
-            gl.TEXTURE5,
+            GL_TEXTURE0,
+            GL_TEXTURE1,
+            GL_TEXTURE2,
+            GL_TEXTURE3,
+            GL_TEXTURE4,
+            GL_TEXTURE5,
         ];
 
         Object.keys(this.uniforms).forEach((uniformName, i) => {
