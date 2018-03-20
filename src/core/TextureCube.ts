@@ -106,7 +106,7 @@ export default class TextureCube {
             GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
         ];
 
-        for (let i = 0; i < 6; i += 1) {
+        for (let i = 0; i < this.src.length; i += 1) {
             const image = images[i];
 
             gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, false);
