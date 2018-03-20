@@ -5,7 +5,6 @@ import {
     vec3 as Vec3,
 } from 'gl-matrix';
 import {
-    GL_NONE,
     GL_TEXTURE_2D,
     GL_TEXTURE_CUBE_MAP,
     GL_TEXTURE0,
@@ -63,7 +62,7 @@ export default class Material {
         this.vertexShader = '';
         this.fragmentShader = '';
         this.drawType = GL_TRIANGLES;
-        this.culling = GL_NONE;
+        this.culling = -1;
 
         Object.assign(this, options);
 

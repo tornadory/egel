@@ -10,17 +10,10 @@ import {
 // Core
 import * as Context from './Context';
 
+// Utilities
+import { addLineNumbers } from '../utilities/Logging';
+
 let gl: WebGLRenderingContext;
-
-const addLineNumbers = (str) => {
-    const lines = str.split('\n');
-
-    for (let i = 0; i < lines.length; i += 1) {
-        lines[i] = `${(i + 1)}: ${lines[i]}`;
-    }
-
-    return lines.join('\n');
-};
 
 export default class Program {
     public program: WebGLProgram;
