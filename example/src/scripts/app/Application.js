@@ -70,22 +70,16 @@ export default class Application {
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
 				console.log(data);
-			})
-			.catch((error) => {
-				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
-			});
 
-		new OBJLoader('public/assets/obj/bunny.obj')
-			.then((data) => {
 				const geometry = new Geometry(
-					data.vertices,
-					data.indices,
-					data.normals,
-					data.uvs,
+					data.meshes.vertices,
+					data.meshes.indices,
+					data.meshes.normals,
+					data.meshes.uvs,
 				);
 
 				const material = new Material({
-					name: 'BunnyMesh',
+					name: 'DamagedHelmetMesh',
 					vertexShader: BunnyVertexShader,
 					fragmentShader: BunnyFragmentShader,
 					uniforms: {
@@ -104,6 +98,36 @@ export default class Application {
 			.catch((error) => {
 				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
 			});
+
+		// new OBJLoader('public/assets/obj/bunny.obj')
+		// 	.then((data) => {
+		// 		const geometry = new Geometry(
+		// 			data.vertices,
+		// 			data.indices,
+		// 			data.normals,
+		// 			data.uvs,
+		// 		);
+
+		// 		const material = new Material({
+		// 			name: 'BunnyMesh',
+		// 			vertexShader: BunnyVertexShader,
+		// 			fragmentShader: BunnyFragmentShader,
+		// 			uniforms: {
+		// 				uDiffuse: {
+		// 					type: '3f',
+		// 					value: Vec3.fromValues(0.5, 0.37, 0.5),
+		// 				},
+		// 			},
+		// 		});
+
+		// 		const mesh = new Mesh(geometry, material);
+		// 		Vec3.set(mesh.scale, 0.5, 0.5, 0.5);
+
+		// 		scene.add(mesh);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+		// 	});
 
 		this.onResize();
 

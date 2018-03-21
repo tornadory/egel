@@ -12,15 +12,11 @@ function GLTFParser(filename, data) {
 	const { materials } = parsedData;
 	const { meshes } = parsedData;
 	const { nodes } = parsedData;
-	const { samplers } = parsedData;
-	const { scene } = parsedData;
-	const { scenes } = parsedData;
 	const { textures } = parsedData;
 
 	const fileRoot = `${document.location.protocol}//${document.location.host}`;
 	const filePath = filename.substring(0, filename.lastIndexOf('/'));
 
-	const bufferByteLength = buffers[0].byteLength;
 	const meshAttributesData = meshes[0].primitives[0].attributes;
 
 	const textureList = textures.map((data) => {
@@ -34,8 +30,6 @@ function GLTFParser(filename, data) {
 	const meshDataNormalIndex = meshAttributesData.NORMAL;
 	const meshDataPositionIndex = meshAttributesData.POSITION;
 	const meshDataTexcoordIndex = meshAttributesData.TEXCOORD_0;
-
-	console.log(materials);
 
 	// Texture data
 	const textureDataBaseIndex = materials[0].pbrMetallicRoughness.baseColorTexture.index;
@@ -75,7 +69,6 @@ function GLTFParser(filename, data) {
 
 	const result = Promise.all(meshList.map(bin => bin))
 		.then((geometryData) => {
-			console.log(textureList);
 			const meshData = {
 				textures: {
 					baseColorTexture: textureList[textureDataBaseIndex],
@@ -85,6 +78,7 @@ function GLTFParser(filename, data) {
 					normalTexture: textureList[textureDataNormalIndex],
 				},
 				meshes: {
+					rotation: nodes[0].rotation,
 					vertices: geometryData[meshDataPositionIndex],
 					normals: geometryData[meshDataNormalIndex],
 					indices: geometryData[meshDataIndicesIndex],
