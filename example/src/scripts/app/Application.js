@@ -17,8 +17,10 @@ import OBJLoader from './OBJLoader';
 import OrbitalControls from './OrbitalControls';
 
 // Shaders
-import BunnyVertexShader from './shaders/BunnyVertexShader.vert';
-import BunnyFragmentShader from './shaders/BunnyFragmentShader.frag';
+// import BunnyVertexShader from './shaders/BunnyVertexShader.vert';
+// import BunnyFragmentShader from './shaders/BunnyFragmentShader.frag';
+import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert';
+import DamagedHelmetFragmentShader from './shaders/DamagedHelmetFragmentShader.frag';
 
 // Stats
 const stats = new Stats();
@@ -69,8 +71,6 @@ export default class Application {
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
-				console.log(data);
-
 				const geometry = new Geometry(
 					data.meshes.vertices,
 					data.meshes.indices,
@@ -80,19 +80,37 @@ export default class Application {
 
 				const material = new Material({
 					name: 'DamagedHelmetMesh',
-					vertexShader: BunnyVertexShader,
-					fragmentShader: BunnyFragmentShader,
+					vertexShader: DamagedHelmetVertexShader,
+					fragmentShader: DamagedHelmetFragmentShader,
 					uniforms: {
 						uDiffuse: {
 							type: '3f',
 							value: Vec3.fromValues(0.5, 0.37, 0.5),
 						},
+						uBaseColorTexture: {
+							type: 't',
+							value: data.textures.baseColorTexture.texture,
+						},
+						uEmissiveTexture: {
+							type: 't',
+							value: data.textures.emissiveTexture.texture,
+						},
+						uMetallicRoughnessTexture: {
+							type: 't',
+							value: data.textures.metallicRoughnessTexture.texture,
+						},
+						uNormalTexture: {
+							type: 't',
+							value: data.textures.normalTexture.texture,
+						},
+						uOcclusionTexture: {
+							type: 't',
+							value: data.textures.occlusionTexture.texture,
+						},
 					},
 				});
 
 				const mesh = new Mesh(geometry, material);
-				Vec3.set(mesh.scale, 0.5, 0.5, 0.5);
-
 				scene.add(mesh);
 			})
 			.catch((error) => {
