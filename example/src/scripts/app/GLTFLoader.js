@@ -29,10 +29,20 @@ function GLTFParser(filename, data) {
 		});
 	});
 
-	const meshDataIndices = meshes[0].primitives[0].indices;
-	const meshDataNormal = meshAttributesData.NORMAL;
-	const meshDataPosition = meshAttributesData.POSITION;
-	const meshDataTexcoord = meshAttributesData.TEXCOORD_0;
+	// Geometry data
+	const meshDataIndicesIndex = meshes[0].primitives[0].indices;
+	const meshDataNormalIndex = meshAttributesData.NORMAL;
+	const meshDataPositionIndex = meshAttributesData.POSITION;
+	const meshDataTexcoordIndex = meshAttributesData.TEXCOORD_0;
+
+	console.log(materials);
+
+	// Texture data
+	const textureDataBaseIndex = materials[0].pbrMetallicRoughness.baseColorTexture.index;
+	const textureDataNormalIndex = materials[0].normalTexture.index;
+	const textureDataMetallicRoughnessIndex = materials[0].pbrMetallicRoughness.metallicRoughnessTexture.index;
+	const textureDataEmissiveIndex = materials[0].emissiveTexture.index;
+	const textureDataOcclusionIndex = materials[0].occlusionTexture.index;
 
 	const meshList = accessors.map((accessor, i) => {
 		// Load binary
@@ -65,9 +75,21 @@ function GLTFParser(filename, data) {
 
 	const result = Promise.all(meshList.map(bin => bin))
 		.then((geometryData) => {
+			console.log(textureList);
 			const meshData = {
-				textures: textureList,
-				meshes: geometryData,
+				textures: {
+					baseColorTexture: textureList[textureDataBaseIndex],
+					metallicRoughnessTexture: textureList[textureDataMetallicRoughnessIndex],
+					emissiveTexture: textureList[textureDataEmissiveIndex],
+					occlusionTexture: textureList[textureDataOcclusionIndex],
+					normalTexture: textureList[textureDataNormalIndex],
+				},
+				meshes: {
+					vertices: geometryData[meshDataPositionIndex],
+					normals: geometryData[meshDataNormalIndex],
+					indices: geometryData[meshDataIndicesIndex],
+					uvs: geometryData[meshDataTexcoordIndex],
+				},
 			};
 
 			return meshData;
@@ -79,10 +101,6 @@ function GLTFParser(filename, data) {
 	return result.then((resultData) => {
 		return resultData;
 	});
-
-	// const texture0 = new Texture2D({
-	// 	src: 'public/assets/textures/example.png',
-	// });
 }
 
 export default function GLTFLoader(filename) {
