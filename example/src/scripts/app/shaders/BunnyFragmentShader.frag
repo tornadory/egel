@@ -1,8 +1,5 @@
 precision highp float;
 
-// Uniforms
-uniform sampler2D uTexture0;
-
 // Position
 varying vec3 vPosition;
 varying vec4 vWorldPosition;
@@ -32,13 +29,13 @@ vec3 CalculatePointLight(
 
     // diffuse shading
     float diff = max(dot(normal, lightDirection), 0.0);
-    
+
     // specular shading
     vec3 reflectDirection = reflect(-lightDirection, normal);
 
     // Fix the spec from showing on the backside by multiplying it by the lambert term
     float spec = diff * pow(max(dot(lightDirection, reflectDirection), 0.0), 0.25);
-    
+
     // attenuation
     float constant = 1.0;
     float linear = 0.09;
@@ -59,7 +56,6 @@ vec3 CalculatePointLight(
 
 void main(void) {
     vec3 color = vDiffuse;
-    color = texture2D(uTexture0, vTextureCoord).rgb;
 
     #ifdef HAS_VERTEX_NORMALS
     vec3 normal = normalize(vNormal);
@@ -75,4 +71,4 @@ void main(void) {
     );
 
     gl_FragColor = vec4(color, 1.0);
-}	
+}

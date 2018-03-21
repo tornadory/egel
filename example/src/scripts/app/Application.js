@@ -7,11 +7,11 @@ import { // eslint-disable-line
 	Renderer,
 	Scene,
 	PerspectiveCamera,
-	Texture2D,
 	Vec3,
 } from 'egel';
 
 import AxisHelper from './AxisHelper';
+import GLTFLoader from './GLTFLoader';
 import GridHelper from './GridHelper';
 import OBJLoader from './OBJLoader';
 import OrbitalControls from './OrbitalControls';
@@ -67,11 +67,15 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		const texture0 = new Texture2D({
-			src: 'public/assets/textures/example.png',
-		});
+		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((error) => {
+				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+			});
 
-		new OBJLoader('public/assets/models/bunny.obj')
+		new OBJLoader('public/assets/obj/bunny.obj')
 			.then((data) => {
 				const geometry = new Geometry(
 					data.vertices,
@@ -88,10 +92,6 @@ export default class Application {
 						uDiffuse: {
 							type: '3f',
 							value: Vec3.fromValues(0.5, 0.37, 0.5),
-						},
-						uTexture0: {
-							type: 't',
-							value: texture0.texture,
 						},
 					},
 				});
