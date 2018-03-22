@@ -6,6 +6,10 @@ import { // eslint-disable-line
     Geometry,
 } from 'egel';
 
+import {
+	GL_LINES,
+} from 'webgl-constants';
+
 let gl;
 
 const customVertexShader = `
@@ -99,7 +103,7 @@ export default class AxisHelper extends Mesh {
         }
 
         gl.drawArrays(
-            gl.LINES,
+            GL_LINES,
             0,
             this.geometry.attributes.aVertexPosition.numItems,
         );
