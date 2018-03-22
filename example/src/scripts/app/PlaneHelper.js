@@ -239,11 +239,12 @@ export default class PlaneHelper extends Mesh {
             this.bindIndexBuffer();
         }
 
-        gl.drawArrays(
-            gl.TRIANGLES,
-            0,
-            this.geometry.attributes.aVertexPosition.numItems,
-        );
+		gl.drawElements(
+			this.material.drawType,
+			this.geometry.attributes.aVertexIndex.numItems,
+			gl.UNSIGNED_SHORT,
+			0,
+		);
 
         if (Capabilities.extensions.vertexArrayObjectExtension) {
             this.vertexArrayObject.unbind();
