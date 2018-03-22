@@ -74,8 +74,8 @@ export default class Application {
 		this.controls.update();
 
 		// Geometry
-		this.planeMesh = new PlaneMesh(5, 5, 10, 10);
-		scene.add(this.planeMesh);
+		// this.planeMesh = new PlaneMesh(5, 5, 10, 10);
+		// scene.add(this.planeMesh);
 
 		// Helpers
 		this.gridHelper = new GridHelper(10);
@@ -84,9 +84,9 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		this.planeMeshNormalHelper = new NormalHelper(this.planeMesh, 0.25);
-		this.planeMeshNormalHelper.setParent(this.planeMesh);
-		scene.add(this.planeMeshNormalHelper);
+		// this.planeMeshNormalHelper = new NormalHelper(this.planeMesh, 0.25);
+		// this.planeMeshNormalHelper.setParent(this.planeMesh);
+		// scene.add(this.planeMeshNormalHelper);
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
@@ -135,8 +135,12 @@ export default class Application {
 				// Vec3.transformQuat(meshRotation, meshRotation, quatFromRotation);
 				// Vec3.set(mesh.rotation, ...meshRotation);
 				Vec3.set(mesh.rotation, -Math.PI / 2, Math.PI, Math.PI / 2);
-				Vec3.set(mesh.position, -2.0, 0.5, 0.0);
+				Vec3.set(mesh.position, 0.0, 0.5, 0.0);
 				scene.add(mesh);
+
+				this.meshNormalHelper = new NormalHelper(mesh, 0.1);
+				this.meshNormalHelper.setParent(mesh);
+				scene.add(this.meshNormalHelper);
 			})
 			.catch((error) => {
 				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
