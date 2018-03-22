@@ -139,17 +139,17 @@ class PlaneGeometry extends Geometry {
 				uvs = uvs.concat([u + spacerU, v]);
 				uvs = uvs.concat([u + spacerU, v + spacerV]);
 				uvs = uvs.concat([u, v + spacerV]);
+
+				indices.push(index * 4 + 0);
+				indices.push(index * 4 + 1);
+				indices.push(index * 4 + 2);
+				indices.push(index * 4 + 0);
+				indices.push(index * 4 + 2);
+				indices.push(index * 4 + 3);
+
+				index += 1;
 			}
 		}
-
-		indices.push(index * 4 + 0);
-        indices.push(index * 4 + 1);
-        indices.push(index * 4 + 2);
-        indices.push(index * 4 + 0);
-        indices.push(index * 4 + 2);
-        indices.push(index * 4 + 3);
-
-		index += 1;
 
 		gl = Context.get();
 
@@ -177,7 +177,7 @@ export default class PlaneMesh extends Mesh {
         super(
             new PlaneGeometry(width, height, subdivisionsX, subdivisionsY),
             new Material({
-                name: 'PlaneHelper',
+                name: 'PlaneMesh',
                 vertexShader,
 				fragmentShader,
 				uniforms: {

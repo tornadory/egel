@@ -13,69 +13,63 @@ import {
 let gl;
 
 const customVertexShader = `
-    attribute vec3 aVertexPosition;
-    attribute vec3 aVertexColor;
+	attribute vec3 aVertexPosition;
 
-    uniform mat4 uProjectionMatrix;
-    uniform mat4 uModelViewMatrix;
+	uniform mat4 uProjectionMatrix;
+	uniform mat4 uModelViewMatrix;
+	uniform mat3 uNormalMatrix;
 
-    varying vec3 vColor;
-
-    void main(void) {
-        vColor = aVertexColor;
-
-        gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+	void main(void) {
+		gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
 	}
 `;
 
 const customFragmentShader = `
     precision highp float;
 
-    varying vec3 vColor;
-
 	void main(void) {
-	    gl_FragColor = vec4(vColor, 1.0);
+	    gl_FragColor = vec4(1.0);
 	}
 `;
 
-class AxisGeometry extends Geometry {
-    constructor(size) {
-        let vertices = [];
+class NormalGeometry extends Geometry {
+    constructor(mesh, size = 0.5) {
+		let vertices = [];
 
-        // X-axis
-        vertices = vertices.concat([0, 0, 0, size, 0, 0]);
+		const sx = mesh.scale[0];
+		const sy = mesh.scale[1];
+		const sz = mesh.scale[2];
+		const length = mesh.geometry.bufferNormals.length / 3;
 
-        // Y-axis
-        vertices = vertices.concat([0, 0, 0, 0, size, 0]);
+		for (let i = 0; i < length; i += 1) {
+			const i3 = i * 3;
+			const v0x = sx * mesh.geometry.bufferVertices[i3];
+			const v0y = sy * mesh.geometry.bufferVertices[i3 + 1];
+			const v0z = sz * mesh.geometry.bufferVertices[i3 + 2];
+			const nx = mesh.geometry.bufferNormals[i3];
+			const ny = mesh.geometry.bufferNormals[i3 + 1];
+			const nz = mesh.geometry.bufferNormals[i3 + 2];
+			const v1x = v0x + size * nx;
+			const v1y = v0y + size * ny;
+			const v1z = v0z + size * nz;
+			vertices = vertices.concat([v0x, v0y, v0z, v1x, v1y, v1z]);
+		}
 
-        // Z-axis
-        vertices = vertices.concat([0, 0, 0, 0, 0, size]);
+		gl = Context.get();
 
-        // Colors
-        const colors = new Float32Array([
-			1, 0, 0,
-			1, 0, 0,
-			0, 1, 0,
-			0, 1, 0,
-			0, 0, 1,
-			0, 0, 1,
-        ]);
-
-        gl = Context.get();
-
-        super(new Float32Array(vertices), undefined, undefined, undefined, colors);
+		super(new Float32Array(vertices));
       }
 }
 
-export default class AxisHelper extends Mesh {
-    constructor(size = 1) {
+export default class NormalHelper extends Mesh {
+    constructor(mesh, size = 1) {
         const vertexShader = customVertexShader;
         const fragmentShader = customFragmentShader;
 
         super(
-            new AxisGeometry(size),
+            new NormalGeometry(mesh, size),
             new Material({
-                name: 'AxisHelper',
+                name: 'NormalHelper',
                 vertexShader,
                 fragmentShader,
             }),
