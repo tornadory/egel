@@ -4,6 +4,10 @@ import {
     vec3 as Vec3,
 } from 'gl-matrix';
 
+export function isPowerOfTwo(value) {
+	return !(value & (value - 1)) && (!!value);
+}
+
 export function lookAt(eye: Vec3, target: Vec3, up: Vec3) {
     const quatOut = Quat.create();
     const x = Vec3.create();

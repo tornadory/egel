@@ -19,11 +19,9 @@ function GLTFParser(filename, data) {
 
 	const meshAttributesData = meshes[0].primitives[0].attributes;
 
-	const textureList = textures.map((data) => {
-		return new Texture2D({
-			src: `${fileRoot}/${filePath}/${images[data.source].uri}`,
-		});
-	});
+	const textureList = textures.map(textureData => new Texture2D({
+		src: `${fileRoot}/${filePath}/${images[textureData.source].uri}`,
+	}));
 
 	// Geometry data
 	const meshDataIndicesIndex = meshes[0].primitives[0].indices;

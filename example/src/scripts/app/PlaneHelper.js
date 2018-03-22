@@ -164,6 +164,7 @@ export default class PlaneHelper extends Mesh {
 
 		const uvDebugTexture = new Texture2D({
 			src: 'public/assets/textures/UV_debug.jpg',
+			generateMipmap: true,
 		});
 
         super(

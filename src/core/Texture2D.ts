@@ -18,6 +18,9 @@ import * as Context from './Context';
 // Loaders
 import ImageLoader from '../loaders/ImageLoader';
 
+// Math
+import { isPowerOfTwo } from '../math/MathUtilities';
+
 // Utilities
 import { createCanvas } from '../utilities/Canvas';
 
@@ -29,6 +32,7 @@ interface Options {
     minFilter?: number;
     wrapS?: number;
     wrapT?: number;
+    generateMipmap?: boolean;
 }
 
 export default class Texture2D {
@@ -37,6 +41,7 @@ export default class Texture2D {
     public minFilter: number;
     public wrapS: number;
     public wrapT: number;
+    public generateMipmap?: boolean;
     public texture: WebGLTexture;
     public image: HTMLImageElement | HTMLCanvasElement;
 
@@ -48,6 +53,7 @@ export default class Texture2D {
         this.minFilter = GL_NEAREST;
         this.wrapS = GL_CLAMP_TO_EDGE;
         this.wrapT = GL_CLAMP_TO_EDGE;
+        this.generateMipmap = false;
 
         Object.assign(this, options);
 
@@ -92,6 +98,11 @@ export default class Texture2D {
         gl.bindTexture(GL_TEXTURE_2D, this.texture);
         gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, true);
         gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, image);
+
+        if (this.generateMipmap && isPowerOfTwo(this.texture)) {
+            gl.generateMipmap(gl.TEXTURE_2D);
+        }
+
         gl.bindTexture(GL_TEXTURE_2D, null);
     }
 
