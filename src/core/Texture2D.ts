@@ -10,6 +10,8 @@ import {
     GL_TEXTURE_WRAP_S,
     GL_TEXTURE_WRAP_T,
     GL_UNPACK_FLIP_Y_WEBGL,
+    GL_LINEAR,
+    GL_LINEAR_MIPMAP_LINEAR,
 } from 'webgl-constants';
 
 // Core
@@ -63,10 +65,6 @@ export default class Texture2D {
 
         gl.bindTexture(GL_TEXTURE_2D, this.texture);
         gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, canvas);
-        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this.magFilter);
-        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this.minFilter);
-        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this.wrapS);
-        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this.wrapT);
         gl.bindTexture(GL_TEXTURE_2D, null);
 
         if (this.src) {
@@ -102,6 +100,11 @@ export default class Texture2D {
         if (this.generateMipmap && isPowerOfTwo(this.texture)) {
             gl.generateMipmap(gl.TEXTURE_2D);
         }
+
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this.magFilter);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this.minFilter);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this.wrapS);
+        gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this.wrapT);
 
         gl.bindTexture(GL_TEXTURE_2D, null);
     }

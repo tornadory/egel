@@ -47,6 +47,7 @@ const config = {
 			{
 				test: /\.js$/,
 				include: srcPath,
+				exclude: /node_modules\/(?!(webgl-constants)\/).*/,
 				loader: 'babel-loader?cacheDirectory=true',
 				options: {
 					presets: [

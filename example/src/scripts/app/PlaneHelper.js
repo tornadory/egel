@@ -8,6 +8,11 @@ import { // eslint-disable-line
 	Texture2D,
 } from 'egel';
 
+import {
+	GL_LINEAR,
+	GL_LINEAR_MIPMAP_LINEAR,
+} from 'webgl-constants';
+
 let gl;
 
 const customVertexShader = `
@@ -163,8 +168,10 @@ export default class PlaneHelper extends Mesh {
         const fragmentShader = customFragmentShader;
 
 		const uvDebugTexture = new Texture2D({
-			src: 'public/assets/textures/UV_debug.jpg',
+			src: 'public/assets/textures/debug/UV_debug.jpg',
 			generateMipmap: true,
+			magFilter: GL_LINEAR,
+			minFilter: GL_LINEAR_MIPMAP_LINEAR,
 		});
 
         super(
