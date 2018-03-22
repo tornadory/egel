@@ -162,7 +162,7 @@ class PlaneGeometry extends Geometry {
     }
 }
 
-export default class PlaneHelper extends Mesh {
+export default class PlaneMesh extends Mesh {
     constructor(width = 5, height = 5, subdivisionsX = 1, subdivisionsY = 1) {
         const vertexShader = customVertexShader;
         const fragmentShader = customFragmentShader;

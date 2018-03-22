@@ -11,12 +11,19 @@ import { // eslint-disable-line
 	Quat,
 } from 'egel';
 
-import AxisHelper from './AxisHelper';
-import GLTFLoader from './GLTFLoader';
-import GridHelper from './GridHelper';
-import OBJLoader from './OBJLoader';
-import OrbitalControls from './OrbitalControls';
-import PlaneHelper from './PlaneHelper';
+// Controls
+import OrbitalControls from './controls/OrbitalControls';
+
+// Geometry
+import PlaneMesh from './geometry/PlaneMesh';
+
+// Helpers
+import AxisHelper from './helpers/AxisHelper';
+import GridHelper from './helpers/GridHelper';
+
+// Loaders
+import GLTFLoader from './loaders/GLTFLoader';
+// import OBJLoader from './loaders/OBJLoader';
 
 // Shaders
 // import BunnyVertexShader from './shaders/BunnyVertexShader.vert';
@@ -71,8 +78,8 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		this.planeHelper = new PlaneHelper();
-		scene.add(this.planeHelper);
+		this.planeMesh = new PlaneMesh();
+		scene.add(this.planeMesh);
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
