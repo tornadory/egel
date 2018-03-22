@@ -3,6 +3,12 @@ import { // eslint-disable-line
 	Texture2D,
 } from 'egel';
 
+import {
+	GL_CLAMP_TO_EDGE,
+	GL_LINEAR,
+	GL_REPEAT,
+} from 'webgl-constants';
+
 function GLTFParser(filename, data) {
 	const parsedData = JSON.parse(data);
 	const { accessors } = parsedData;
@@ -21,6 +27,12 @@ function GLTFParser(filename, data) {
 
 	const textureList = textures.map(textureData => new Texture2D({
 		src: `${fileRoot}/${filePath}/${images[textureData.source].uri}`,
+		magFilter: GL_LINEAR,
+		minFilter: GL_LINEAR,
+		wrapS: GL_REPEAT,
+		wrapT: GL_REPEAT,
+		generateMipmap: true,
+		flipY: false,
 	}));
 
 	// Geometry data

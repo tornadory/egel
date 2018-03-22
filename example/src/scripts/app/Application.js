@@ -138,9 +138,9 @@ export default class Application {
 				Vec3.set(mesh.position, 0.0, 0.5, 0.0);
 				scene.add(mesh);
 
-				this.meshNormalHelper = new NormalHelper(mesh, 0.1);
-				this.meshNormalHelper.setParent(mesh);
-				scene.add(this.meshNormalHelper);
+				// this.meshNormalHelper = new NormalHelper(mesh, 0.1);
+				// this.meshNormalHelper.setParent(mesh);
+				// scene.add(this.meshNormalHelper);
 			})
 			.catch((error) => {
 				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console

@@ -35,6 +35,7 @@ interface Options {
     wrapS?: number;
     wrapT?: number;
     generateMipmap?: boolean;
+    flipY?: boolean;
 }
 
 export default class Texture2D {
@@ -44,6 +45,7 @@ export default class Texture2D {
     public wrapS: number;
     public wrapT: number;
     public generateMipmap?: boolean;
+    public flipY: boolean;
     public texture: WebGLTexture;
     public image: HTMLImageElement | HTMLCanvasElement;
 
@@ -56,6 +58,7 @@ export default class Texture2D {
         this.wrapS = GL_CLAMP_TO_EDGE;
         this.wrapT = GL_CLAMP_TO_EDGE;
         this.generateMipmap = false;
+        this.flipY = false;
 
         Object.assign(this, options);
 
@@ -94,7 +97,7 @@ export default class Texture2D {
 
     public update(image: HTMLCanvasElement | HTMLImageElement) {
         gl.bindTexture(GL_TEXTURE_2D, this.texture);
-        gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, true);
+        gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, this.flipY);
         gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, image);
 
         if (this.generateMipmap && isPowerOfTwo(this.texture)) {
