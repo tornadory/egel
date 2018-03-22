@@ -5,6 +5,7 @@ import { // eslint-disable-line
     Mesh,
 	Geometry,
 	Vec3,
+	Texture2D,
 } from 'egel';
 
 let gl;
@@ -64,6 +65,9 @@ const customVertexShader = `
 const customFragmentShader = `
 	precision highp float;
 
+	// Uniforms
+	uniform sampler2D uDebugTexture;
+
 	// Position
 	varying vec3 vPosition;
 	varying vec4 vWorldPosition;
@@ -81,58 +85,13 @@ const customFragmentShader = `
 	varying vec2 vTextureCoord;
 	#endif
 
-	vec3 CalculatePointLight(
-		vec3 lightPosition,
-		vec3 ambientColor,
-		float ambientIntensity,
-		vec3 specularColor,
-		vec3 specularIntensity,
-		vec3 normal
-	) {
-		vec3 lightDirection = normalize(lightPosition - vWorldPosition.xyz);
-
-		// diffuse shading
-		float diff = max(dot(normal, lightDirection), 0.0);
-
-		// specular shading
-		vec3 reflectDirection = reflect(-lightDirection, normal);
-
-		// Fix the spec from showing on the backside by multiplying it by the lambert term
-		float spec = diff * pow(max(dot(lightDirection, reflectDirection), 0.0), 0.25);
-
-		// attenuation
-		float constant = 1.0;
-		float linear = 0.09;
-		float quadratic = 0.032;
-
-		float dist = length(lightPosition);
-		float attenuation = 1.0 / (constant + linear * dist + quadratic * (dist * dist));
-
-		// combine results
-		vec3 ambient = (ambientColor * ambientIntensity) * vDiffuse;
-		vec3 diffuse = diff * vDiffuse;
-		vec3 specular = specularColor * spec * specularIntensity;
-		ambient *= attenuation;
-		diffuse *= attenuation;
-		specular *= attenuation;
-		return (ambient + diffuse + specular);
-	}
-
 	void main(void) {
 		vec3 color = vDiffuse;
+		color = texture2D(uDebugTexture, vTextureCoord).rgb;
 
 		#ifdef HAS_VERTEX_NORMALS
 		vec3 normal = normalize(vNormal);
 		#endif
-
-		color += CalculatePointLight(
-			vec3(0.5, 1.0, 2.0), // lightPosition
-			vec3(1.0, 0.73, 0.5), // ambientColor
-			0.5, // ambientIntensity
-			vec3(0.25), // specularColor
-			vec3(1), // specularIntensity
-			normal
-		);
 
 		gl_FragColor = vec4(color, 1.0);
 	}
@@ -203,6 +162,10 @@ export default class PlaneHelper extends Mesh {
         const vertexShader = customVertexShader;
         const fragmentShader = customFragmentShader;
 
+		const uvDebugTexture = new Texture2D({
+			src: 'public/assets/textures/UV_debug.jpg',
+		});
+
         super(
             new PlaneGeometry(width, height, subdivisionsX, subdivisionsY),
             new Material({
@@ -213,6 +176,10 @@ export default class PlaneHelper extends Mesh {
 					uDiffuse: {
 						type: '3f',
 						value: Vec3.fromValues(0.5, 0.37, 0.5),
+					},
+					uDebugTexture: {
+						type: 't',
+						value: uvDebugTexture.texture,
 					},
 				},
             }),

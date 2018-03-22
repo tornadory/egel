@@ -71,8 +71,8 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		this.planeHelper = new PlaneHelper();
-		scene.add(this.planeHelper);
+		// this.planeHelper = new PlaneHelper();
+		// scene.add(this.planeHelper);
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
