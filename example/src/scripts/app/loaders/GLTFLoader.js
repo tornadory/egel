@@ -50,6 +50,7 @@ function GLTFParser(filename, data) {
 	const textureDataEmissiveIndex = materials[0].emissiveTexture.index;
 	const textureDataOcclusionIndex = materials[0].occlusionTexture.index;
 
+	// TODO: bin is now loaded in multiple times
 	const meshList = accessors.map((accessor, i) => {
 		// Load binary
 		return new Promise((resolve, reject) => {
