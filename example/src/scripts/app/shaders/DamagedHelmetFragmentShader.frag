@@ -63,7 +63,11 @@ vec3 CalculatePointLight(
 
 void main(void) {
     vec3 color = vDiffuse;
-    color = texture2D(uNormalTexture, vTextureCoord).rgb;
+    color = texture2D(uBaseColorTexture, vTextureCoord).rgb;
+    // color = texture2D(uEmissiveTexture, vTextureCoord).rgb;
+    // color = texture2D(uMetallicRoughnessTexture, vTextureCoord).rgb;
+    // color = texture2D(uNormalTexture, vTextureCoord).rgb;
+    // color = texture2D(uOcclusionTexture, vTextureCoord).rgb;
 
     #ifdef HAS_VERTEX_NORMALS
     vec3 normal = normalize(vNormal);

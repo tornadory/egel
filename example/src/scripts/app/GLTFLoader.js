@@ -31,6 +31,8 @@ function GLTFParser(filename, data) {
 	const meshDataPositionIndex = meshAttributesData.POSITION;
 	const meshDataTexcoordIndex = meshAttributesData.TEXCOORD_0;
 
+	// console.log(data);
+
 	// Texture data
 	const textureDataBaseIndex = materials[0].pbrMetallicRoughness.baseColorTexture.index;
 	const textureDataNormalIndex = materials[0].normalTexture.index;

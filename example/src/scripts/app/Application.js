@@ -8,6 +8,7 @@ import { // eslint-disable-line
 	Scene,
 	PerspectiveCamera,
 	Vec3,
+	Quat,
 } from 'egel';
 
 import AxisHelper from './AxisHelper';
@@ -15,6 +16,7 @@ import GLTFLoader from './GLTFLoader';
 import GridHelper from './GridHelper';
 import OBJLoader from './OBJLoader';
 import OrbitalControls from './OrbitalControls';
+import PlaneHelper from './PlaneHelper';
 
 // Shaders
 // import BunnyVertexShader from './shaders/BunnyVertexShader.vert';
@@ -56,7 +58,7 @@ export default class Application {
 			aspectRatio: this.width / this.height,
 		});
 
-		Vec3.set(this.camera.position, 3, 2, 3);
+		Vec3.set(this.camera.position, 3, 1, 3);
 		this.camera.lookAt();
 
 		// Controls
@@ -68,6 +70,9 @@ export default class Application {
 
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
+
+		this.planeHelper = new PlaneHelper();
+		scene.add(this.planeHelper);
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
@@ -111,6 +116,12 @@ export default class Application {
 				});
 
 				const mesh = new Mesh(geometry, material);
+				// const quatFromRotation = Quat.fromValues(...data.meshes.rotation);
+				// const meshRotation = Vec3.fromValues(1.0, 1.0, 1.0);
+				// Vec3.transformQuat(meshRotation, meshRotation, quatFromRotation);
+				// Vec3.set(mesh.rotation, ...meshRotation);
+				Vec3.set(mesh.rotation, -Math.PI / 2, Math.PI, Math.PI / 2);
+				Vec3.set(mesh.position, 0.0, 0.5, 0.0);
 				scene.add(mesh);
 			})
 			.catch((error) => {

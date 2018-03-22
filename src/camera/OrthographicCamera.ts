@@ -14,10 +14,6 @@ interface Options {
     top?: number;
     near?: number;
     far?: number;
-    fieldOfView?: number;
-    position?: Vec3;
-    target?: Vec3;
-    up?: Vec3;
 }
 
 export default class OrthographicCamera extends Camera {
