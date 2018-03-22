@@ -4,7 +4,6 @@ import { // eslint-disable-line
 } from 'egel';
 
 import {
-	GL_CLAMP_TO_EDGE,
 	GL_LINEAR,
 	GL_REPEAT,
 } from 'webgl-constants';
@@ -41,8 +40,6 @@ function GLTFParser(filename, data) {
 	const meshDataPositionIndex = meshAttributesData.POSITION;
 	const meshDataTexcoordIndex = meshAttributesData.TEXCOORD_0;
 
-	// console.log(data);
-
 	// Texture data
 	const textureDataBaseIndex = materials[0].pbrMetallicRoughness.baseColorTexture.index;
 	const textureDataNormalIndex = materials[0].normalTexture.index;
@@ -53,7 +50,7 @@ function GLTFParser(filename, data) {
 	const meshList = new Promise((resolve, reject) => {
 		FileLoader(`${fileRoot}/${filePath}/${buffers[0].uri}`, 'arraybuffer')
 			.then((bin) => {
-				resolve(accessors.map((accessor, i) => {
+				resolve(accessors.map((accessor) => {
 					const bufferViewData = bufferViews[accessor.bufferView];
 					const slicedBuffer = bin.slice(
 						bufferViewData.byteOffset,

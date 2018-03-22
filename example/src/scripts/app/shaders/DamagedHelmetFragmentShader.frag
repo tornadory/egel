@@ -1,3 +1,5 @@
+#extension GL_OES_standard_derivatives : enable
+
 precision highp float;
 
 // Uniforms
@@ -27,10 +29,14 @@ varying vec2 vTextureCoord;
 vec4 SRGBtoLINEAR(vec4 srgbIn) {
     #ifdef SRGB_FAST_APPROXIMATION
       vec3 linOut = pow(srgbIn.xyz,vec3(2.2));
-    #else //SRGB_FAST_APPROXIMATION
-      vec3 bLess = step(vec3(0.04045),srgbIn.xyz);
-      vec3 linOut = mix( srgbIn.xyz/vec3(12.92), pow((srgbIn.xyz+vec3(0.055))/vec3(1.055),vec3(2.4)), bLess );
-    #endif //SRGB_FAST_APPROXIMATION
+    #else
+      vec3 bLess = step(vec3(0.04045), srgbIn.xyz);
+      vec3 linOut = mix(
+        srgbIn.xyz / vec3(12.92),
+        pow((srgbIn.xyz + vec3(0.055)) / vec3(1.055),
+        vec3(2.4)), bLess
+      );
+    #endif
 
     return vec4(linOut,srgbIn.w);;
 }
@@ -73,12 +79,26 @@ vec3 CalculatePointLight(
 }
 
 void main(void) {
+    // float perceptualRoughness = 0.5;
+    // float metallic = 0.5;
+    // vec4 metallicRoughnessSample = texture2D(uMetallicRoughnessTexture, vTextureCoord);
+    // perceptualRoughness = metallicRoughnessSample.g * perceptualRoughness;
+    // metallic = metallicRoughnessSample.b * metallic;
+
     // vec3 color = vDiffuse;
-    vec3 color = SRGBtoLINEAR(texture2D(uBaseColorTexture, vTextureCoord)).rgb;
-    // color = texture2D(uEmissiveTexture, vTextureCoord).rgb;
+
     // color = texture2D(uMetallicRoughnessTexture, vTextureCoord).rgb;
-    // color = texture2D(uNormalTexture, vTextureCoord).rgb;
-    // color = texture2D(uOcclusionTexture, vTextureCoord).rgb;
+    // color += texture2D(uNormalTexture, vTextureCoord).rgb;
+
+    // Albedo
+    vec3 color = SRGBtoLINEAR(texture2D(uBaseColorTexture, vTextureCoord)).rgb;
+
+    // Emissive
+    color += SRGBtoLINEAR(texture2D(uEmissiveTexture, vTextureCoord)).rgb;
+
+    // AO
+    float ambientOcclusion = texture2D(uOcclusionTexture, vTextureCoord).r;
+    color = mix(color, color * ambientOcclusion, 0.5);
 
     #ifdef HAS_VERTEX_NORMALS
     vec3 normal = normalize(vNormal);
