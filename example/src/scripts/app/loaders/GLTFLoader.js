@@ -50,12 +50,10 @@ function GLTFParser(filename, data) {
 	const textureDataEmissiveIndex = materials[0].emissiveTexture.index;
 	const textureDataOcclusionIndex = materials[0].occlusionTexture.index;
 
-	// TODO: bin is now loaded in multiple times
-	const meshList = accessors.map((accessor, i) => {
-		// Load binary
-		return new Promise((resolve, reject) => {
-			FileLoader(`${fileRoot}/${filePath}/${buffers[0].uri}`, 'arraybuffer')
-				.then((bin) => {
+	const meshList = new Promise((resolve, reject) => {
+		FileLoader(`${fileRoot}/${filePath}/${buffers[0].uri}`, 'arraybuffer')
+			.then((bin) => {
+				resolve(accessors.map((accessor, i) => {
 					const bufferViewData = bufferViews[accessor.bufferView];
 					const slicedBuffer = bin.slice(
 						bufferViewData.byteOffset,
@@ -72,15 +70,15 @@ function GLTFParser(filename, data) {
 						console.warn('componentType is unknown');
 					}
 
-					resolve(bufferData);
-				})
-				.catch((error) => {
-					reject(error);
-				});
-		});
+					return bufferData;
+				}));
+			})
+			.catch((error) => {
+				reject(console.warn(error));
+			});
 	});
 
-	const result = Promise.all(meshList.map(bin => bin))
+	return meshList
 		.then((geometryData) => {
 			const meshData = {
 				textures: {
@@ -104,10 +102,6 @@ function GLTFParser(filename, data) {
 		.catch((error) => {
 			console.warn(error);
 		});
-
-	return result.then((resultData) => {
-		return resultData;
-	});
 }
 
 export default function GLTFLoader(filename) {
