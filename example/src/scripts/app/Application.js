@@ -101,9 +101,6 @@ export default class Application {
 					name: 'DamagedHelmetMesh',
 					vertexShader: DamagedHelmetVertexShader,
 					fragmentShader: DamagedHelmetFragmentShader,
-					defines: {
-
-					},
 					uniforms: {
 						uDiffuse: {
 							type: '3f',
