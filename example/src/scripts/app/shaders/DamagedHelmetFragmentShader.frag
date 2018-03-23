@@ -1,4 +1,4 @@
-#extension GL_OES_standard_derivatives : enable
+// #extension GL_OES_standard_derivatives : enable
 
 precision highp float;
 
@@ -13,9 +13,6 @@ uniform sampler2D uOcclusionTexture;
 varying vec3 vPosition;
 varying vec4 vWorldPosition;
 
-// Color
-varying vec3 vDiffuse;
-
 // Normal
 #ifdef HAS_VERTEX_NORMALS
 varying vec3 vNormal;
@@ -25,6 +22,8 @@ varying vec3 vNormal;
 #ifdef HAS_TEXTURE_COORDS
 varying vec2 vTextureCoord;
 #endif
+
+#define DIFFUSE = vec3(0.5);
 
 vec4 SRGBtoLINEAR(vec4 srgbIn) {
     #ifdef SRGB_FAST_APPROXIMATION
@@ -69,8 +68,9 @@ vec3 CalculatePointLight(
     float attenuation = 1.0 / (constant + linear * dist + quadratic * (dist * dist));
 
     // combine results
-    vec3 ambient = (ambientColor * ambientIntensity) * vDiffuse;
-    vec3 diffuse = diff * vDiffuse;
+    vec3 diffuseColor = vec3(0.5);
+    vec3 ambient = (ambientColor * ambientIntensity) * diffuseColor;
+    vec3 diffuse = diff * diffuseColor;
     vec3 specular = specularColor * spec * specularIntensity;
     ambient *= attenuation;
     diffuse *= attenuation;

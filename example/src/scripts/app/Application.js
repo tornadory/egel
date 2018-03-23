@@ -102,10 +102,6 @@ export default class Application {
 					vertexShader: DamagedHelmetVertexShader,
 					fragmentShader: DamagedHelmetFragmentShader,
 					uniforms: {
-						uDiffuse: {
-							type: '3f',
-							value: Vec3.fromValues(0.5, 0.37, 0.5),
-						},
 						uBaseColorTexture: {
 							type: 't',
 							value: data.textures.baseColorTexture.texture,

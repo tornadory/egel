@@ -9,10 +9,6 @@ attribute vec3 aVertexPosition;
 varying vec3 vPosition;
 varying vec4 vWorldPosition;
 
-// Color
-uniform vec3 uDiffuse;
-varying vec3 vDiffuse;
-
 // Normal
 #ifdef HAS_VERTEX_NORMALS
 attribute vec3 aVertexNormal;
@@ -26,8 +22,6 @@ varying vec2 vTextureCoord;
 #endif
 
 void main(void) {
-    vDiffuse = uDiffuse;
-
     // Override for custom positioning
     vec3 transformed = vec3(0.0);
 
