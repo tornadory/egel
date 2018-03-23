@@ -40,13 +40,27 @@ document.body.appendChild(stats.dom);
 // Scene
 const scene = new Scene();
 
-// function throwOnGLError(err, funcName, args) {
-// 	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
-// }
+// WebGL debugger, useful in development, should not be in production
+function throwOnGLError(err, funcName, args) {
+	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
+}
 
-// function logGLCall(funcName, args) {
-// 	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-// }
+function logGLCall(funcName, args) {
+	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+}
+
+function validateNoneOfTheArgsAreUndefined(funcName, args) {
+	for (let i = 0; i < args.length; i++) {
+		if (args[i] === undefined) {
+			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+		}
+	}
+}
+
+function logAndValidate(funcName, args) {
+	// logGLCall(funcName, args);
+	validateNoneOfTheArgsAreUndefined(funcName, args);
+ }
 
 export default class Application {
 	constructor() {
@@ -63,8 +77,9 @@ export default class Application {
 			aspectRatio: this.width / this.height,
 		});
 
-		// const gl = this.renderer.getContext();
-		// this.renderer.setContext(WebGLDebug.makeDebugContext(gl, throwOnGLError, logGLCall));
+		// Expose the GL context to WebGLDebugUtils to log errors and calls
+		// const glContext = this.renderer.getContext();
+		// this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
