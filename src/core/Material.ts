@@ -5,14 +5,14 @@ import {
     vec3 as Vec3,
 } from 'gl-matrix';
 import {
-    GL_TEXTURE_2D,
-    GL_TEXTURE_CUBE_MAP,
     GL_TEXTURE0,
     GL_TEXTURE1,
     GL_TEXTURE2,
     GL_TEXTURE3,
     GL_TEXTURE4,
     GL_TEXTURE5,
+    GL_TEXTURE_2D,
+    GL_TEXTURE_CUBE_MAP,
     GL_TRIANGLES,
 } from 'webgl-constants';
 

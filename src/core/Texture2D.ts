@@ -2,6 +2,8 @@
 import {
     GL_CLAMP_TO_EDGE,
     GL_DATA_UNSIGNED_BYTE,
+    GL_LINEAR,
+    GL_LINEAR_MIPMAP_LINEAR,
     GL_NEAREST,
     GL_RGBA,
     GL_TEXTURE_2D,
@@ -10,8 +12,6 @@ import {
     GL_TEXTURE_WRAP_S,
     GL_TEXTURE_WRAP_T,
     GL_UNPACK_FLIP_Y_WEBGL,
-    GL_LINEAR,
-    GL_LINEAR_MIPMAP_LINEAR,
 } from 'webgl-constants';
 
 // Core
@@ -101,7 +101,7 @@ export default class Texture2D {
         gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, image);
 
         if (this.generateMipmap && isPowerOfTwo(this.texture)) {
-            gl.generateMipmap(gl.TEXTURE_2D);
+            gl.generateMipmap(GL_TEXTURE_2D);
         }
 
         gl.texParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this.magFilter);

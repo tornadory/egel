@@ -1,21 +1,21 @@
 // Vendor
 import {
     GL_CLAMP_TO_EDGE,
+    GL_DATA_UNSIGNED_BYTE,
     GL_LINEAR,
     GL_RGBA,
+    GL_TEXTURE_CUBE_MAP,
     GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
     GL_TEXTURE_CUBE_MAP_POSITIVE_X,
     GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
     GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-    GL_TEXTURE_CUBE_MAP,
     GL_TEXTURE_MAG_FILTER,
     GL_TEXTURE_MIN_FILTER,
     GL_TEXTURE_WRAP_S,
     GL_TEXTURE_WRAP_T,
     GL_UNPACK_FLIP_Y_WEBGL,
-    GL_DATA_UNSIGNED_BYTE,
 } from 'webgl-constants';
 
 // Core
@@ -23,6 +23,9 @@ import * as Context from './Context';
 
 // Loaders
 import ImageLoader from '../loaders/ImageLoader';
+
+// Math
+import { isPowerOfTwo } from '../math/MathUtilities';
 
 // Utilities
 import { createCanvas } from '../utilities/Canvas';
@@ -35,6 +38,8 @@ interface Options {
     minFilter?: number;
     wrapS?: number;
     wrapT?: number;
+    generateMipmap?: boolean;
+    flipY?: boolean;
 }
 
 export default class TextureCube {
@@ -43,6 +48,8 @@ export default class TextureCube {
     public minFilter: number;
     public wrapS: number;
     public wrapT: number;
+    public generateMipmap?: boolean;
+    public flipY: boolean;
     public texture: WebGLTexture;
     public loaders: any[];
     public images: Array<HTMLCanvasElement | HTMLImageElement>;
@@ -55,6 +62,8 @@ export default class TextureCube {
         this.minFilter = GL_LINEAR;
         this.wrapS = GL_CLAMP_TO_EDGE;
         this.wrapT = GL_CLAMP_TO_EDGE;
+        this.generateMipmap = false;
+        this.flipY = false;
 
         Object.assign(this, options);
 
@@ -66,9 +75,9 @@ export default class TextureCube {
 
         const images = [];
 
-        for (let i = 0; i < this.src.length; i += 1) {
+        this.src.forEach(() => {
             images.push(canvas);
-        }
+        });
 
         this.update(images);
 
@@ -109,9 +118,12 @@ export default class TextureCube {
         for (let i = 0; i < this.src.length; i += 1) {
             const image = images[i];
 
-            gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, false);
-
+            gl.pixelStorei(GL_UNPACK_FLIP_Y_WEBGL, this.flipY);
             gl.texImage2D(targets[i], 0, GL_RGBA, GL_RGBA, GL_DATA_UNSIGNED_BYTE, image);
+
+            if (this.generateMipmap && isPowerOfTwo(this.texture)) {
+                gl.generateMipmap(GL_TEXTURE_CUBE_MAP);
+            }
 
             gl.texParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, this.magFilter);
             gl.texParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, this.minFilter);
