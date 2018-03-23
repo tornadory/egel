@@ -1,4 +1,5 @@
 // Vendor
+import WebGLDebug from 'webgl-debug';
 import Stats from 'stats.js';
 import { // eslint-disable-line
 	Geometry,
@@ -20,6 +21,7 @@ import PlaneMesh from './geometry/PlaneMesh';
 // Helpers
 import AxisHelper from './helpers/AxisHelper';
 import GridHelper from './helpers/GridHelper';
+import NormalHelper from './helpers/NormalHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
@@ -30,7 +32,6 @@ import GLTFLoader from './loaders/GLTFLoader';
 // import BunnyFragmentShader from './shaders/BunnyFragmentShader.frag';
 import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert';
 import DamagedHelmetFragmentShader from './shaders/DamagedHelmetFragmentShader.frag';
-import NormalHelper from './helpers/NormalHelper';
 
 // Stats
 const stats = new Stats();
@@ -38,6 +39,14 @@ document.body.appendChild(stats.dom);
 
 // Scene
 const scene = new Scene();
+
+// function throwOnGLError(err, funcName, args) {
+// 	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
+// }
+
+// function logGLCall(funcName, args) {
+// 	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+// }
 
 export default class Application {
 	constructor() {
@@ -53,6 +62,9 @@ export default class Application {
 			stencil: true,
 			aspectRatio: this.width / this.height,
 		});
+
+		// const gl = this.renderer.getContext();
+		// this.renderer.setContext(WebGLDebug.makeDebugContext(gl, throwOnGLError, logGLCall));
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
