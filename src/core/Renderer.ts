@@ -142,6 +142,15 @@ export default class Renderer {
         gl.enable(GL_DEPTH_TEST);
     }
 
+    public setContext(context) {
+        Context.set(context);
+        gl = Context.get();
+    }
+
+    public getContext() {
+        return gl;
+    }
+
     public setClearColor(r = 0, g = 0, b = 0, a = 1) {
         this.clearColor.r = r;
         this.clearColor.g = g;

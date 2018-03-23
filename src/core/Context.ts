@@ -1,8 +1,6 @@
 let gl: WebGLRenderingContext;
 
-export function set(
-    context: WebGLRenderingContext,
-) {
+export function set(context: WebGLRenderingContext) {
     gl = context;
 }
 
