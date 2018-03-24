@@ -1,5 +1,5 @@
 // Vendor
-import WebGLDebug from 'webgl-debug';
+// import WebGLDebug from 'webgl-debug';
 import Stats from 'stats.js';
 import { // eslint-disable-line
 	Geometry,
@@ -16,12 +16,12 @@ import { // eslint-disable-line
 import OrbitalControls from './controls/OrbitalControls';
 
 // Geometry
-import PlaneMesh from './geometry/PlaneMesh';
+// import PlaneMesh from './geometry/PlaneMesh';
 
 // Helpers
 import AxisHelper from './helpers/AxisHelper';
 import GridHelper from './helpers/GridHelper';
-import NormalHelper from './helpers/NormalHelper';
+// import NormalHelper from './helpers/NormalHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
@@ -41,26 +41,26 @@ document.body.appendChild(stats.dom);
 const scene = new Scene();
 
 // WebGL debugger, useful in development, should not be in production
-function throwOnGLError(err, funcName, args) {
-	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
-}
+// function throwOnGLError(err, funcName, args) {
+// 	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
+// }
 
-function logGLCall(funcName, args) {
-	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-}
+// function logGLCall(funcName, args) {
+// 	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+// }
 
-function validateNoneOfTheArgsAreUndefined(funcName, args) {
-	for (let i = 0; i < args.length; i++) {
-		if (args[i] === undefined) {
-			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-		}
-	}
-}
+// function validateNoneOfTheArgsAreUndefined(funcName, args) {
+// 	for (let i = 0; i < args.length; i += 1) {
+// 		if (args[i] === undefined) {
+// 			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+// 		}
+// 	}
+// }
 
-function logAndValidate(funcName, args) {
-	// logGLCall(funcName, args);
-	validateNoneOfTheArgsAreUndefined(funcName, args);
- }
+// function logAndValidate(funcName, args) {
+// 	logGLCall(funcName, args);
+// 	validateNoneOfTheArgsAreUndefined(funcName, args);
+// }
 
 export default class Application {
 	constructor() {

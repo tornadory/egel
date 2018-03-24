@@ -139,7 +139,10 @@ export default class Renderer {
         };
 
         this.setClearColor();
-        gl.enable(GL_DEPTH_TEST);
+
+        if (this.depth) {
+            gl.enable(GL_DEPTH_TEST);
+        }
     }
 
     public setContext(context) {
