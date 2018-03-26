@@ -26,12 +26,10 @@ varying vec2 vTextureCoord;
 
 const float M_PI = 3.141592653589793;
 const float MIN_ROUGHNESS = 0.04;
-const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.15);
-const float NORMAL_SCALE = 0.15;
-const vec3 LIGHT_DIRECTION = vec3(0.05, 0.5, 0.5);
+const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.15, 1.0);
+const float NORMAL_SCALE = 1.0;
+const vec3 LIGHT_DIRECTION = vec3(0.5, 0.5, 0.5);
 const vec3 LIGHT_COLOR = vec3(1.0, 1.0, 1.0);
-const vec4 SCALE_DIFF_BASE_MR = vec4(0.0, 0.0, 0.0, 0.0);
-const vec4 SCALE_FGD_SPEC = vec4(0.0, 0.0, 0.0, 0.0);
 
 struct PBRInfo {
   float NdotL;                  // cos angle between normal and light direction
@@ -105,11 +103,7 @@ vec3 getNormal() {
   vec3 tex_dy = dFdy(vec3(vTextureCoord, 0.0));
   vec3 t = (tex_dy.t * pos_dx - tex_dx.t * pos_dy) / (tex_dx.s * tex_dy.t - tex_dy.s * tex_dx.t);
 
-  #ifdef HAS_VERTEX_NORMALS
-    vec3 ng = normalize(vNormal);
-  #else
-    vec3 ng = cross(pos_dx, pos_dy);
-  #endif
+  vec3 ng = normalize(vNormal);
 
   t = normalize(t - ng * dot(ng, t));
   vec3 b = normalize(cross(ng, t));
@@ -191,16 +185,6 @@ void main(void) {
     // Ambient Occlusion
     float ambientOcclusion = texture2D(uOcclusionTexture, vTextureCoord).r;
     color = mix(color, color * ambientOcclusion, 1.0);
-
-    color = mix(color, F, SCALE_FGD_SPEC.x);
-    color = mix(color, vec3(G), SCALE_FGD_SPEC.y);
-    color = mix(color, vec3(D), SCALE_FGD_SPEC.z);
-    color = mix(color, specContrib, SCALE_FGD_SPEC.w);
-
-    color = mix(color, diffuseContrib, SCALE_DIFF_BASE_MR.x);
-    color = mix(color, baseColor.rgb, SCALE_DIFF_BASE_MR.y);
-    color = mix(color, vec3(metallic), SCALE_DIFF_BASE_MR.z);
-    color = mix(color, vec3(perceptualRoughness), SCALE_DIFF_BASE_MR.w);
 
     gl_FragColor = vec4(pow(color, vec3(1.0 / 2.2)), baseColor.a);
 }
