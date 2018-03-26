@@ -36,6 +36,7 @@ const stats = new Stats();
 document.body.appendChild(stats.dom);
 
 // Scene
+let mesh;
 const scene = new Scene();
 
 // WebGL debugger, useful in development, should not be in production
@@ -153,7 +154,7 @@ export default class Application {
 					},
 				});
 
-				const mesh = new Mesh(geometry, material);
+				mesh = new Mesh(geometry, material);
 				// const quatFromRotation = Quat.fromValues(...data.meshes.rotation);
 				// const meshRotation = Vec3.fromValues(1.0, 1.0, 1.0);
 				// Vec3.transformQuat(meshRotation, meshRotation, quatFromRotation);
@@ -165,6 +166,12 @@ export default class Application {
 				// this.meshNormalHelper = new NormalHelper(mesh, 0.1);
 				// this.meshNormalHelper.setParent(mesh);
 				// scene.add(this.meshNormalHelper);
+
+				this.onResize();
+
+				this.tick();
+
+				this.addListeners();
 			})
 			.catch((error) => {
 				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
@@ -199,16 +206,12 @@ export default class Application {
 		// 	.catch((error) => {
 		// 		console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
 		// 	});
-
-		this.onResize();
-
-		this.tick();
-
-		this.addListeners();
 	}
 
 	render() {
 		stats.begin();
+
+		mesh.material.uniforms.uCameraPosition.value = this.camera.position;
 
 		this.controls.update();
 		this.camera.updateMatrixWorld();
