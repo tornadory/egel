@@ -28,7 +28,7 @@ const float M_PI = 3.141592653589793;
 const float MIN_ROUGHNESS = 0.04;
 const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.15, 1.0);
 const float NORMAL_SCALE = 1.0;
-const vec3 LIGHT_DIRECTION = vec3(0.5, 0.5, 0.5);
+const vec3 LIGHT_DIRECTION = vec3(0.0, 0.5, 0.5);
 const vec3 LIGHT_COLOR = vec3(1.0, 1.0, 1.0);
 
 struct PBRInfo {
@@ -118,9 +118,11 @@ vec3 getNormal() {
 void main(void) {
     float perceptualRoughness = METALLIC_ROUGHNESS_VALUES.y;
     float metallic = METALLIC_ROUGHNESS_VALUES.x;
+
     vec4 metallicRoughnessSample = texture2D(uMetallicRoughnessTexture, vTextureCoord);
     perceptualRoughness = metallicRoughnessSample.g * perceptualRoughness;
     metallic = metallicRoughnessSample.b * metallic;
+
     perceptualRoughness = clamp(perceptualRoughness, MIN_ROUGHNESS, 1.0);
     metallic = clamp(metallic, 0.0, 1.0);
     float alphaRoughness = perceptualRoughness * perceptualRoughness;
@@ -179,12 +181,12 @@ void main(void) {
     // Obtain final intensity as reflectance (BRDF) scaled by the energy of the light (cosine law)
     vec3 color = NdotL * LIGHT_COLOR * (diffuseContrib + specContrib);
 
-    // Emissive
-    color += SRGBtoLINEAR(texture2D(uEmissiveTexture, vTextureCoord)).rgb;
-
     // Ambient Occlusion
     float ambientOcclusion = texture2D(uOcclusionTexture, vTextureCoord).r;
     color = mix(color, color * ambientOcclusion, 1.0);
+
+    // Emissive
+    color += SRGBtoLINEAR(texture2D(uEmissiveTexture, vTextureCoord)).rgb;
 
     gl_FragColor = vec4(pow(color, vec3(1.0 / 2.2)), baseColor.a);
 }
