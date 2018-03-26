@@ -102,7 +102,7 @@ const customFragmentShader = `
 	}
 `;
 
-class PlaneGeometry extends Geometry {
+class PlaneTextureGeometry extends Geometry {
     constructor(width, height, subdivisionsX, subdivisionsY) {
 		let vertices = [];
 		const indices = [];
@@ -162,7 +162,7 @@ class PlaneGeometry extends Geometry {
     }
 }
 
-export default class PlaneMesh extends Mesh {
+export default class PlaneTextureHelper extends Mesh {
     constructor(width = 5, height = 5, subdivisionsX = 1, subdivisionsY = 1) {
         const vertexShader = customVertexShader;
         const fragmentShader = customFragmentShader;
@@ -176,9 +176,9 @@ export default class PlaneMesh extends Mesh {
 		});
 
         super(
-            new PlaneGeometry(width, height, subdivisionsX, subdivisionsY),
+            new PlaneTextureGeometry(width, height, subdivisionsX, subdivisionsY),
             new Material({
-                name: 'PlaneMesh',
+                name: 'PlaneTextureHelper',
                 vertexShader,
 				fragmentShader,
 				uniforms: {
