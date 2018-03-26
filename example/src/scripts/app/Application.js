@@ -126,6 +126,10 @@ export default class Application {
 					vertexShader: DamagedHelmetVertexShader,
 					fragmentShader: DamagedHelmetFragmentShader,
 					uniforms: {
+						uCameraPosition: {
+							type: '3f',
+							value: this.camera.position,
+						},
 						uBaseColorTexture: {
 							type: 't',
 							value: data.textures.baseColorTexture.texture,
