@@ -23,7 +23,22 @@ varying vec3 vNormal;
 varying vec2 vTextureCoord;
 #endif
 
-#define DIFFUSE = vec3(0.5);
+const float M_PI = 3.141592653589793;
+const float MIN_ROUGHNESS = 0.04;
+
+struct PBRInfo {
+  float NdotL;
+  float NdotV;
+  float NdotH;
+  float LdotH;
+  float perceptualRoughness;
+  float metalness;
+  vec3 reflectance0;
+  vec3 reflectance90;
+  float alphaRoughness;
+  vec3 diffuseColor;
+  vec3 specularColor;
+};
 
 vec4 SRGBtoLINEAR(vec4 srgbIn) {
     #ifdef SRGB_FAST_APPROXIMATION
@@ -33,49 +48,12 @@ vec4 SRGBtoLINEAR(vec4 srgbIn) {
       vec3 linOut = mix(
         srgbIn.xyz / vec3(12.92),
         pow((srgbIn.xyz + vec3(0.055)) / vec3(1.055),
-        vec3(2.4)), bLess
+        vec3(2.4)),
+        bLess
       );
     #endif
 
-    return vec4(linOut,srgbIn.w);;
-}
-
-vec3 CalculatePointLight(
-    vec3 lightPosition,
-    vec3 ambientColor,
-    float ambientIntensity,
-    vec3 specularColor,
-    vec3 specularIntensity,
-    vec3 normal
-) {
-    vec3 lightDirection = normalize(lightPosition - vWorldPosition.xyz);
-
-    // diffuse shading
-    float diff = max(dot(normal, lightDirection), 0.0);
-
-    // specular shading
-    vec3 reflectDirection = reflect(-lightDirection, normal);
-
-    // Fix the spec from showing on the backside by multiplying it by the lambert term
-    float spec = diff * pow(max(dot(lightDirection, reflectDirection), 0.0), 0.25);
-
-    // attenuation
-    float constant = 1.0;
-    float linear = 0.09;
-    float quadratic = 0.032;
-
-    float dist = length(lightPosition);
-    float attenuation = 1.0 / (constant + linear * dist + quadratic * (dist * dist));
-
-    // combine results
-    vec3 diffuseColor = vec3(0.5);
-    vec3 ambient = (ambientColor * ambientIntensity) * diffuseColor;
-    vec3 diffuse = diff * diffuseColor;
-    vec3 specular = specularColor * spec * specularIntensity;
-    ambient *= attenuation;
-    diffuse *= attenuation;
-    specular *= attenuation;
-    return (ambient + diffuse + specular);
+    return vec4(linOut, srgbIn.w);
 }
 
 void main(void) {
@@ -90,8 +68,10 @@ void main(void) {
     // color = texture2D(uMetallicRoughnessTexture, vTextureCoord).rgb;
     // color += texture2D(uNormalTexture, vTextureCoord).rgb;
 
+    vec4 baseColor = SRGBtoLINEAR(texture2D(uBaseColorTexture, vTextureCoord));
+
     // Albedo
-    vec3 color = SRGBtoLINEAR(texture2D(uBaseColorTexture, vTextureCoord)).rgb;
+    vec3 color = baseColor.rgb;
 
     // Emissive
     color += SRGBtoLINEAR(texture2D(uEmissiveTexture, vTextureCoord)).rgb;
@@ -101,17 +81,8 @@ void main(void) {
     color = mix(color, color * ambientOcclusion, 0.5);
 
     #ifdef HAS_VERTEX_NORMALS
-    vec3 normal = normalize(vNormal);
+      vec3 normal = normalize(vNormal);
     #endif
 
-    color += CalculatePointLight(
-        vec3(0.5, 1.0, 2.0), // lightPosition
-        vec3(1.0, 0.73, 0.5), // ambientColor
-        0.5, // ambientIntensity
-        vec3(0.25), // specularColor
-        vec3(1), // specularIntensity
-        normal
-    );
-
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(pow(color, vec3(1.0 / 2.2)), baseColor.a);
 }
