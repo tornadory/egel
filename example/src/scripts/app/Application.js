@@ -56,7 +56,7 @@ const scene = new Scene();
 // }
 
 // function logAndValidate(funcName, args) {
-// 	logGLCall(funcName, args);
+// 	// logGLCall(funcName, args);
 // 	validateNoneOfTheArgsAreUndefined(funcName, args);
 // }
 
