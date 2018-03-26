@@ -172,6 +172,7 @@ export default class PlaneMesh extends Mesh {
 			generateMipmap: true,
 			magFilter: GL_LINEAR,
 			minFilter: GL_LINEAR_MIPMAP_LINEAR,
+			flipY: true,
 		});
 
         super(
