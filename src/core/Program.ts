@@ -32,10 +32,7 @@ export default class Program {
         this.attributeLocations = {};
     }
 
-    public link(
-        vertexShader: string,
-        fragmentShader: string,
-    ) {
+    public link(vertexShader: string, fragmentShader: string) {
         this.compiledVertexShader = this.compile('vertex', vertexShader);
         this.compiledFragmentShader = this.compile('fragment', fragmentShader);
 

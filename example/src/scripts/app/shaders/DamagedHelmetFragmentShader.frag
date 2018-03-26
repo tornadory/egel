@@ -1,4 +1,4 @@
-// #extension GL_OES_standard_derivatives : enable
+#extension GL_OES_standard_derivatives: enable
 
 precision highp float;
 
@@ -26,6 +26,7 @@ varying vec2 vTextureCoord;
 const float M_PI = 3.141592653589793;
 const float MIN_ROUGHNESS = 0.04;
 const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.5);
+const float NORMAL_SCALE = 0.5;
 
 struct PBRInfo {
   float NdotL;                  // cos angle between normal and light direction
@@ -90,6 +91,29 @@ float microfacetDistribution(PBRInfo pbrInputs) {
     float roughnessSq = pbrInputs.alphaRoughness * pbrInputs.alphaRoughness;
     float f = (pbrInputs.NdotH * roughnessSq - pbrInputs.NdotH) * pbrInputs.NdotH + 1.0;
     return roughnessSq / (M_PI * f * f);
+}
+
+vec3 getNormal() {
+  vec3 pos_dx = dFdx(vPosition);
+  vec3 pos_dy = dFdy(vPosition);
+  vec3 tex_dx = dFdx(vec3(vTextureCoord, 0.0));
+  vec3 tex_dy = dFdy(vec3(vTextureCoord, 0.0));
+  vec3 t = (tex_dy.t * pos_dx - tex_dx.t * pos_dy) / (tex_dx.s * tex_dy.t - tex_dy.s * tex_dx.t);
+
+  #ifdef HAS_VERTEX_NORMALS
+    vec3 ng = normalize(vNormal);
+  #else
+    vec3 ng = cross(pos_dx, pos_dy);
+  #endif
+
+  t = normalize(t - ng * dot(ng, t));
+  vec3 b = normalize(cross(ng, t));
+  mat3 tbn = mat3(t, b, ng);
+
+  vec3 n = texture2D(uNormalTexture, vTextureCoord).rgb;
+  n = normalize(tbn * ((2.0 * n - 1.0) * vec3(NORMAL_SCALE, NORMAL_SCALE, 1.0)));
+
+  return n;
 }
 
 void main(void) {
