@@ -15,13 +15,11 @@ import { // eslint-disable-line
 // Controls
 import OrbitalControls from './controls/OrbitalControls';
 
-// Geometry
-// import PlaneMesh from './geometry/PlaneMesh';
-
 // Helpers
 import AxisHelper from './helpers/AxisHelper';
 import GridHelper from './helpers/GridHelper';
 // import NormalHelper from './helpers/NormalHelper';
+// import PlaneTextureHelper from './helpers/PlaneTextureHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
@@ -100,10 +98,6 @@ export default class Application {
 		this.controls = new OrbitalControls(this.camera, this.renderer.canvas);
 		this.controls.update();
 
-		// Geometry
-		// this.planeMesh = new PlaneMesh(5, 5, 10, 10);
-		// scene.add(this.planeMesh);
-
 		// Helpers
 		this.gridHelper = new GridHelper(10);
 		scene.add(this.gridHelper);
@@ -111,9 +105,12 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		// this.planeMeshNormalHelper = new NormalHelper(this.planeMesh, 0.25);
-		// this.planeMeshNormalHelper.setParent(this.planeMesh);
-		// scene.add(this.planeMeshNormalHelper);
+		// this.planeTextureHelper = new PlaneTextureHelper(5, 5, 10, 10);
+		// scene.add(this.planeTextureHelper);
+
+		// this.planeTextureNormalHelper = new NormalHelper(this.planeTextureHelper, 0.25);
+		// this.planeTextureNormalHelper.setParent(this.planeTextureHelper);
+		// scene.add(this.planeTextureNormalHelper);
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
