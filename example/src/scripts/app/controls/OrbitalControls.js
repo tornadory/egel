@@ -71,7 +71,9 @@ export default class OrbitalControls {
     }
 
     onWheel(event) {
-        if (!this.zoom) return;
+        if (!this.zoom) {
+			return;
+		}
 
         const delta = event.deltaY ? event.deltaY : (event.detail ? event.detail : 0);
         const value = delta / 500;
@@ -115,7 +117,10 @@ export default class OrbitalControls {
         if (this.isDown) {
             switch (this.mode) {
                 case MODE_PAN: {
-                    if (!this.pan) return;
+                    if (!this.pan) {
+						return;
+					}
+
                     const x = event.pageY / this.height;
                     const y = event.pageX / this.width;
 

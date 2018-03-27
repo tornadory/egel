@@ -77,7 +77,9 @@ export default class NormalHelper extends Mesh {
     }
 
     draw(camera) {
-        if (!this.visible) return;
+        if (!this.visible) {
+			return;
+		}
 
         // Update modelMatrix
         this.updateMatrix(camera);

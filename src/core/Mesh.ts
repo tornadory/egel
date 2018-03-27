@@ -75,8 +75,9 @@ export default class Mesh extends Object3D {
     }
 
     public draw(camera: Camera | PerspectiveCamera | OrthographicCamera) {
-        if (!this.visible) return;
-        if (!this.material.program.created) return;
+        if (!this.visible || !this.material.program.created) {
+            return;
+        }
 
         // Update ModelMatrix
         this.updateMatrix(camera);

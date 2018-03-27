@@ -57,15 +57,10 @@ export default class Program {
     public compile(type: string, source: string) {
         let shader;
 
-        switch (type) {
-            case 'vertex':
-                shader = gl.createShader(GL_VERTEX_SHADER);
-                break;
-            case 'fragment':
-                shader = gl.createShader(GL_FRAGMENT_SHADER);
-                break;
-            default:
-                break;
+        if (type === 'vertex') {
+            shader = gl.createShader(GL_VERTEX_SHADER);
+        } else {
+            shader = gl.createShader(GL_FRAGMENT_SHADER);
         }
 
         gl.shaderSource(shader, source);
@@ -74,6 +69,7 @@ export default class Program {
         if (!gl.getShaderParameter(shader, GL_COMPILE_STATUS)) {
             console.warn(`Failed to compile shader: ${gl.getShaderInfoLog(shader)}`);
             console.log(addLineNumbers(source));
+
             return false;
         }
 
@@ -81,7 +77,9 @@ export default class Program {
     }
 
     public setAttributeLocation(attributeName: string) {
-        if (!this.created) return;
+        if (!this.created) {
+            return;
+        }
 
         this.attributeLocations[attributeName] = gl.getAttribLocation(this.program, attributeName);
         gl.enableVertexAttribArray(this.attributeLocations[attributeName]);
@@ -92,7 +90,9 @@ export default class Program {
     }
 
     public setUniformLocation(uniforms: object, uniformName: string) {
-        if (!this.created) return;
+        if (!this.created) {
+            return;
+        }
 
         uniforms[uniformName].location = gl.getUniformLocation(this.program, uniformName);
     }

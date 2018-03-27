@@ -100,7 +100,9 @@ export default class Object3D {
     }
 
     public unsetParent() {
-        if (this.parent === undefined) return;
+        if (this.parent === undefined) {
+            return;
+        }
 
         const objectIndex = this.parent.children.indexOf(this);
 

@@ -124,6 +124,7 @@ export default class Renderer {
             Context.set(context);
         } else {
             console.warn('WebGL is not supported, please use a modern browser.');
+
             return;
         }
 
