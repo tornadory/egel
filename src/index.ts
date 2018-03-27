@@ -1,5 +1,6 @@
 // Vendor
 import {
+    glMatrix as Common,
     mat2 as Mat2,
     mat2d as Mat2d,
     mat3 as Mat3,
@@ -10,6 +11,7 @@ import {
     vec4 as Vec4,
 } from 'gl-matrix';
 export {
+    Common,
     Mat2,
     Mat2d,
     Mat3,
