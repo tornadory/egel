@@ -33,7 +33,7 @@ export default class Camera {
         this.worldInverseMatrix = Mat4.create();
         this.near = 0.1;
         this.far = 100;
-        this.fieldOfView = 70;
+        this.fieldOfView = 60;
         this.aspectRatio = RENDERER_DEFAULT_ASPECT_RATIO;
         this.position = Vec3.create();
         this.target = Vec3.create();

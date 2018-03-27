@@ -4,6 +4,10 @@ import {
     vec3 as Vec3,
 } from 'gl-matrix';
 
+export function convertDegreesToRadians(value) {
+    return value * (Math.PI / 180);
+}
+
 export function isPowerOfTwo(value) {
 	return !(value & (value - 1)) && (!!value);
 }
