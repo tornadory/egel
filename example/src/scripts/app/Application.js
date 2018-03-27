@@ -87,7 +87,7 @@ export default class Application {
 
 		// Camera
 		this.camera = new PerspectiveCamera({
-			fieldOfView: 45,
+			fieldOfView: 60,
 			far: 500,
 			aspectRatio: this.width / this.height,
 		});

@@ -22,6 +22,6 @@ export default class PerspectiveCamera extends Camera {
     }
 
     public updateProjectionMatrix() {
-        Mat4.perspective(this.projectionMatrix, this.fieldOfView, this.aspectRatio, this.near, this.far);
+        Mat4.perspective(this.projectionMatrix, this.fieldOfView * (Math.PI / 180), this.aspectRatio, this.near, this.far);
     }
 }
