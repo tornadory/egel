@@ -1,5 +1,6 @@
 // Vendor
 import {
+    glMatrix as Common,
     mat4 as Mat4,
     vec3 as Vec3,
 } from 'gl-matrix';
@@ -22,6 +23,6 @@ export default class PerspectiveCamera extends Camera {
     }
 
     public updateProjectionMatrix() {
-        Mat4.perspective(this.projectionMatrix, this.fieldOfView, this.aspectRatio, this.near, this.far);
+        Mat4.perspective(this.projectionMatrix, Common.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
     }
 }
