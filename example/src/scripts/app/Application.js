@@ -155,10 +155,6 @@ export default class Application {
 				});
 
 				mesh = new Mesh(geometry, material);
-				// const quatFromRotation = Quat.fromValues(...data.meshes.rotation);
-				// const meshRotation = Vec3.fromValues(1.0, 1.0, 1.0);
-				// Vec3.transformQuat(meshRotation, meshRotation, quatFromRotation);
-				// Vec3.set(mesh.rotation, ...meshRotation);
 				Vec3.set(mesh.rotation, -Math.PI / 2, Math.PI, Math.PI / 2);
 				Vec3.set(mesh.position, 0.0, 0.5, 0.0);
 				scene.add(mesh);

@@ -28,7 +28,7 @@ const float M_PI = 3.141592653589793;
 const float MIN_ROUGHNESS = 0.04;
 const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.15, 1.0);
 const float NORMAL_SCALE = 1.0;
-const vec3 LIGHT_DIRECTION = vec3(0.0, 0.5, 0.5);
+const vec3 LIGHT_DIRECTION = vec3(1.0, 0.0, 1.0);
 const vec3 LIGHT_COLOR = vec3(1.0, 1.0, 1.0);
 
 struct PBRInfo {
