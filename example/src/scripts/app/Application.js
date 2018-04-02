@@ -8,6 +8,8 @@ import { // eslint-disable-line
 	Renderer,
 	Scene,
 	PerspectiveCamera,
+	Texture2D,
+	TextureCube,
 	Vec3,
 	// Quat,
 } from 'egel';
@@ -113,6 +115,39 @@ export default class Application {
 		// this.planeTextureNormalHelper.setParent(this.planeTextureHelper);
 		// scene.add(this.planeTextureNormalHelper);
 
+		// GL_TEXTURE_CUBE_MAP_POSITIVE_X = right,
+		// GL_TEXTURE_CUBE_MAP_NEGATIVE_X = left,
+		// GL_TEXTURE_CUBE_MAP_POSITIVE_Y = top,
+		// GL_TEXTURE_CUBE_MAP_NEGATIVE_Y = bottom,
+		// GL_TEXTURE_CUBE_MAP_POSITIVE_Z = front,
+		// GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = back,
+
+		this.diffuseCubemapTexture = new TextureCube({
+			src: [
+				'public/assets/textures/papermill/diffuse/diffuse_right_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_left_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_top_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_bottom_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_front_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_back_0.jpg',
+			],
+		});
+
+		this.specularCubemapTexture = new TextureCube({
+			src: [
+				'public/assets/textures/papermill/specular/specular_right_0.jpg',
+				'public/assets/textures/papermill/specular/specular_left_0.jpg',
+				'public/assets/textures/papermill/specular/specular_top_0.jpg',
+				'public/assets/textures/papermill/specular/specular_bottom_0.jpg',
+				'public/assets/textures/papermill/specular/specular_front_0.jpg',
+				'public/assets/textures/papermill/specular/specular_back_0.jpg',
+			],
+		});
+
+		this.BRDFLUTTexture = new Texture2D({
+			src: 'public/assets/textures/brdfLUT.png',
+		});
+
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
 				const geometry = new Geometry(
@@ -150,6 +185,18 @@ export default class Application {
 						uOcclusionTexture: {
 							type: 't',
 							value: data.textures.occlusionTexture.texture,
+						},
+						uDiffuseEnvTexture: {
+							type: 'tc',
+							value: this.diffuseCubemapTexture.texture,
+						},
+						uSpecularEnvTexture: {
+							type: 'tc',
+							value: this.specularCubemapTexture.texture,
+						},
+						uBRDFLUT: {
+							type: 't',
+							value: this.BRDFLUTTexture.texture,
 						},
 					},
 				});

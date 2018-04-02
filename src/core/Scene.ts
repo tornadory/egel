@@ -12,7 +12,7 @@ export default class Scene {
         this.objects.push(object);
     }
 
-    public remove(object: Mesh, dispose = false) {
+    public dispose(object: Mesh, dispose = false) {
         const objectIndex = this.objects.indexOf(object);
 
         if (objectIndex !== -1) {

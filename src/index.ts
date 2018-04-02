@@ -66,6 +66,9 @@ export { Scene };
 import Texture2D from './core/Texture2D';
 export { Texture2D };
 
+import TextureCube from './core/TextureCube';
+export { TextureCube };
+
 import VertexArrayObject from './core/VertexArrayObject';
 export { VertexArrayObject };
 

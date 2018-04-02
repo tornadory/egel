@@ -9,6 +9,9 @@ uniform sampler2D uEmissiveTexture;
 uniform sampler2D uMetallicRoughnessTexture;
 uniform sampler2D uNormalTexture;
 uniform sampler2D uOcclusionTexture;
+uniform samplerCube uDiffuseEnvTexture;
+uniform samplerCube uSpecularEnvTexture;
+uniform sampler2D uBRDFLUT;
 
 // Position
 varying vec3 vPosition;
@@ -30,6 +33,7 @@ const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.15, 1.0);
 const float NORMAL_SCALE = 1.0;
 const vec3 LIGHT_DIRECTION = vec3(1.0, 0.0, 1.0);
 const vec3 LIGHT_COLOR = vec3(1.0, 1.0, 1.0);
+const vec4 IBL_AMBIENT_SCALE = vec4(1.0);
 
 struct PBRInfo {
   float NdotL;                  // cos angle between normal and light direction
@@ -178,8 +182,16 @@ void main(void) {
     // Calculation of analytical lighting contribution
     vec3 diffuseContrib = (1.0 - F) * diffuse(pbrInputs);
     vec3 specContrib = F * G * D / (4.0 * NdotL * NdotV);
+
     // Obtain final intensity as reflectance (BRDF) scaled by the energy of the light (cosine law)
     vec3 color = NdotL * LIGHT_COLOR * (diffuseContrib + specContrib);
+
+    // Image based lighting (wihout spherical harmonics)
+    vec3 BRDF = texture2D(uBRDFLUT, vec2(NdotV, 1.0 - perceptualRoughness)).rgb;
+    vec3 diffuseLight = textureCube(uDiffuseEnvTexture, n).rgb;
+    vec3 specularLight = textureCube(uSpecularEnvTexture, reflection).rgb;
+    vec3 IBLcolor = (diffuseLight * diffuseColor * IBL_AMBIENT_SCALE.x) + (specularLight * (specularColor * BRDF.x + BRDF.y) * IBL_AMBIENT_SCALE.y);
+    color += IBLcolor;
 
     // Ambient Occlusion
     float ambientOcclusion = texture2D(uOcclusionTexture, vTextureCoord).r;
