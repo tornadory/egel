@@ -29,11 +29,11 @@ varying vec2 vTextureCoord;
 
 const float M_PI = 3.141592653589793;
 const float MIN_ROUGHNESS = 0.04;
-const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.15, 1.0);
+const vec2 METALLIC_ROUGHNESS_VALUES = vec2(0.85, 0.25);
 const float NORMAL_SCALE = 1.0;
 const vec3 LIGHT_DIRECTION = vec3(1.0, 0.0, 1.0);
 const vec3 LIGHT_COLOR = vec3(1.0, 1.0, 1.0);
-const vec4 IBL_AMBIENT_SCALE = vec4(1.0);
+const vec4 IBL_AMBIENT_SCALE = vec4(0.6);
 
 struct PBRInfo {
   float NdotL;                  // cos angle between normal and light direction

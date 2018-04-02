@@ -131,6 +131,7 @@ export default class Application {
 				'public/assets/textures/papermill/diffuse/diffuse_front_0.jpg',
 				'public/assets/textures/papermill/diffuse/diffuse_back_0.jpg',
 			],
+			flipY: true,
 		});
 
 		this.specularCubemapTexture = new TextureCube({
@@ -142,6 +143,7 @@ export default class Application {
 				'public/assets/textures/papermill/specular/specular_front_0.jpg',
 				'public/assets/textures/papermill/specular/specular_back_0.jpg',
 			],
+			flipY: true,
 		});
 
 		this.BRDFLUTTexture = new Texture2D({
