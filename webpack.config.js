@@ -35,12 +35,12 @@ const config = {
 					presets: [
 						['env', {
 							modules: false,
-							useBuiltIns: true,
+							useBuiltIns: 'usage',
 							targets: {
 								browsers: [
 									'> 5%',
 									'last 2 versions',
-									'not ie <= 11',
+									'not ie < 11',
 									'ios_saf >= 10.2',
 								],
 							},

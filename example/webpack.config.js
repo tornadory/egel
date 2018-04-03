@@ -52,10 +52,16 @@ const config = {
 				options: {
 					presets: [
 						['env', {
-							targets: {
-								browsers: ['last 2 versions'],
-							},
 							modules: false,
+							useBuiltIns: 'usage',
+							targets: {
+								browsers: [
+									'> 5%',
+									'last 2 versions',
+									'not ie < 11',
+									'ios_saf >= 10.2',
+								],
+							},
 						}],
 					],
 				},
