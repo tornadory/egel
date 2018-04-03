@@ -7,13 +7,20 @@ import { // eslint-disable-line
 	Mesh,
 	Renderer,
 	Scene,
+	OrthographicCamera,
 	PerspectiveCamera,
+	RenderTarget,
+	Texture2D,
+	TextureCube,
 	Vec3,
 	// Quat,
 } from 'egel';
 
 // Controls
 import OrbitalControls from './controls/OrbitalControls';
+
+// Geometry
+import PlaneGeometry from './geometry/PlaneGeometry';
 
 // Helpers
 import AxisHelper from './helpers/AxisHelper';
@@ -33,6 +40,7 @@ import DamagedHelmetFragmentShader from './shaders/DamagedHelmetFragmentShader.f
 
 // Stats
 const stats = new Stats();
+stats.showPanel(1); // show MS
 document.body.appendChild(stats.dom);
 
 // Scene
@@ -113,6 +121,54 @@ export default class Application {
 		// this.planeTextureNormalHelper.setParent(this.planeTextureHelper);
 		// scene.add(this.planeTextureNormalHelper);
 
+		// GL_TEXTURE_CUBE_MAP_POSITIVE_X = right,
+		// GL_TEXTURE_CUBE_MAP_NEGATIVE_X = left,
+		// GL_TEXTURE_CUBE_MAP_POSITIVE_Y = top,
+		// GL_TEXTURE_CUBE_MAP_NEGATIVE_Y = bottom,
+		// GL_TEXTURE_CUBE_MAP_POSITIVE_Z = front,
+		// GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = back,
+
+		this.diffuseCubemapTexture = new TextureCube({
+			src: [
+				'public/assets/textures/papermill/diffuse/diffuse_right_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_left_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_top_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_bottom_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_front_0.jpg',
+				'public/assets/textures/papermill/diffuse/diffuse_back_0.jpg',
+			],
+			flipY: true,
+		});
+
+		this.specularCubemapTexture = new TextureCube({
+			src: [
+				'public/assets/textures/papermill/specular/specular_right_0.jpg',
+				'public/assets/textures/papermill/specular/specular_left_0.jpg',
+				'public/assets/textures/papermill/specular/specular_top_0.jpg',
+				'public/assets/textures/papermill/specular/specular_bottom_0.jpg',
+				'public/assets/textures/papermill/specular/specular_front_0.jpg',
+				'public/assets/textures/papermill/specular/specular_back_0.jpg',
+			],
+			flipY: true,
+		});
+
+		this.BRDFLUTTexture = new Texture2D({
+			src: 'public/assets/textures/brdfLUT.png',
+		});
+
+		// Fullscreen screen-space bloom
+		this.bloomRenderTarget = new RenderTarget({
+			width: window.innerWidth,
+			height: window.innerHeight,
+			pixelRatio: this.renderer.pixelRatio,
+		});
+
+		this.renderTargetCamera = new OrthographicCamera({
+			fieldOfView: 45,
+		});
+		Vec3.set(this.renderTargetCamera.position, 0, 0, 1);
+		this.renderTargetCamera.lookAt();
+
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
 				const geometry = new Geometry(
@@ -151,14 +207,22 @@ export default class Application {
 							type: 't',
 							value: data.textures.occlusionTexture.texture,
 						},
+						uDiffuseEnvTexture: {
+							type: 'tc',
+							value: this.diffuseCubemapTexture.texture,
+						},
+						uSpecularEnvTexture: {
+							type: 'tc',
+							value: this.specularCubemapTexture.texture,
+						},
+						uBRDFLUT: {
+							type: 't',
+							value: this.BRDFLUTTexture.texture,
+						},
 					},
 				});
 
 				mesh = new Mesh(geometry, material);
-				// const quatFromRotation = Quat.fromValues(...data.meshes.rotation);
-				// const meshRotation = Vec3.fromValues(1.0, 1.0, 1.0);
-				// Vec3.transformQuat(meshRotation, meshRotation, quatFromRotation);
-				// Vec3.set(mesh.rotation, ...meshRotation);
 				Vec3.set(mesh.rotation, -Math.PI / 2, Math.PI, Math.PI / 2);
 				Vec3.set(mesh.position, 0.0, 0.5, 0.0);
 				scene.add(mesh);

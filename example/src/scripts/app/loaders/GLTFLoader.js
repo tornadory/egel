@@ -31,7 +31,6 @@ function GLTFParser(filename, data) {
 		wrapS: GL_REPEAT,
 		wrapT: GL_REPEAT,
 		generateMipmap: true,
-		flipY: false,
 	}));
 
 	// Geometry data
