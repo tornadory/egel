@@ -7,7 +7,9 @@ import { // eslint-disable-line
 	Mesh,
 	Renderer,
 	Scene,
+	OrthographicCamera,
 	PerspectiveCamera,
+	RenderTarget,
 	Texture2D,
 	TextureCube,
 	Vec3,
@@ -149,6 +151,23 @@ export default class Application {
 		this.BRDFLUTTexture = new Texture2D({
 			src: 'public/assets/textures/brdfLUT.png',
 		});
+
+		// Fullscreen screen-space bloom
+		this.bloomRenderTarget = new RenderTarget({
+			width: window.innerWidth,
+			height: window.innerHeight,
+			pixelRatio: this.renderer.pixelRatio,
+		});
+
+		// this.bloomRenderTargetDebug = new Mesh(
+
+		// );
+
+		this.renderTargetCamera = new OrthographicCamera({
+			fieldOfView: 45,
+		});
+		Vec3.set(this.renderTargetCamera.position, 0, 0, 1);
+		this.renderTargetCamera.lookAt();
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {

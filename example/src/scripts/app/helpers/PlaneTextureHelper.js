@@ -3,7 +3,6 @@ import { // eslint-disable-line
     Context,
     Material,
     Mesh,
-	Geometry,
 	Vec3,
 	Texture2D,
 } from 'egel';
@@ -12,6 +11,8 @@ import {
 	GL_LINEAR,
 	GL_LINEAR_MIPMAP_LINEAR,
 } from 'webgl-constants';
+
+import PlaneGeometry from '../geometry/PlaneGeometry';
 
 let gl;
 
@@ -102,70 +103,12 @@ const customFragmentShader = `
 	}
 `;
 
-class PlaneTextureGeometry extends Geometry {
-    constructor(width, height, subdivisionsX, subdivisionsY) {
-		let vertices = [];
-		const indices = [];
-		let normals = [];
-		let uvs = [];
-		let index = 0;
-
-		const spacerX = width / subdivisionsX;
-		const spacerY = height / subdivisionsY;
-		const offsetX = -width * 0.5;
-		const offsetY = -height * 0.5;
-		const spacerU = 1 / subdivisionsX;
-		const spacerV = 1 / subdivisionsY;
-
-		for (let y = 0; y < subdivisionsY; y += 1) {
-			for (let x = 0; x < subdivisionsX; x += 1) {
-				const triangleX = spacerX * x + offsetX;
-				const triangleY = spacerY * y + offsetY;
-
-				const u = x / subdivisionsX;
-				const v = y / subdivisionsY;
-
-				vertices = vertices.concat([triangleX, triangleY, 0]);
-				vertices = vertices.concat([triangleX + spacerX, triangleY, 0]);
-				vertices = vertices.concat([triangleX + spacerX, triangleY + spacerY, 0]);
-				vertices = vertices.concat([triangleX, triangleY + spacerY, 0]);
-
-				normals = normals.concat([0, 0, 1]);
-				normals = normals.concat([0, 0, 1]);
-				normals = normals.concat([0, 0, 1]);
-				normals = normals.concat([0, 0, 1]);
-
-				uvs = uvs.concat([u, v]);
-				uvs = uvs.concat([u + spacerU, v]);
-				uvs = uvs.concat([u + spacerU, v + spacerV]);
-				uvs = uvs.concat([u, v + spacerV]);
-
-				indices.push(index * 4 + 0);
-				indices.push(index * 4 + 1);
-				indices.push(index * 4 + 2);
-				indices.push(index * 4 + 0);
-				indices.push(index * 4 + 2);
-				indices.push(index * 4 + 3);
-
-				index += 1;
-			}
-		}
-
-		gl = Context.get();
-
-		super(
-			new Float32Array(vertices),
-			new Uint16Array(indices),
-			new Float32Array(normals),
-			new Float32Array(uvs),
-		);
-    }
-}
-
 export default class PlaneTextureHelper extends Mesh {
     constructor(width = 5, height = 5, subdivisionsX = 1, subdivisionsY = 1) {
         const vertexShader = customVertexShader;
-        const fragmentShader = customFragmentShader;
+		const fragmentShader = customFragmentShader;
+
+		gl = Context.get();
 
 		const uvDebugTexture = new Texture2D({
 			src: 'public/assets/textures/debug/UV_debug.jpg',
@@ -176,7 +119,7 @@ export default class PlaneTextureHelper extends Mesh {
 		});
 
         super(
-            new PlaneTextureGeometry(width, height, subdivisionsX, subdivisionsY),
+            new PlaneGeometry(width, height, subdivisionsX, subdivisionsY),
             new Material({
                 name: 'PlaneTextureHelper',
                 vertexShader,
