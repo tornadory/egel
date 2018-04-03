@@ -1,17 +1,10 @@
 // Vendor
 import { // eslint-disable-line
-    Capabilities,
-    Context,
-    Material,
-    Mesh,
-	Vec3,
-	Texture2D,
+	Capabilities,
+	Context,
+	Material,
+	Mesh,
 } from 'egel';
-
-import {
-	GL_LINEAR,
-	GL_LINEAR_MIPMAP_LINEAR,
-} from 'webgl-constants';
 
 // Geometry
 import PlaneGeometry from '../geometry/PlaneGeometry';
@@ -105,39 +98,27 @@ const fragmentShader = `
 	}
 `;
 
-export default class PlaneTextureHelper extends Mesh {
-    constructor(width = 5, height = 5, subdivisionsX = 1, subdivisionsY = 1) {
+export default class RenderTargetHelper {
+	constructor(texture) {
 		gl = Context.get();
 
-		const uvDebugTexture = new Texture2D({
-			src: 'public/assets/textures/debug/UV_debug.jpg',
-			generateMipmap: true,
-			magFilter: GL_LINEAR,
-			minFilter: GL_LINEAR_MIPMAP_LINEAR,
-			flipY: true,
-		});
-
-        super(
-            new PlaneGeometry(width, height, subdivisionsX, subdivisionsY),
-            new Material({
-                name: 'PlaneTextureHelper',
-                vertexShader,
+		this.renderTargetHelper = new Mesh(
+			new PlaneGeometry(),
+			new Material({
+				name: 'RenderTargetHelper',
+				vertexShader,
 				fragmentShader,
 				uniforms: {
-					uDiffuse: {
-						type: '3f',
-						value: Vec3.fromValues(0.5, 0.37, 0.5),
-					},
 					uDebugTexture: {
 						type: 't',
-						value: uvDebugTexture.texture,
+						value: texture,
 					},
 				},
-            }),
-        );
-    }
+			}),
+		);
+	}
 
-    draw(camera) {
+	draw(camera) {
         if (!this.visible) return;
 
         // Update modelMatrix
@@ -169,3 +150,4 @@ export default class PlaneTextureHelper extends Mesh {
         }
     }
 }
+

@@ -19,6 +19,9 @@ import { // eslint-disable-line
 // Controls
 import OrbitalControls from './controls/OrbitalControls';
 
+// Geometry
+import PlaneGeometry from './geometry/PlaneGeometry';
+
 // Helpers
 import AxisHelper from './helpers/AxisHelper';
 import GridHelper from './helpers/GridHelper';
@@ -158,10 +161,6 @@ export default class Application {
 			height: window.innerHeight,
 			pixelRatio: this.renderer.pixelRatio,
 		});
-
-		// this.bloomRenderTargetDebug = new Mesh(
-
-		// );
 
 		this.renderTargetCamera = new OrthographicCamera({
 			fieldOfView: 45,

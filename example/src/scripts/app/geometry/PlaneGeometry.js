@@ -3,7 +3,7 @@ import { // eslint-disable-line
 } from 'egel';
 
 export default class PlaneGeometry extends Geometry {
-    constructor(width, height, subdivisionsX, subdivisionsY) {
+    constructor(width = 5, height = 5, subdivisionsX = 1, subdivisionsY = 1) {
 		let vertices = [];
 		const indices = [];
 		let normals = [];
