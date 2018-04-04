@@ -35,7 +35,7 @@ const config = {
 					presets: [
 						['env', {
 							modules: false,
-							useBuiltIns: 'usage',
+							useBuiltIns: true,
 							targets: {
 								browsers: [
 									'> 5%',

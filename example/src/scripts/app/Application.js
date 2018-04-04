@@ -1,5 +1,5 @@
 // Vendor
-// import WebGLDebug from 'webgl-debug';
+import WebGLDebug from 'webgl-debug';
 import Stats from 'stats.js';
 import { // eslint-disable-line
 	Geometry,
@@ -19,9 +19,6 @@ import { // eslint-disable-line
 // Controls
 import OrbitalControls from './controls/OrbitalControls';
 
-// Geometry
-import PlaneGeometry from './geometry/PlaneGeometry';
-
 // Helpers
 import AxisHelper from './helpers/AxisHelper';
 import GridHelper from './helpers/GridHelper';
@@ -30,11 +27,8 @@ import GridHelper from './helpers/GridHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
-// import OBJLoader from './loaders/OBJLoader';
 
 // Shaders
-// import BunnyVertexShader from './shaders/BunnyVertexShader.vert';
-// import BunnyFragmentShader from './shaders/BunnyFragmentShader.frag';
 import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert';
 import DamagedHelmetFragmentShader from './shaders/DamagedHelmetFragmentShader.frag';
 
@@ -48,26 +42,26 @@ let mesh;
 const scene = new Scene();
 
 // WebGL debugger, useful in development, should not be in production
-// function throwOnGLError(err, funcName, args) {
-// 	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
-// }
+function throwOnGLError(err, funcName, args) {
+	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
+}
 
-// function logGLCall(funcName, args) {
-// 	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-// }
+function logGLCall(funcName, args) {
+	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+}
 
-// function validateNoneOfTheArgsAreUndefined(funcName, args) {
-// 	for (let i = 0; i < args.length; i += 1) {
-// 		if (args[i] === undefined) {
-// 			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-// 		}
-// 	}
-// }
+function validateNoneOfTheArgsAreUndefined(funcName, args) {
+	for (let i = 0; i < args.length; i += 1) {
+		if (args[i] === undefined) {
+			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+		}
+	}
+}
 
-// function logAndValidate(funcName, args) {
-// 	// logGLCall(funcName, args);
-// 	validateNoneOfTheArgsAreUndefined(funcName, args);
-// }
+function logAndValidate(funcName, args) {
+	// logGLCall(funcName, args);
+	validateNoneOfTheArgsAreUndefined(funcName, args);
+}
 
 export default class Application {
 	constructor() {
@@ -85,8 +79,8 @@ export default class Application {
 		});
 
 		// Expose the GL context to WebGLDebugUtils to log errors and calls
-		// const glContext = this.renderer.getContext();
-		// this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
+		const glContext = this.renderer.getContext();
+		this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
@@ -240,36 +234,6 @@ export default class Application {
 			.catch((error) => {
 				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
 			});
-
-		// new OBJLoader('public/assets/obj/bunny.obj')
-		// 	.then((data) => {
-		// 		const geometry = new Geometry(
-		// 			data.vertices,
-		// 			data.indices,
-		// 			data.normals,
-		// 			data.uvs,
-		// 		);
-
-		// 		const material = new Material({
-		// 			name: 'BunnyMesh',
-		// 			vertexShader: BunnyVertexShader,
-		// 			fragmentShader: BunnyFragmentShader,
-		// 			uniforms: {
-		// 				uDiffuse: {
-		// 					type: '3f',
-		// 					value: Vec3.fromValues(0.5, 0.37, 0.5),
-		// 				},
-		// 			},
-		// 		});
-
-		// 		const mesh = new Mesh(geometry, material);
-		// 		Vec3.set(mesh.scale, 0.5, 0.5, 0.5);
-
-		// 		scene.add(mesh);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
-		// 	});
 	}
 
 	render() {

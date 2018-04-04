@@ -22,9 +22,6 @@ varying vec2 vTextureCoord;
 #endif
 
 void main(void) {
-    // Override for custom positioning
-    vec3 transformed = vec3(0.0);
-
     #ifdef HAS_TEXTURE_COORDS
     vTextureCoord = aTextureCoord;
     #endif
@@ -33,11 +30,11 @@ void main(void) {
     vNormal = uNormalMatrix * aVertexNormal;
     #endif
 
-    // Vertex position + offset
-    vPosition = aVertexPosition + transformed;
+    // Vertex position
+    vPosition = aVertexPosition;
 
-    // Calculate world position of vertex with transformed
-    vWorldPosition = uModelMatrix * vec4(aVertexPosition + transformed, 1.0);
+    // Calculate world position of vertex
+    vWorldPosition = uModelMatrix * vec4(aVertexPosition, 1.0);
 
     gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(vPosition, 1.0);
 }

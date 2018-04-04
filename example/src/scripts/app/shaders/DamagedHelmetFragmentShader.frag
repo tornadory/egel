@@ -31,8 +31,8 @@ const float M_PI = 3.141592653589793;
 const float MIN_ROUGHNESS = 0.04;
 const vec2 METALLIC_ROUGHNESS_VALUES = vec2(1.0, 0.75);
 const float NORMAL_SCALE = 1.0;
-const vec3 LIGHT_DIRECTION = vec3(1.0, 0.0, 1.0);
-const vec3 LIGHT_COLOR = vec3(1.0, 1.0, 1.0);
+const vec3 LIGHT_DIRECTION = vec3(0.0, 1.0, 0.0);
+const vec3 LIGHT_COLOR = vec3(1.0);
 const vec4 IBL_AMBIENT_SCALE = vec4(0.6);
 
 struct PBRInfo {
@@ -190,7 +190,9 @@ void main(void) {
     vec3 BRDF = texture2D(uBRDFLUT, vec2(NdotV, 1.0 - perceptualRoughness)).rgb;
     vec3 diffuseLight = textureCube(uDiffuseEnvTexture, n).rgb;
     vec3 specularLight = textureCube(uSpecularEnvTexture, reflection).rgb;
-    vec3 IBLcolor = (diffuseLight * diffuseColor * IBL_AMBIENT_SCALE.x) + (specularLight * (specularColor * BRDF.x + BRDF.y) * IBL_AMBIENT_SCALE.y);
+    vec3 IBLcolor =
+      (diffuseLight * diffuseColor * IBL_AMBIENT_SCALE.x) +
+      (specularLight * (specularColor * BRDF.x + BRDF.y) * IBL_AMBIENT_SCALE.y);
     color += IBLcolor;
 
     // Ambient Occlusion
