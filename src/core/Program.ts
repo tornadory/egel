@@ -112,5 +112,9 @@ export default class Program {
         gl.detachShader(this.program, this.compiledVertexShader);
         gl.detachShader(this.program, this.compiledFragmentShader);
         gl.deleteProgram(this.program);
+
+        delete this.program;
+        delete this.compiledVertexShader;
+        delete this.compiledFragmentShader;
     }
 }

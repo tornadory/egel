@@ -115,6 +115,7 @@ export default class Object3D {
     public dispose() {
         this.unsetParent();
         this.children = [];
+
         delete this.localMatrix;
         delete this.modelMatrix;
         delete this.position;

@@ -331,5 +331,7 @@ export default class Material {
         });
 
         this.program.dispose();
+
+        delete this.program;
     }
 }

@@ -69,6 +69,7 @@ export default class Renderer {
     public viewport: Viewport;
     public autoClear: boolean;
     public clearColor: ClearColor;
+    public state: GLState;
 
     constructor(options?: Options) {
         this.width = RENDERER_DEFAULT_WIDTH;
@@ -132,7 +133,7 @@ export default class Renderer {
         }
 
         gl = Context.get();
-        state = State();
+        this.state = State();
 
         Capabilities.set(gl);
 

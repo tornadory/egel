@@ -82,15 +82,11 @@ export default class Application {
 			aspectRatio: this.width / this.height,
 		});
 
-		// Expose the GL context to WebGLDebugUtils to log errors and calls
-		const glContext = this.renderer.getContext();
-		this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
+		// Expose the GL context to WebGLDebugUtils to log errors and calls ~ 8 - 12ms performance hit
+		// const glContext = this.renderer.getContext();
+		// this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
 
-		// State
-		this.state = State();
-		const defaultConfig = this.state.config().cullFace(GL_FRONT);
-		this.state.push(defaultConfig);
-		console.log(this.state);
+		console.log(this.renderer.state);
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);

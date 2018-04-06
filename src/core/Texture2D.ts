@@ -114,6 +114,7 @@ export default class Texture2D {
 
     public dispose() {
         gl.deleteTexture(this.texture);
+
         delete this.texture;
     }
 }

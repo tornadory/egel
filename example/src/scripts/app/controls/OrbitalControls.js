@@ -209,7 +209,6 @@ export default class OrbitalControls {
         this.element.removeEventListener('mousemove', event => this.onMove(event), false);
         this.element.removeEventListener('mouseup', event => this.onUp(event), false);
 
-
         delete this.camera;
         delete this.element;
     }

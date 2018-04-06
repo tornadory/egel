@@ -43,6 +43,7 @@ export default class BufferAttribute {
 
     public dispose() {
         gl.deleteBuffer(this.buffer);
+
         delete this.buffer;
     }
 }
