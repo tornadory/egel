@@ -1,4 +1,5 @@
 // Vendor
+import GLState from 'nanogl-state';
 import {
     GL_COLOR_BUFFER_BIT,
     GL_DEPTH_BUFFER_BIT,
@@ -21,11 +22,13 @@ import {
     RENDERER_DEFAULT_WIDTH,
 } from './CoreConstants';
 import Scene from './Scene';
+import State from './State';
 
 // Utilities
 import WebGLSupport from '../utilities/WebGLSupport';
 
 let gl: WebGLRenderingContext;
+let state: GLState;
 
 interface Options {
     width?: number;
@@ -129,6 +132,7 @@ export default class Renderer {
         }
 
         gl = Context.get();
+        state = State();
 
         Capabilities.set(gl);
 

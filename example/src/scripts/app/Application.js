@@ -1,11 +1,15 @@
 // Vendor
 import WebGLDebug from 'webgl-debug';
+import {
+	GL_FRONT,
+} from 'webgl-constants';
 import Stats from 'stats.js';
 import { // eslint-disable-line
 	Geometry,
 	Material,
 	Mesh,
 	Renderer,
+	State,
 	Scene,
 	OrthographicCamera,
 	PerspectiveCamera,
@@ -81,6 +85,12 @@ export default class Application {
 		// Expose the GL context to WebGLDebugUtils to log errors and calls
 		const glContext = this.renderer.getContext();
 		this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
+
+		// State
+		this.state = State();
+		const defaultConfig = this.state.config().cullFace(GL_FRONT);
+		this.state.push(defaultConfig);
+		console.log(this.state);
 
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);

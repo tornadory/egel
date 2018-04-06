@@ -63,6 +63,9 @@ export { RenderTarget };
 import Scene from './core/Scene';
 export { Scene };
 
+import State from './core/State';
+export { State };
+
 import Texture2D from './core/Texture2D';
 export { Texture2D };
 
