@@ -22,13 +22,11 @@ import {
     RENDERER_DEFAULT_WIDTH,
 } from './CoreConstants';
 import Scene from './Scene';
-import State from './State';
 
 // Utilities
 import WebGLSupport from '../utilities/WebGLSupport';
 
 let gl: WebGLRenderingContext;
-let state: GLState;
 
 interface Options {
     width?: number;
@@ -69,7 +67,6 @@ export default class Renderer {
     public viewport: Viewport;
     public autoClear: boolean;
     public clearColor: ClearColor;
-    public state: GLState;
 
     constructor(options?: Options) {
         this.width = RENDERER_DEFAULT_WIDTH;
@@ -133,7 +130,6 @@ export default class Renderer {
         }
 
         gl = Context.get();
-        this.state = State();
 
         Capabilities.set(gl);
 

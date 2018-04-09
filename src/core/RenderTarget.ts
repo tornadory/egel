@@ -100,6 +100,7 @@ export default class RenderTarget {
         gl.renderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, this.width, this.height);
         gl.framebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this.texture, 0);
         gl.framebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this.renderBuffer);
+
         gl.bindTexture(GL_TEXTURE_2D, null);
         gl.bindRenderbuffer(GL_RENDERBUFFER, null);
         gl.bindFramebuffer(GL_FRAMEBUFFER, null);

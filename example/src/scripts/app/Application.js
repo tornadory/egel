@@ -86,8 +86,6 @@ export default class Application {
 		// const glContext = this.renderer.getContext();
 		// this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
 
-		console.log(this.renderer.state);
-
 		this.renderer.setDevicePixelRatio(window.devicePixelRatio);
 		this.renderer.setScissorTest(true);
 
