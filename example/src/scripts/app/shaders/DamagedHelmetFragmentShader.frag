@@ -71,6 +71,11 @@ vec4 SRGBtoLINEAR(vec4 srgbIn) {
 vec3 diffuse(PBRInfo pbrInputs) {
     return pbrInputs.diffuseColor / M_PI;
 }
+// Alternative diffuse implementation from Physically-Based Shading at Disney (5.3)
+// vec3 diffuse(PBRInfo pbrInputs) {
+//     float f90 = 2.0 * pbrInputs.LdotH * pbrInputs.LdotH * pbrInputs.alphaRoughness - 0.5;
+//     return (pbrInputs.diffuseColor / M_PI) * (1.0 + f90 * pow((1.0 - pbrInputs.NdotL), 5.0)) * (1.0 + f90 * pow((1.0 - pbrInputs.NdotV), 5.0));
+// }
 
 // Fresnel reflectance term of the spec equation (aka F())
 vec3 specularReflection(PBRInfo pbrInputs) {
@@ -180,6 +185,7 @@ void main(void) {
     float D = microfacetDistribution(pbrInputs);
 
     // Calculation of analytical lighting contribution
+    // Schlick BRDF model from An Inexpensive BRDF Model for Physically-based Rendering
     vec3 diffuseContrib = (1.0 - F) * diffuse(pbrInputs);
     vec3 specContrib = F * G * D / (4.0 * NdotL * NdotV);
 
