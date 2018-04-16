@@ -194,8 +194,8 @@ export default class Application {
 							type: '3f',
 							value: this.camera.position,
 						},
-						uSphericalHarmonics: {
-							type: 'fv1',
+						uSHCoeffs: {
+							type: 'v4v',
 							value: Promise.resolve(new SHLoader('public/assets/environments/sh.bin')),
 						},
 						uBaseColorTexture: {
