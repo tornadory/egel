@@ -12,6 +12,7 @@ uniform sampler2D uOcclusionTexture;
 uniform samplerCube uDiffuseEnvTexture;
 uniform samplerCube uSpecularEnvTexture;
 uniform sampler2D uBRDFLUT;
+uniform float uSphericalHarmonics[27];
 
 // Position
 varying vec3 vPosition;

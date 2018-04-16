@@ -1,15 +1,11 @@
 // Vendor
 import WebGLDebug from 'webgl-debug';
-import {
-	GL_FRONT,
-} from 'webgl-constants';
 import Stats from 'stats.js';
 import { // eslint-disable-line
 	Geometry,
 	Material,
 	Mesh,
 	Renderer,
-	State,
 	Scene,
 	OrthographicCamera,
 	PerspectiveCamera,
@@ -31,6 +27,7 @@ import GridHelper from './helpers/GridHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
+import SHLoader from './loaders/SHLoader';
 
 // Shaders
 import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert';
@@ -126,6 +123,18 @@ export default class Application {
 		// GL_TEXTURE_CUBE_MAP_POSITIVE_Z = front,
 		// GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = back,
 
+		this.environmentBackgroundTexture = new Texture2D({
+			src: 'public/assets/environments/background.jpg',
+		});
+
+		this.environmentHighTexture = new Texture2D({
+			src: 'public/assets/environments/env_hi.png',
+		});
+
+		this.environmentTexture = new Texture2D({
+			src: 'public/assets/environments/env.png',
+		});
+
 		this.diffuseCubemapTexture = new TextureCube({
 			src: [
 				'public/assets/textures/papermill/diffuse/diffuse_right_0.jpg',
@@ -184,6 +193,10 @@ export default class Application {
 						uCameraPosition: {
 							type: '3f',
 							value: this.camera.position,
+						},
+						uSphericalHarmonics: {
+							type: 'fv1',
+							value: Promise.resolve(new SHLoader('public/assets/environments/sh.bin')),
 						},
 						uBaseColorTexture: {
 							type: 't',
