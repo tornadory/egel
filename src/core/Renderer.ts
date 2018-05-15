@@ -1,4 +1,5 @@
 // Vendor
+import GLState from 'nanogl-state';
 import {
     GL_COLOR_BUFFER_BIT,
     GL_DEPTH_BUFFER_BIT,
@@ -26,6 +27,7 @@ import Scene from './Scene';
 import WebGLSupport from '../utilities/WebGLSupport';
 
 let gl: WebGLRenderingContext;
+let glState: GLState;
 
 interface Options {
     width?: number;
@@ -66,6 +68,7 @@ export default class Renderer {
     public viewport: Viewport;
     public autoClear: boolean;
     public clearColor: ClearColor;
+    public state: GLState;
 
     constructor(options?: Options) {
         this.width = RENDERER_DEFAULT_WIDTH;
@@ -124,11 +127,12 @@ export default class Renderer {
             Context.set(context);
         } else {
             console.warn('WebGL is not supported, please use a modern browser.');
-
             return;
         }
 
         gl = Context.get();
+
+        this.setState(gl);
 
         Capabilities.set(gl);
 
@@ -153,6 +157,14 @@ export default class Renderer {
 
     public getContext() {
         return gl;
+    }
+
+    public setState(context) {
+        this.state = new GLState(context);
+    }
+
+    public getState() {
+        return this.state;
     }
 
     public setClearColor(r = 0, g = 0, b = 0, a = 1) {
