@@ -27,7 +27,6 @@ import GridHelper from './helpers/GridHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
-import SHLoader from './loaders/SHLoader';
 
 // Shaders
 import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert';
@@ -193,10 +192,6 @@ export default class Application {
 						uCameraPosition: {
 							type: '3f',
 							value: this.camera.position,
-						},
-						uSHCoeffs: {
-							type: 'v4v',
-							value: Promise.resolve(new SHLoader('public/assets/environments/sh.bin')),
 						},
 						uBaseColorTexture: {
 							type: 't',
