@@ -132,7 +132,7 @@ export default class Renderer {
 
         gl = Context.get();
 
-        this.setState(gl);
+        this.state = new GLState(gl);
 
         Capabilities.set(gl);
 
@@ -157,14 +157,6 @@ export default class Renderer {
 
     public getContext() {
         return gl;
-    }
-
-    public setState(context) {
-        this.state = new GLState(context);
-    }
-
-    public getState() {
-        return this.state;
     }
 
     public setClearColor(r = 0, g = 0, b = 0, a = 1) {
