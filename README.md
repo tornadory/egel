@@ -26,17 +26,17 @@ A minimal framework around the WebGL API.
 
 Make sure you have [Node.js](http://nodejs.org/) installed.
 
-	npm install
+$ npm install
 
 ## Usage
 
-	npm start
+$ npm start
 
-	npm run lint
+$ npm run lint
 
-	npm run dist
+$ npm run dist
 
-	npm run deploy
+$ npm run deploy
 
 ## Licence
 
