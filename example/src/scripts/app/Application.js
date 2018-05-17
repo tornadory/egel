@@ -78,8 +78,6 @@ export default class Application {
 			aspectRatio: this.width / this.height,
 		});
 
-		console.log(this.renderer.state);
-
 		// Expose the GL context to WebGLDebugUtils to log errors and calls ~ 8 - 12ms performance hit
 		// const glContext = this.renderer.getContext();
 		// this.renderer.setContext(WebGLDebug.makeDebugContext(glContext, throwOnGLError, logAndValidate));
