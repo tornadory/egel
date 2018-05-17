@@ -7,9 +7,7 @@ import { // eslint-disable-line
 	Mesh,
 	Renderer,
 	Scene,
-	OrthographicCamera,
 	PerspectiveCamera,
-	RenderTarget,
 	Texture2D,
 	TextureCube,
 	Vec3,
@@ -27,6 +25,7 @@ import GridHelper from './helpers/GridHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
+import SHLoader from './loaders/SHLoader';
 
 // Shaders
 import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert';
@@ -162,18 +161,13 @@ export default class Application {
 			src: 'public/assets/textures/brdfLUT.png',
 		});
 
-		// Fullscreen screen-space bloom
-		this.bloomRenderTarget = new RenderTarget({
-			width: window.innerWidth,
-			height: window.innerHeight,
-			pixelRatio: this.renderer.pixelRatio,
-		});
-
-		this.renderTargetCamera = new OrthographicCamera({
-			fieldOfView: 45,
-		});
-		Vec3.set(this.renderTargetCamera.position, 0, 0, 1);
-		this.renderTargetCamera.lookAt();
+		new SHLoader('public/assets/environments/sh.bin')
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 
 		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
 			.then((data) => {
