@@ -41,26 +41,26 @@ let mesh;
 const scene = new Scene();
 
 // WebGL debugger, useful in development, should not be in production
-function throwOnGLError(err, funcName, args) {
-	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
-}
+// function throwOnGLError(err, funcName, args) {
+// 	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
+// }
 
-function logGLCall(funcName, args) {
-	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-}
+// function logGLCall(funcName, args) {
+// 	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+// }
 
-function validateNoneOfTheArgsAreUndefined(funcName, args) {
-	for (let i = 0; i < args.length; i += 1) {
-		if (args[i] === undefined) {
-			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-		}
-	}
-}
+// function validateNoneOfTheArgsAreUndefined(funcName, args) {
+// 	for (let i = 0; i < args.length; i += 1) {
+// 		if (args[i] === undefined) {
+// 			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+// 		}
+// 	}
+// }
 
-function logAndValidate(funcName, args) {
-	// logGLCall(funcName, args);
-	validateNoneOfTheArgsAreUndefined(funcName, args);
-}
+// function logAndValidate(funcName, args) {
+// 	// logGLCall(funcName, args);
+// 	validateNoneOfTheArgsAreUndefined(funcName, args);
+// }
 
 export default class Application {
 	constructor() {
@@ -122,7 +122,7 @@ export default class Application {
 		// GL_TEXTURE_CUBE_MAP_NEGATIVE_Z = back,
 
 		this.environmentBackgroundTexture = new Texture2D({
-			src: 'public/assets/environments/background.jpg',
+			src: 'public/assets/environments/bg.jpg',
 		});
 
 		this.environmentHighTexture = new Texture2D({
@@ -162,83 +162,97 @@ export default class Application {
 		});
 
 		new SHLoader('public/assets/environments/sh.bin')
-			.then((data) => {
-				console.log(data);
+			.then((sphericalHarmonicsCoefficients) => {
+				new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
+					.then((data) => {
+						const geometry = new Geometry(
+							data.meshes.vertices,
+							data.meshes.indices,
+							data.meshes.normals,
+							data.meshes.uvs,
+						);
+
+						const material = new Material({
+							name: 'DamagedHelmetMesh',
+							vertexShader: DamagedHelmetVertexShader,
+							fragmentShader: DamagedHelmetFragmentShader,
+							uniforms: {
+								uCameraPosition: {
+									type: '3f',
+									value: this.camera.position,
+								},
+								uBaseColorTexture: {
+									type: 't',
+									value: data.textures.baseColorTexture.texture,
+								},
+								uEmissiveTexture: {
+									type: 't',
+									value: data.textures.emissiveTexture.texture,
+								},
+								uMetallicRoughnessTexture: {
+									type: 't',
+									value: data.textures.metallicRoughnessTexture.texture,
+								},
+								uNormalTexture: {
+									type: 't',
+									value: data.textures.normalTexture.texture,
+								},
+								uOcclusionTexture: {
+									type: 't',
+									value: data.textures.occlusionTexture.texture,
+								},
+								uDiffuseEnvTexture: {
+									type: 'tc',
+									value: this.diffuseCubemapTexture.texture,
+								},
+								uSpecularEnvTexture: {
+									type: 'tc',
+									value: this.specularCubemapTexture.texture,
+								},
+								uBRDFLUT: {
+									type: 't',
+									value: this.BRDFLUTTexture.texture,
+								},
+								uEnvironmentBackgroundTexture: {
+									type: 't',
+									value: this.environmentBackgroundTexture.texture,
+								},
+								uEnvironmentHighTexture: {
+									type: 't',
+									value: this.environmentHighTexture.texture,
+								},
+								uEnvironmentTexture: {
+									type: 't',
+									value: this.environmentTexture.texture,
+								},
+								uSphericalHarmonicsCoefficients: {
+									type: 'fv1',
+									value: sphericalHarmonicsCoefficients,
+								},
+							},
+						});
+
+						mesh = new Mesh(geometry, material);
+						Vec3.set(mesh.rotation, -Math.PI / 2, Math.PI, Math.PI / 2);
+						Vec3.set(mesh.position, 0.0, 0.5, 0.0);
+						scene.add(mesh);
+
+						// this.meshNormalHelper = new NormalHelper(mesh, 0.1);
+						// this.meshNormalHelper.setParent(mesh);
+						// scene.add(this.meshNormalHelper);
+
+						this.onResize();
+
+						this.tick();
+
+						this.addListeners();
+					})
+					.catch((error) => {
+						console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
+					});
 			})
 			.catch((error) => {
 				console.error(error);
-			});
-
-		new GLTFLoader('public/assets/gltf/DamagedHelmet.gltf')
-			.then((data) => {
-				const geometry = new Geometry(
-					data.meshes.vertices,
-					data.meshes.indices,
-					data.meshes.normals,
-					data.meshes.uvs,
-				);
-
-				const material = new Material({
-					name: 'DamagedHelmetMesh',
-					vertexShader: DamagedHelmetVertexShader,
-					fragmentShader: DamagedHelmetFragmentShader,
-					uniforms: {
-						uCameraPosition: {
-							type: '3f',
-							value: this.camera.position,
-						},
-						uBaseColorTexture: {
-							type: 't',
-							value: data.textures.baseColorTexture.texture,
-						},
-						uEmissiveTexture: {
-							type: 't',
-							value: data.textures.emissiveTexture.texture,
-						},
-						uMetallicRoughnessTexture: {
-							type: 't',
-							value: data.textures.metallicRoughnessTexture.texture,
-						},
-						uNormalTexture: {
-							type: 't',
-							value: data.textures.normalTexture.texture,
-						},
-						uOcclusionTexture: {
-							type: 't',
-							value: data.textures.occlusionTexture.texture,
-						},
-						uDiffuseEnvTexture: {
-							type: 'tc',
-							value: this.diffuseCubemapTexture.texture,
-						},
-						uSpecularEnvTexture: {
-							type: 'tc',
-							value: this.specularCubemapTexture.texture,
-						},
-						uBRDFLUT: {
-							type: 't',
-							value: this.BRDFLUTTexture.texture,
-						},
-					},
-				});
-
-				mesh = new Mesh(geometry, material);
-				Vec3.set(mesh.rotation, -Math.PI / 2, Math.PI, Math.PI / 2);
-				Vec3.set(mesh.position, 0.0, 0.5, 0.0);
-				scene.add(mesh);
-
-				// this.meshNormalHelper = new NormalHelper(mesh, 0.1);
-				// this.meshNormalHelper.setParent(mesh);
-				// scene.add(this.meshNormalHelper);
-
-				this.onResize();
-
-				this.tick();
-
-				this.addListeners();
-			})
-			.catch((error) => {
-				console.log(`Unable to load model: status -> ${error}`); // eslint-disable-line no-console
 			});
 	}
 
