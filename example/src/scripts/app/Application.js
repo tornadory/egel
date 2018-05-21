@@ -1,6 +1,6 @@
 // Vendor
 import WebGLDebug from 'webgl-debug';
-import Stats from 'stats.js';
+// import Stats from 'stats.js';
 import { // eslint-disable-line
 	Geometry,
 	Material,
@@ -32,9 +32,9 @@ import DamagedHelmetVertexShader from './shaders/DamagedHelmetVertexShader.vert'
 import DamagedHelmetFragmentShader from './shaders/DamagedHelmetFragmentShader.frag';
 
 // Stats
-const stats = new Stats();
-stats.showPanel(1); // show MS
-document.body.appendChild(stats.dom);
+// const stats = new Stats();
+// stats.showPanel(1); // show MS
+// document.body.appendChild(stats.dom);
 
 // Scene
 let mesh;
@@ -64,6 +64,8 @@ const scene = new Scene();
 
 export default class Application {
 	constructor() {
+		this.webglProfiler = new WebGLProfiler();
+
 		this.width = window.innerWidth;
 		this.height = window.innerHeight;
 
@@ -257,7 +259,8 @@ export default class Application {
 	}
 
 	render() {
-		stats.begin();
+		// stats.begin();
+		this.webglProfiler.begin();
 
 		mesh.material.uniforms.uCameraPosition.value = this.camera.position;
 
@@ -265,7 +268,8 @@ export default class Application {
 		this.camera.updateMatrixWorld();
 		this.renderer.render(scene, this.camera);
 
-		stats.end();
+		// stats.end();
+		this.webglProfiler.end();
 	}
 
 	tick() {

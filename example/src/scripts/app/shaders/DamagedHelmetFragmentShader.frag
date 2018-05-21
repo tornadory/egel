@@ -2,6 +2,10 @@
 
 precision highp float;
 
+// Defines
+#define PI 3.141592653589793
+#define TWO_PI 6.283185307179586
+
 // Uniforms
 uniform vec3 uCameraPosition;
 uniform sampler2D uBaseColorTexture;
@@ -15,7 +19,7 @@ uniform sampler2D uBRDFLUT;
 uniform sampler2D uEnvironmentBackgroundTexture;
 uniform sampler2D uEnvironmentHighTexture;
 uniform sampler2D uEnvironmentTexture;
-uniform float uSphericalHarmonicsCoefficients[27];
+uniform vec4 uSphericalHarmonicsCoefficients[7];
 
 // Position
 varying vec3 vPosition;
@@ -38,6 +42,32 @@ const float NORMAL_SCALE = 1.0;
 const vec3 LIGHT_DIRECTION = vec3(0.0, 1.0, 0.0);
 const vec3 LIGHT_COLOR = vec3(1.0);
 const vec4 IBL_AMBIENT_SCALE = vec4(0.6);
+
+/**
+ * Samples equirectangular (lat/long) panorama environment map
+ * @param  {sampler2D} envMap - equirectangular (lat/long) panorama texture
+ * @param  {vec3} wcNormal - normal in the world coordinate space
+ * @param  {float} - flipEnvMap    -1.0 for left handed coorinate system oriented texture (usual case)
+ *                                  1.0 for right handed coorinate system oriented texture
+ * @return {vec2} equirectangular texture coordinate-
+ * @description Based on http://http.developer.nvidia.com/GPUGems/gpugems_ch17.html and http://gl.ict.usc.edu/Data/HighResProbes/
+ */
+vec2 envMapEquirect(vec3 wcNormal, float flipEnvMap) {
+  //I assume envMap texture has been flipped the WebGL way (pixel 0,0 is a the bottom)
+  //therefore we flip wcNorma.y as acos(1) = 0
+  float phi = acos(-wcNormal.y);
+  float theta = atan(flipEnvMap * wcNormal.x, wcNormal.z) + PI;
+  return vec2(theta / TWO_PI, phi / PI);
+}
+
+vec2 envMapEquirect(vec3 wcNormal) {
+    //-1.0 for left handed coordinate system oriented texture (usual case)
+    return envMapEquirect(wcNormal, -1.0);
+}
+
+vec3 decodeRGBE( vec4 hdr ){
+  return hdr.rgb * pow(2.0, (hdr.a * 255.0 ) -128.0);
+}
 
 struct PBRInfo {
   float NdotL;                  // cos angle between normal and light direction
@@ -198,8 +228,13 @@ void main(void) {
 
     // Image based lighting (wihout spherical harmonics)
     vec3 BRDF = texture2D(uBRDFLUT, vec2(NdotV, 1.0 - perceptualRoughness)).rgb;
+
+    // vec3 diffuseLight = texture2D(uEnvironmentBackgroundTexture, envMapEquirect(n)).rgb;
+    // vec3 specularLight = texture2D(uEnvironmentHighTexture, reflection).rgb;
+
     vec3 diffuseLight = textureCube(uDiffuseEnvTexture, n).rgb;
     vec3 specularLight = textureCube(uSpecularEnvTexture, reflection).rgb;
+
     vec3 IBLcolor =
       (diffuseLight * diffuseColor * IBL_AMBIENT_SCALE.x) +
       (specularLight * (specularColor * BRDF.x + BRDF.y) * IBL_AMBIENT_SCALE.y);
