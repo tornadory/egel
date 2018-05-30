@@ -71,7 +71,7 @@ const fragmentShader = `
 	precision highp float;
 
 	// Uniforms
-	uniform sampler2D uDebugTexture;
+	uniform sampler2D uHelperTexture;
 
 	// Position
 	varying vec3 vPosition;
@@ -92,21 +92,22 @@ const fragmentShader = `
 
 	void main(void) {
 		vec3 color = vDiffuse;
-		color = texture2D(uDebugTexture, vTextureCoord).rgb;
 
 		#ifdef HAS_VERTEX_NORMALS
 		vec3 normal = normalize(vNormal);
 		#endif
 
+		color = texture2D(uHelperTexture, vTextureCoord).rgb;
+
 		gl_FragColor = vec4(color, 1.0);
 	}
 `;
 
-export default class PlaneTextureHelper extends Mesh {
+export default class Texture2DHelper extends Mesh {
     constructor(width = 5, height = 5, subdivisionsX = 1, subdivisionsY = 1) {
 		gl = Context.get();
 
-		const uvDebugTexture = new Texture2D({
+		const helperTexture = new Texture2D({
 			src: 'public/assets/textures/debug/UV_debug.jpg',
 			generateMipmap: true,
 			magFilter: GL_LINEAR,
@@ -117,7 +118,7 @@ export default class PlaneTextureHelper extends Mesh {
         super(
             new PlaneGeometry(width, height, subdivisionsX, subdivisionsY),
             new Material({
-                name: 'PlaneTextureHelper',
+                name: 'Texture2DHelper',
                 vertexShader,
 				fragmentShader,
 				uniforms: {
@@ -125,9 +126,9 @@ export default class PlaneTextureHelper extends Mesh {
 						type: '3f',
 						value: Vec3.fromValues(0.5, 0.37, 0.5),
 					},
-					uDebugTexture: {
+					uHelperTexture: {
 						type: 't',
-						value: uvDebugTexture.texture,
+						value: helperTexture.texture,
 					},
 				},
             }),

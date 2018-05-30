@@ -21,7 +21,8 @@ import OrbitalControls from './controls/OrbitalControls';
 import AxisHelper from './helpers/AxisHelper';
 import GridHelper from './helpers/GridHelper';
 // import NormalHelper from './helpers/NormalHelper';
-// import PlaneTextureHelper from './helpers/PlaneTextureHelper';
+import Texture2DHelper from './helpers/Texture2DHelper';
+import TextureCubeHelper from './helpers/TextureCubeHelper';
 
 // Loaders
 import GLTFLoader from './loaders/GLTFLoader';
@@ -41,26 +42,26 @@ let mesh;
 const scene = new Scene();
 
 // WebGL debugger, useful in development, should not be in production
-// function throwOnGLError(err, funcName, args) {
-// 	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
-// }
+function throwOnGLError(err, funcName, args) {
+	console.error(`${WebGLDebug.glEnumToString(err)} was caused by call to ${funcName}`);
+}
 
-// function logGLCall(funcName, args) {
-// 	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-// }
+function logGLCall(funcName, args) {
+	console.log(`gl.${funcName}(${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+}
 
-// function validateNoneOfTheArgsAreUndefined(funcName, args) {
-// 	for (let i = 0; i < args.length; i += 1) {
-// 		if (args[i] === undefined) {
-// 			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
-// 		}
-// 	}
-// }
+function validateNoneOfTheArgsAreUndefined(funcName, args) {
+	for (let i = 0; i < args.length; i += 1) {
+		if (args[i] === undefined) {
+			console.error(`Undefined pass to gl.${funcName}${WebGLDebug.glFunctionArgsToString(funcName, args)})`);
+		}
+	}
+}
 
-// function logAndValidate(funcName, args) {
-// 	// logGLCall(funcName, args);
-// 	validateNoneOfTheArgsAreUndefined(funcName, args);
-// }
+function logAndValidate(funcName, args) {
+	// logGLCall(funcName, args);
+	validateNoneOfTheArgsAreUndefined(funcName, args);
+}
 
 export default class Application {
 	constructor() {
@@ -109,12 +110,11 @@ export default class Application {
 		this.axisHelper = new AxisHelper();
 		scene.add(this.axisHelper);
 
-		// this.planeTextureHelper = new PlaneTextureHelper(5, 5, 10, 10);
-		// scene.add(this.planeTextureHelper);
+		// this.texture2DHelper = new Texture2DHelper();
+		// scene.add(this.texture2DHelper);
 
-		// this.planeTextureNormalHelper = new NormalHelper(this.planeTextureHelper, 0.25);
-		// this.planeTextureNormalHelper.setParent(this.planeTextureHelper);
-		// scene.add(this.planeTextureNormalHelper);
+		// this.textureCubeHelper = new TextureCubeHelper();
+		// scene.add(this.textureCubeHelper);
 
 		// GL_TEXTURE_CUBE_MAP_POSITIVE_X = right,
 		// GL_TEXTURE_CUBE_MAP_NEGATIVE_X = left,
